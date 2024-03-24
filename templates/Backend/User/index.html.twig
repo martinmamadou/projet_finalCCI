@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="container mt-4">
+        <h1 class="text-center">admin des users</h1>
+            <a href="" class="btn btn-secondaire">
+			<i class="bi bi-chat-text"></i>Acceuil</a>
+        <div class="card-list mt-2">
+        {% for user in users %}
+            <div class="blog-card">
+					<div class="blog-card-content">
+                    <h2 class="blog-card-header">
+                    {{user.username}}</h2>
+                    <p>
+							<strong>Email :
+							</strong>
+							{{user.email}}</p>
+						<p>
+
+                        <p>
+                            <strong>Role : </strong>
+							{% for role in user.roles %}
+								{{role == 'ROLE_ADMIN' ? 'Admin' : 'User'}}
+							{% endfor %}
+						</p>
+
+                        <p>
+                            <strong>Date d'Inscription : </strong>
+                            {{user.createdAt|format_datetime('short','none',locale='fr')}}
+                        </p>
+                    </div>
+
+                    <div class="blog-card-btn">
+				    <a href="{{path('admin.users.edit', {id:user.id})}}" class="btn btn-secondaire">
+					<i class="bi bi-pencil-square"></i>Modifier</a>
+                    {% include "Backend/User/_delete.html.twig" %}
+			</div>
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}
