@@ -9,6 +9,7 @@ nav{
     top: 0;
     margin-bottom: 70px;
     z-index: 100;
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
 
   ul{
     display: block;
@@ -19,7 +20,6 @@ nav{
     width: 60vw;
     height: 100vh;
     text-align: center;
-    box-shadow: $nav-shadow;
     padding: 70px;
   }
 

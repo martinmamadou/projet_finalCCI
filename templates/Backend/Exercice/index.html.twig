@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<section class="container">
+		<h1>admin des exercices</h1>
+		<div class="card-list mt-2">
+			{% for exercice in exercices %}
+				<div class="blog-card">
+					<div class="blog-card-content">
+						<h2 class="blog-card-header">
+							{{exercice.nom}}</h2>
+
+                         <p>
+                            <strong>Date d'Inscription : </strong>
+                            {{exercice.createdAt|format_datetime('short','none',locale='fr')}}
+                        </p>
+                            
+					</div>
+                    <div class="blog-card-btn">
+				    <a href="" class="btn btn-secondaire">
+					<i class="bi bi-pencil-square"></i>Modifier</a>
+				</div>
+			</div>
+		
+	{% endfor %}
+    </section>
+{% endblock %}

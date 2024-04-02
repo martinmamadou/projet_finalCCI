@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<section class="container">
+		<h1>Creation D'exercice</h1>
+		{{form_start(form,{'attr': {'class': "card p-3 w-50 mx-auto mt-3"}})}}
+		{{form_row(form)}}
+		<button type="submit" class="btn-secondaire">Ajouter</button>
+		{{form_end(form)}}
+	</section>
+{% endblock %}
