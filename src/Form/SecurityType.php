@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -45,7 +46,14 @@ class SecurityType extends AbstractType
                 'attr' => [
                     'placeholder' => 'S3CR3T'
                 ]
+            ])
+
+            ->add('imageFile', FileType::class, [
+                'label' => 'Photo de profil',
+                'required' => false
             ]);
+
+
 
 
         if ($options['isAdmin']) {
@@ -73,7 +81,3 @@ class SecurityType extends AbstractType
         ]);
     }
 }
-        
-        
-
-
