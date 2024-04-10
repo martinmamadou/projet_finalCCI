@@ -1,40 +1,18 @@
-<nav>
-        <div class="logo">
-        <p>Sporting</p>
-        </div>
-      
-      <div class="container-nav">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-          </div>
 
-  
-   
-      <ul class="close">
-            <li>Home</li>
-            <li>Programmes</li>
-            <li>Contact</li> 
-            <li><button class="btn btn-primary">Admin</button></li> 
+<nav >
+<div class="logo">
+	<p>Sporting</p>
+</div>
+<div id="burger-menu">
+  <span></span>
+</div>
 
-            {% if app.user %}
-                <li>
-                    <a href="/logout" class="btn btn-danger">Deconnexion</a>
-                </li>
-                {% else %}
-                    <div class="dropdown">
-									<button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										User
-									</button>
-									<div class="dropdown-menu" aria-labelledby="triggerId">
-										<a class="dropdown-item" href="{{ path('app.login') }}">Connexion</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="{{ path('app.register') }}">Inscription</a>
-									</div>
-								</div>
-            {% endif %}
-                  
-        </ul>
-        
-   
+<div id="menu">
+    <ul>
+      <li><a href="{{path('app.home')}}">Home</a></li>
+      <li><a href="/logout">Deconnexion</a></li>
+
+    </ul>
+</div>
+
 </nav>

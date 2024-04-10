@@ -21,13 +21,6 @@ class Programme
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\ManyToMany(targetEntity: Exercice::class, inversedBy: 'programmes')]
-    private Collection $exercice;
-
-    public function __construct()
-    {
-        $this->exercice = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -46,27 +39,4 @@ class Programme
         return $this;
     }
 
-    /**
-     * @return Collection<int, Exercice>
-     */
-    public function getExercice(): Collection
-    {
-        return $this->exercice;
-    }
-
-    public function addExercice(Exercice $exercice): static
-    {
-        if (!$this->exercice->contains($exercice)) {
-            $this->exercice->add($exercice);
-        }
-
-        return $this;
-    }
-
-    public function removeExercice(Exercice $exercice): static
-    {
-        $this->exercice->removeElement($exercice);
-
-        return $this;
-    }
 }

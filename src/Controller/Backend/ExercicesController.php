@@ -17,7 +17,7 @@ class ExercicesController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private ExerciceRepository $exRepo
+        
     )
     {
         
@@ -27,7 +27,7 @@ class ExercicesController extends AbstractController
     public function index(): Response
     {
         return $this->render('Backend/Exercice/index.html.twig', [
-            'exercices' => $this->exRepo->findAll()
+           
         ]);
     }
 

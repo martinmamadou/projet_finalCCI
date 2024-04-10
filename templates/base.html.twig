@@ -21,9 +21,12 @@
 	</head>
 	<body>
 		{% include "layout/header.html.twig" %}
+		{% include "layout/flash.html.twig" %}
+		{% block body %}
 		<main>
-			{% include "layout/flash.html.twig" %}
+			
 		</main>
-		{% block body %}{% endblock %}
+		{% endblock %}
 	</body>
+	<script src="{{ asset('javascript/main.js') }}"></script>
 </html>
