@@ -1,40 +1,24 @@
 <nav>
-        <div class="logo">
-        <p>Sporting</p>
-        </div>
-      
-      <div class="container-nav">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-          </div>
+	<div class="logo">
+		<p>Sporting</p>
+	</div>
+	<div id="mySidenav" class="sidenav">
+		<a id="closeBtn" href="#" class="close">×</a>
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Programmes</a></li>
+			<li><a href="#">Exercices</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</div>
 
-  
-   
-      <ul class="close">
-            <li>Home</li>
-            <li>Programmes</li>
-            <li>Contact</li> 
-            <li><button class="btn btn-primary">Admin</button></li> 
+	<a href="#" id="openBtn">
+		<span class="burger-icon">
+			<span></span>
+			<span></span>
+			<span></span>
+		</span>
+	</a>
 
-            {% if app.user %}
-                <li>
-                    <a href="/logout" class="btn btn-danger">Deconnexion</a>
-                </li>
-                {% else %}
-                    <div class="dropdown">
-									<button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										User
-									</button>
-									<div class="dropdown-menu" aria-labelledby="triggerId">
-										<a class="dropdown-item" href="{{ path('app.login') }}">Connexion</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="{{ path('app.register') }}">Inscription</a>
-									</div>
-								</div>
-            {% endif %}
-                  
-        </ul>
-        
-   
+
 </nav>
