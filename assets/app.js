@@ -7,5 +7,7 @@ import './bootstrap.js';
  */
 import './styles/app.scss';
 
+import "./img/74758-65e1879c36c0f798257758 (1).jpg"
+
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

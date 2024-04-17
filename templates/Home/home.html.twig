@@ -1,7 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<section class="container">
+	<section class="">
 		{% include "Home/_dashboard.html.twig" %}
+
+		<div class="htop-Content">
+			<div class="left"></div>
+			<div class="right">
+				<h2>About</h2>
+			</div>
+		</div>
+
+		<div class="hmiddle-content">
+			<a href="" class="left">
+				<img src="{{asset('/img/74758-65e1879c36c0f798257758 (1).jpg')}}" alt="">
+			</a>
+			<a href="" class="right">
+				<img src="{{asset('/img/74758-65e1879c36c0f798257758 (1).jpg')}}" alt="">
+			</a>
+		</div>
 	</section>
 {% endblock %}

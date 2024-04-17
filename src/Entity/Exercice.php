@@ -25,13 +25,6 @@ class Exercice
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\ManyToMany(targetEntity: Programme::class, mappedBy: 'exercice')]
-    private Collection $programmes;
-
-    public function __construct()
-    {
-        $this->programmes = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -50,30 +43,5 @@ class Exercice
         return $this;
     }
 
-    /**
-     * @return Collection<int, Programme>
-     */
-    public function getProgrammes(): Collection
-    {
-        return $this->programmes;
-    }
 
-    public function addProgramme(Programme $programme): static
-    {
-        if (!$this->programmes->contains($programme)) {
-            $this->programmes->add($programme);
-            $programme->addExercice($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProgramme(Programme $programme): static
-    {
-        if ($this->programmes->removeElement($programme)) {
-            $programme->removeExercice($this);
-        }
-
-        return $this;
-    }
 }

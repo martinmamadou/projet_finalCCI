@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Profile
+{% endblock %}
+
+{% block body %}
+	<section class="profile">
+		<h1>Mon profil</h1>
+		<img src="{{vich_uploader_asset(user)}}" alt="" height='50px' width='50px'>
+		<div class="me">
+		<div class="para">
+		<h2>{{user.username}}</h2>
+		<p>{{user.email}}</p>
+		</div>
+		<button class='btn-principal'>Modifier</button>
+		</div>
+		<div class="info">
+			<h3>Mes infos</h3>
+			<div class="info-container">
+				<p>
+					Taille :
+				</p>
+				<p>
+					Poids :</p>
+				<p>
+					IMC :
+				</p>
+			</div>
+			<div class="btn-container">
+				<button class='btn-secondaire'>Modifier</button>
+				<button class='btn-dng'>Supprimer</button>
+			</div>
+		</div>
+	</section>
+{% endblock %}
