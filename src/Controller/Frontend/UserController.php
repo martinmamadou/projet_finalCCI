@@ -11,16 +11,16 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/user/profile', 'user.profile')]
 class UserController extends AbstractController
 {
-    #[Route('/{id}', name: '', methods:['GET','POST'])]
+    #[Route('/{id}', name: '', methods: ['GET', 'POST'])]
     public function show(?User $user): Response|RedirectResponse
     {
-        if(!$user){
+        if (!$user) {
             $this->addFlash('danger', 'utilisateur inexistant');
             return $this->redirectToRoute('app.home');
         }
 
         return $this->render('Frontend/User/show.html.twig', [
-            'user'=>$user
+            'user' => $user
         ]);
     }
 }

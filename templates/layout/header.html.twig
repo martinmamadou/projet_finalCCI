@@ -8,8 +8,35 @@
 
 	<div id="menu">
 		<ul>
-			<li><a class='wi'href="{{path('app.home')}}">Home</a></li>
-			<li><a class='wi' href="/logout">Deconnexion</a></li>
+
+			<li>
+				<a class='li-item' href="{{path('app.home')}}">Home</a>
+			</li>
+			<div class="separator"></div>
+
+
+			{% if app.user %}
+
+				<li>
+					<a href="{{path('user.profile', {id:app.user.id})}}" class="li-item">Profile</a>
+				</li>
+				<div class="separator"></div>
+				<li>
+					<a class='li-item' href="/logout">Deconnexion</a>
+				</li>
+				<div class="separator"></div>
+			{% else %}
+
+				<li>
+					<a class='li-item' href="/login">Connexion</a>
+				</li>
+				<div class="separator"></div>
+
+				<li>
+					<a class='li-item' href="/register">inscription</a>
+				</li>
+				<div class="separator"></div>
+			{% endif %}
 		</ul>
 	</div>
 
