@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Exercice;
-use App\Entity\Programme;
+use App\Entity\ExerciceMaison;
+use App\Entity\ProgrammeMaison;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -11,16 +11,21 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ExerciceType extends AbstractType
+class ExMaisonType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class, [
-                'label' => 'Nom : '
-            ] )
+            ->add('name', TextType::class, [
+                'label' => "Nom Exercice : ",
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Pompes...'
+                ]
+            ])
             ->add('enable', CheckboxType::class, [
-                'label' => 'Actif '
+                'label' => 'actif',
+                'required' => false
             ])
         ;
     }
@@ -28,7 +33,7 @@ class ExerciceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Exercice::class,
+            'data_class' => ExerciceMaison::class,
         ]);
     }
 }

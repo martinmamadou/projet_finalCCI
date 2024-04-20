@@ -30,6 +30,7 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', '.edit', methods:['GET','POST'])]
     public function edit(?User $user, Request $request):Response|RedirectResponse{
         if(!$user){
+            $this->addFlash('error', 'utilisateur inexistant');
             return $this->redirectToRoute('admin.users.index');
         }
         $form = $this->createForm(SecurityType::class, $user, ['isAdmin' => true]);
@@ -37,7 +38,8 @@ class UserController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $this->em->persist($user);
             $this->em->flush();
-
+            
+            $this->addFlash('success','Utilisateur modifier avec succès');
            return $this->redirectToRoute('admin.users.index');
         }
         return $this->render('Backend/User/edit.html.twig',[
@@ -50,6 +52,8 @@ class UserController extends AbstractController
     #[Route('/{id}/delete', '.delete', methods:['GET','POST'])]
     public function delete(?User $user, Request $request):Response|RedirectResponse{
         if(!$user){
+
+            $this->addFlash('error', 'utilisateur inexistant');
             return $this->redirectToRoute('admin.users.index');
         }
         if($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('token'))) {
@@ -58,6 +62,8 @@ class UserController extends AbstractController
             $this->em->remove($user);
             $this->em->flush();
 
+            $this->addFlash('success', 'utilisateur supprimer  avec succes');
+            return $this->redirectToRoute('admin.users.index');
             
         }
         return $this->redirectToRoute('admin.users.index');

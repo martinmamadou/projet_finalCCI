@@ -2,9 +2,9 @@
 
 namespace App\Controller\Backend;
 
-use App\Entity\Exercice;
-use App\Form\ExerciceType;
-use App\Repository\ExerciceRepository;
+use App\Entity\ExerciceMaison;
+use App\Form\ExMaisonType;
+use App\Repository\ExerciceMaisonRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,8 +16,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class ExercicesController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $em,
-        
+        private readonly EntityManagerInterface $em,
+        private readonly ExerciceMaisonRepository $exoRepo, 
     )
     {
         
@@ -27,7 +27,8 @@ class ExercicesController extends AbstractController
     public function index(): Response
     {
         return $this->render('Backend/Exercice/index.html.twig', [
-           
+            
+           'exercices' => $this->exoRepo->findAll()
         ]);
     }
 
@@ -35,8 +36,8 @@ class ExercicesController extends AbstractController
     #[Route('/create', '.create', methods:['GET','POST'])]
     public function create(Request $request): Response
     {
-        $exercice = new Exercice;
-        $form = $this->createForm(ExerciceType::class, $exercice);
+        $exercice = new ExerciceMaison;
+        $form = $this->createForm(ExMaisonType::class, $exercice);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $this->em->persist($exercice);

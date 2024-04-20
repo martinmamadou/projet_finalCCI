@@ -13,7 +13,7 @@
 		<h2>{{user.username}}</h2>
 		<p>{{user.email}}</p>
 		</div>
-		<button class='btn-principal'>Modifier</button>
+		<a href="{{path('user.profile.edit',{id:user.id})}}" class="button btn-primaire">Modifier</a>
 		</div>
 		<div class="info">
 			<h3>Mes infos</h3>

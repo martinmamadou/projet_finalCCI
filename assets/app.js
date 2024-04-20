@@ -7,7 +7,7 @@ import './bootstrap.js';
  */
 import './styles/app.scss';
 
-import "./img/header.jpg"
+
 
 
 

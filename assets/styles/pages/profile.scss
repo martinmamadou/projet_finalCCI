@@ -1,4 +1,5 @@
 .profile{
+    color: $text-color;
     text-align: center;
     img{
         border: solid thin;
@@ -15,7 +16,7 @@
         border: solid thin;
         width: 85vw;
         margin: 20px auto;
-        background: lightblue;
+        background: $secondary-color;
         padding: 20px 0;
         box-shadow: $box-shadow;
         
