@@ -1,2 +1,2 @@
-import './javascript/addCollectionForm.js';
+import './javascript/we.js';
 

@@ -17,11 +17,7 @@ class ExMaisonType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => "Nom Exercice : ",
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Pompes...'
-                ]
+                'label' => 'name'
             ])
             ->add('enable', CheckboxType::class, [
                 'label' => 'actif',
