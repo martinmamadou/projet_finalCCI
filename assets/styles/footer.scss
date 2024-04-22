@@ -3,6 +3,10 @@
     background: $primary-color;
     color:$text-color;
     margin-top: 50px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
 
      ul {
         padding:0;

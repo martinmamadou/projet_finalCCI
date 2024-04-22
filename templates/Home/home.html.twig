@@ -3,11 +3,11 @@
 {% block body %}
 	<section class="">
 		{% include "Home/_dashboard.html.twig" %}
-			<div class="title">
-				<hr>
-				<h2>Get Started</h2>
-				<hr>				
-			</div>
+		<div class="title">
+			<hr>
+			<h2>Get Started</h2>
+			<hr>
+		</div>
 		<div class="htop-Content">
 			<div class="left"></div>
 			<div class="right">
@@ -15,16 +15,16 @@
 			</div>
 		</div>
 		<div class="title">
-				<hr>
-				<h2>Nos Programmes</h2>
-				<hr>				
-			</div>
+			<hr>
+			<h2>Nos Programmes</h2>
+			<hr>
+		</div>
 		<div class="hmiddle-content">
 			<a href="" class="left">
 				<img src="{{asset('/img/atGym.jpg')}}" alt="">
 				<h3>En Salle</h3>
 			</a>
-			<a href="" class="right">
+			<a href="{{path('user.programmes.index')}}" class="right">
 				<img src="{{asset('/img/atHome.jpg')}}" alt="">
 				<h3>A la Maison</h3>
 			</a>
