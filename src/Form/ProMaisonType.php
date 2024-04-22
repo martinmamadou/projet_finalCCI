@@ -30,18 +30,23 @@ class ProMaisonType extends AbstractType
                 'attr' => [
                     'placeholder' => 'super description'
                 ]
-                ])
+            ])
             ->add('enable')
             ->add('exerciceMaisons', CollectionType::class, [
                 'required' => false,
                 'label' => false,
-                'entry_type' => ExMaisonType::class,
+                'entry_type' => EntityType::class,
+                'entry_options' => [
+                    'class' => ExerciceMaison::class,
+                    'choice_label' => 'name',
+                    'multiple' => false,
+                    'expanded' => false,
+                ],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'delete_empty' => true,
                 'by_reference' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
