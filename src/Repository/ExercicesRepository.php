@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\ExerciceMaison;
+use App\Entity\Exercices;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ExerciceMaison>
+ * @extends ServiceEntityRepository<Exercices>
  *
- * @method ExerciceMaison|null find($id, $lockMode = null, $lockVersion = null)
- * @method ExerciceMaison|null findOneBy(array $criteria, array $orderBy = null)
- * @method ExerciceMaison[]    findAll()
- * @method ExerciceMaison[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Exercices|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Exercices|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Exercices[]    findAll()
+ * @method Exercices[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ExerciceMaisonRepository extends ServiceEntityRepository
+class ExercicesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ExerciceMaison::class);
+        parent::__construct($registry, Exercices::class);
     }
 
     //    /**
-    //     * @return ExerciceMaison[] Returns an array of ExerciceMaison objects
+    //     * @return Exercices[] Returns an array of Exercices objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -36,7 +36,7 @@ class ExerciceMaisonRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?ExerciceMaison
+    //    public function findOneBySomeField($value): ?Exercices
     //    {
     //        return $this->createQueryBuilder('e')
     //            ->andWhere('e.exampleField = :val')

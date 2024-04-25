@@ -2,21 +2,21 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\EnableTrait;
 use App\Entity\Traits\DateTimeTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\Collection;
-use App\Repository\ProgrammeMaisonRepository;
+use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
-#[ORM\Entity(repositoryClass: ProgrammeMaisonRepository::class)]
+#[ORM\Entity(repositoryClass: ProgrammeRepository::class)]
 #[UniqueEntity(fields: ['name'], message: 'ce nom est deja utilisé ')]
 #[HasLifecycleCallbacks]
-class ProgrammeMaison
+class Programme
 {
     use DateTimeTrait, EnableTrait;
     #[ORM\Id]
@@ -30,20 +30,26 @@ class ProgrammeMaison
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Gedmo\Slug(fields:['id','name'])]
+    #[Assert\Length(max:255)]
+    #[Gedmo\Slug(fields: ['id', 'name'])]
     private ?string $slug = null;
 
-    #[ORM\Column(length: 255)]
+    
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(max:255)]
     private ?string $shortDescription = null;
 
-    #[ORM\ManyToMany(targetEntity: ExerciceMaison::class, mappedBy: 'progMaison')]
-    private Collection $exerciceMaisons;
+    #[ORM\ManyToMany(targetEntity: Exercices::class, mappedBy: 'programme')]
+    private Collection $exercices;
+
+    #[ORM\ManyToOne(inversedBy: 'programme')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categorie $categorie = null;
 
     public function __construct()
     {
-        $this->exerciceMaisons = new ArrayCollection();
+        $this->exercices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,7 +86,7 @@ class ProgrammeMaison
         return $this->shortDescription;
     }
 
-    public function setShortDescription(string $shortDescription): static
+    public function setShortDescription(?string $shortDescription): static
     {
         $this->shortDescription = $shortDescription;
 
@@ -88,28 +94,40 @@ class ProgrammeMaison
     }
 
     /**
-     * @return Collection<int, ExerciceMaison>
+     * @return Collection<int, Exercices>
      */
-    public function getExerciceMaisons(): Collection
+    public function getExercices(): Collection
     {
-        return $this->exerciceMaisons;
+        return $this->exercices;
     }
 
-    public function addExerciceMaison(ExerciceMaison $exerciceMaison): static
+    public function addExercice(Exercices $exercice): static
     {
-        if (!$this->exerciceMaisons->contains($exerciceMaison)) {
-            $this->exerciceMaisons->add($exerciceMaison);
-            $exerciceMaison->addProgMaison($this);
+        if (!$this->exercices->contains($exercice)) {
+            $this->exercices->add($exercice);
+            $exercice->addProgramme($this);
         }
 
         return $this;
     }
 
-    public function removeExerciceMaison(ExerciceMaison $exerciceMaison): static
+    public function removeExercice(Exercices $exercice): static
     {
-        if ($this->exerciceMaisons->removeElement($exerciceMaison)) {
-            $exerciceMaison->removeProgMaison($this);
+        if ($this->exercices->removeElement($exercice)) {
+            $exercice->removeProgramme($this);
         }
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

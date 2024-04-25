@@ -2,9 +2,11 @@
 
 namespace App\Controller\Backend;
 
+use App\Entity\Programme;
 use App\Entity\ProgrammeMaison;
 use App\Form\ProMaisonType;
 use App\Repository\ProgrammeMaisonRepository;
+use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -13,13 +15,13 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 
-#[Route('admin/promaison','admin.promaison')]
+#[Route('admin/programmes','admin.programmes')]
 class ProgrammeController extends AbstractController
 {
 
 public function __construct(
     private readonly EntityManagerInterface $em,
-    private readonly ProgrammeMaisonRepository $ProMaisonRepository
+    private readonly ProgrammeRepository $proRepository
     )
 {
     
@@ -29,14 +31,14 @@ public function __construct(
     public function index(): Response|RedirectResponse
     {
         return $this->render('Backend/Programme/index.html.twig', [
-            'programmes' => $this->ProMaisonRepository->findAll()
+            'programmes' => $this->proRepository->findAll()
         ]);
     }
 
     #[Route('/create', name: '.create', methods:['GET','POST'])]
     public function create(Request $request): Response|RedirectResponse
     {
-        $programme = new ProgrammeMaison;
+        $programme = new Programme;
         $form = $this->createForm(ProMaisonType::class, $programme);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){

@@ -3,6 +3,7 @@
 namespace App\Controller\Frontend;
 
 use App\Repository\ProgrammeMaisonRepository;
+use App\Repository\ProgrammeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class ProgrammeController extends AbstractController
 {
     public function __construct(
-        private readonly ProgrammeMaisonRepository $proMaisonRepo
+        private readonly ProgrammeRepository $proRepo
     ) {
     }
 
@@ -19,7 +20,7 @@ class ProgrammeController extends AbstractController
     public function index(): Response
     {
         return $this->render('Frontend/Programme/index.html.twig', [
-            'programmes' => $this->proMaisonRepo->findAll()
+            'programmes' => $this->proRepo->findAll()
         ]);
     }
 }

@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\ProgrammeMaison;
+use App\Entity\Programme;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ProgrammeMaison>
+ * @extends ServiceEntityRepository<Programme>
  *
- * @method ProgrammeMaison|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProgrammeMaison|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProgrammeMaison[]    findAll()
- * @method ProgrammeMaison[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Programme|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Programme|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Programme[]    findAll()
+ * @method Programme[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProgrammeMaisonRepository extends ServiceEntityRepository
+class ProgrammeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProgrammeMaison::class);
+        parent::__construct($registry, Programme::class);
     }
 
     //    /**
-    //     * @return ProgrammeMaison[] Returns an array of ProgrammeMaison objects
+    //     * @return Programme[] Returns an array of Programme objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -36,7 +36,7 @@ class ProgrammeMaisonRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?ProgrammeMaison
+    //    public function findOneBySomeField($value): ?Programme
     //    {
     //        return $this->createQueryBuilder('p')
     //            ->andWhere('p.exampleField = :val')

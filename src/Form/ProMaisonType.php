@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\ExerciceMaison;
+use App\Entity\Exercices;
+use App\Entity\Programme;
 use App\Entity\ProgrammeMaison;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,13 +34,18 @@ class ProMaisonType extends AbstractType
                     'placeholder' => 'super description'
                 ]
             ])
+            ->add('categorie', EntityType::class,[
+                'label' => 'Categorie Programmes',
+                'class' =>  Categorie::class,
+                'choice_label' => 'name'
+            ] )
             ->add('enable')
-            ->add('exerciceMaisons', CollectionType::class, [
+            ->add('exercices', CollectionType::class, [
                 'required' => false,
                 'label' => false,
                 'entry_type' => EntityType::class,
                 'entry_options' => [
-                    'class' => ExerciceMaison::class,
+                    'class' => Exercices::class,
                     'choice_label' => 'name',
                     'multiple' => false,
                     'expanded' => false,
@@ -52,7 +60,7 @@ class ProMaisonType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ProgrammeMaison::class,
+            'data_class' => Programme::class,
         ]);
     }
 }

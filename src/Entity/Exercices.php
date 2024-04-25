@@ -5,20 +5,20 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\EnableTrait;
 use App\Entity\Traits\DateTimeTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
+use App\Repository\ExercicesRepository;
 use Doctrine\Common\Collections\Collection;
-use App\Repository\ExerciceMaisonRepository;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
-#[ORM\Entity(repositoryClass: ExerciceMaisonRepository::class)]
+#[ORM\Entity(repositoryClass: ExercicesRepository::class)]
 #[UniqueEntity(fields: ['name'], message: 'ce nom est deja utilisé ')]
 #[HasLifecycleCallbacks]
-class ExerciceMaison
+class Exercices
 {
-    use DateTimeTrait, EnableTrait;
+    use DateTimeTrait, EnableTrait; 
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -26,20 +26,21 @@ class ExerciceMaison
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank()]
     #[Assert\Length(max:255)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Gedmo\Slug(fields:['id','name'])]
+    #[Assert\Length(max:255)]
+    #[Gedmo\Slug(fields: ['id', 'name'])]
     private ?string $slug = null;
 
-    #[ORM\ManyToMany(targetEntity: ProgrammeMaison::class, inversedBy: 'exerciceMaisons')]
-    private Collection $progMaison;
+    #[ORM\ManyToMany(targetEntity: Programme::class, inversedBy: 'exercices')]
+    private Collection $programme;
 
     public function __construct()
     {
-        $this->progMaison = new ArrayCollection();
+        $this->programme = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,25 +73,25 @@ class ExerciceMaison
     }
 
     /**
-     * @return Collection<int, ProgrammeMaison>
+     * @return Collection<int, Programme>
      */
-    public function getProgMaison(): Collection
+    public function getProgramme(): Collection
     {
-        return $this->progMaison;
+        return $this->programme;
     }
 
-    public function addProgMaison(ProgrammeMaison $progMaison): static
+    public function addProgramme(Programme $programme): static
     {
-        if (!$this->progMaison->contains($progMaison)) {
-            $this->progMaison->add($progMaison);
+        if (!$this->programme->contains($programme)) {
+            $this->programme->add($programme);
         }
 
         return $this;
     }
 
-    public function removeProgMaison(ProgrammeMaison $progMaison): static
+    public function removeProgramme(Programme $programme): static
     {
-        $this->progMaison->removeElement($progMaison);
+        $this->programme->removeElement($programme);
 
         return $this;
     }

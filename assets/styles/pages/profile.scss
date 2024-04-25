@@ -8,11 +8,12 @@
         width: 150px;
     }
     .me{
-       
+      
         padding: 0 50px;
     }
 
     .info{
+        border-radius: $border-radius1;
         border: solid thin;
         width: 85vw;
         margin: 20px auto;

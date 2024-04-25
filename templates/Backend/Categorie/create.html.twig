@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Creation Categorie
+{% endblock %}
+
+{% block body %}
+    <section class="content">
+        <h1 class="text-center">creation des categories</h1>
+        {% include "Backend/Categorie/_form.html.twig" with {labelButton:('Creer')} %}
+    </section>
+
+{% endblock %}

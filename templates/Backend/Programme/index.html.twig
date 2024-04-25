@@ -5,9 +5,10 @@
 
 {% block body %}
 	{% for programme in programmes %}
-		<p>{{programme.name}}</p>
-		{% for exercice in programme.exerciceMaisons %}
-			<p>{{exercice.name}}</p>
-		{% endfor %}
+		
+		
+			<p>{{programme.categorie.name}}</p>
+		
+		
 	{% endfor %}
 {% endblock %}
