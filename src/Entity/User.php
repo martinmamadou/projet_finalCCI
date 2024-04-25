@@ -77,6 +77,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?UserInfo $userInfo = null;
+
     public function __serialize(): array
     {
         return [
@@ -237,5 +240,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    public function getUserInfo(): ?UserInfo
+    {
+        return $this->userInfo;
+    }
+
+    public function setUserInfo(?UserInfo $userInfo): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($userInfo === null && $this->userInfo !== null) {
+            $this->userInfo->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($userInfo !== null && $userInfo->getUser() !== $this) {
+            $userInfo->setUser($this);
+        }
+
+        $this->userInfo = $userInfo;
+
+        return $this;
     }
 }
