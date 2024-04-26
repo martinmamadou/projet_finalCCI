@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	liste programmes
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+	<section class="content">
+		<h1 class="text-center">Programmes Push</h1>
+
+		{% for programme in programmes %}
+			<pre>
+                    {{ dump(programme) }}
+                </pre>
+
+
+		{% endfor %}
+	</section>
+{% endblock %}

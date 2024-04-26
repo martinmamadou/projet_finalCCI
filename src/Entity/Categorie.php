@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Traits\DateTimeTrait;
+use App\Entity\Traits\EnableTrait;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,13 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 #[UniqueEntity(fields: ['name'], message: 'ce nom est deja utilisé ')]
 #[HasLifecycleCallbacks]
 class Categorie
 {
-    use DateTimeTrait;
+    use DateTimeTrait, EnableTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,11 +27,16 @@ class Categorie
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
-    #[Assert\Length(max:255)]
+    #[Assert\Length(max: 255)]
     private ?string $name = null;
 
     #[ORM\OneToMany(targetEntity: Programme::class, mappedBy: 'categorie')]
     private Collection $programme;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\Length(max: 255)]
+    #[Gedmo\Slug(fields: ['id', 'name'])]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -79,6 +86,18 @@ class Categorie
                 $programme->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

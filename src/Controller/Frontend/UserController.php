@@ -72,13 +72,13 @@ class UserController extends AbstractController
     #[Route('/infos/{id}', '.infos', methods: ['GET', 'POST'])]
     public function infos(Request $request, ?User $user): Response|RedirectResponse
     {
-        $info = new UserInfo;
+
+        $info = $user->getUserInfo() ?? new UserInfo();
 
         $form = $this->createForm(InfoType::class, $info);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user = $this->getUser();
             $info->setUser($user);
 
             $this->em->persist($info);
@@ -92,31 +92,5 @@ class UserController extends AbstractController
             'info' => $info,
             'form' => $form
         ]);
-    }
-    #[Route('/infos/delete/{id}', '.infos.delete', methods: ['POST'])]
-    public function infoDel(Request $request, ?User $user, ?UserInfo $info): Response|RedirectResponse
-    {
-
-        if (!$user) {
-            $this->addFlash('error', 'utilisateur inexistant');
-            return $this->redirectToRoute('app.home');
-        }
-
-        if ($this->isCsrfTokenValid('delete' . $info->getId(), $request->request->get('token'))) {
-            $user
-                ->setUserInfo($info);
-            if ($info !== null) {
-                $this->em->remove($info);
-                $this->em->flush();
-
-                $this->addFlash('success', 'Informations utilisateur supprimées avec succès');
-                return $this->redirectToRoute('app.home');
-            } else {
-                // Gérer le cas où $info est null, peut-être rediriger avec un message d'erreur
-                dump($info);
-                return $this->redirectToRoute('app.home');
-            }
-        }
-        return $this->redirectToRoute('app.user.profile');
     }
 }

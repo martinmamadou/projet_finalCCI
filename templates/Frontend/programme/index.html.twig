@@ -4,9 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	{% for programme in programmes %}
-		<div class="proList">
-			<p>{{programme.name}}</p>
-		</div>
-	{% endfor %}
+	<section class="content">
+		{% for programme in programmes %}
+			<a href="{{path('user.programmes.list',{slug:programme.categorie.slug})}}">
+				<div class="proList">
+					<p>{{programme.categorie.name}}</p>
+				</div>
+			</a>
+		{% endfor %}
+	</section>
 {% endblock %}

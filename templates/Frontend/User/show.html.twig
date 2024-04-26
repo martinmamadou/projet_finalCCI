@@ -31,7 +31,6 @@
 
 					</p>
 
-					<a href="{{path('user.profile.infos',{id:user.id})}}" class="button btn-primaire">Modifier</a>
 
 				{% else %}
 					<p>
@@ -50,14 +49,8 @@
 						{{user.userInfo.poids / (user.userInfo.taille * user.userInfo.taille ) * 10000 }}
 					</p>
 
-					<div class="btn-container">
-						<a href="{{path('user.profile.infos',{id:user.userInfo.id})}}" class="button btn-primaire">Modifier</a>
-						<form action="{{ path('user.profile.infos.delete', {id: user.userInfo.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ces infos')">
-							<input type="hidden" name="token" value="{{ csrf_token('delete'~ user.userInfo.id) }}">
-							<button type="submit" class="btn btn-danger">Supprimer</button>
-						</form>
-					</div>
 				{% endif %}
+				<a href="{{path('user.profile.infos',{id:user.id})}}" class="button btn-primaire">Modifier</a>
 			</div>
 
 		</div>

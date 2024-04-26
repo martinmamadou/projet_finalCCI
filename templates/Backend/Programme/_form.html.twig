@@ -1,6 +1,7 @@
 {{ form_start(form, {'attr': {'class': 'card p-3 w-50 mx-auto mt-3'}}) }}
 {{ form_row(form.name) }}
 {{form_row(form.shortDescription)}}
+{{form_row(form.categorie)}}
 
 <div class="mb-3">
 	<button type="button" class="add_item_link btn btn-secondary" data-collection-holder-class="exercices-list">Ajouter un exercice</button>
@@ -16,6 +17,5 @@
 		</li>
 	{% endfor %}
 </ul>
-
-<button type="submit" class="btn-secondaire">Ajouter</button>
+<button type="submit" class="button btn-secondaire">Ajouter</button>
 {{ form_end(form) }}
