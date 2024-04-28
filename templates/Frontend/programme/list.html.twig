@@ -8,12 +8,14 @@
 {% block body %}
 
 	<section class="content">
-		<h1 class="text-center">Programmes Push</h1>
+		<h1 class="text-center">Programmes</h1>
 
 		{% for programme in programmes %}
-			<pre>
-                    {{ dump(programme) }}
-                </pre>
+			<a href="{{path('user.programmes.details', {slug:programme.slug})}}">
+				<div class="proList">
+					<p>{{programme.name}}</p>
+				</div>
+			</a>
 
 
 		{% endfor %}

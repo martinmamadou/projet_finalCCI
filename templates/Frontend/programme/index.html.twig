@@ -7,9 +7,12 @@
 	<section class="content">
 		{% for programme in programmes %}
 			<a href="{{path('user.programmes.list',{slug:programme.categorie.slug})}}">
+			{% if programme.categorie.name is defined %}
+			
 				<div class="proList">
 					<p>{{programme.categorie.name}}</p>
 				</div>
+				{% endif %}
 			</a>
 		{% endfor %}
 	</section>

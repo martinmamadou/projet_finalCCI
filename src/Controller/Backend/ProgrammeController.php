@@ -49,5 +49,47 @@ public function __construct(
             'form' => $form
         ]);
     }
+
+    #[Route('/{id}/edit', '.edit', methods:['GET','POST'])]
+    public function edit(?Programme $programme, Request $request):Response|RedirectResponse{
+        if(!$programme){
+            $this->addFlash('error', 'programme inexistant');
+            return $this->redirectToRoute('admin.programmes.index');
+        }
+        $form = $this->createForm(ProMaisonType::class, $programme);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $this->em->persist($programme);
+            $this->em->flush();
+            
+            $this->addFlash('success','programme modifier avec succès');
+           return $this->redirectToRoute('admin.programmes.index');
+        }
+        return $this->render('Backend/Programme/edit.html.twig',[
+            'form' => $form
+        ]);
+
+       
+        
+    }
+    #[Route('/{id}/delete', '.delete', methods:['GET','POST'])]
+    public function delete(?Programme $programme, Request $request):Response|RedirectResponse{
+        if(!$programme){
+
+            $this->addFlash('error', 'programme inexistant');
+            return $this->redirectToRoute('admin.users.index');
+        }
+        if($this->isCsrfTokenValid('delete' . $programme->getId(), $request->request->get('token'))) {
+
+            //on supprime en bdd
+            $this->em->remove($programme);
+            $this->em->flush();
+
+            $this->addFlash('success', 'programme supprimer  avec succes');
+            return $this->redirectToRoute('admin.programmes.index');
+            
+        }
+        return $this->redirectToRoute('admin.programmes.index');
+    }
 }
 

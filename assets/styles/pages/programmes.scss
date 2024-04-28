@@ -1,4 +1,4 @@
-.proList{
+.categList{
     background: white;
     width: 90%;
     height: 100px;
@@ -13,5 +13,23 @@
         margin-left: 15px;
         text-transform: uppercase;
         font-size: 3em;
+    }
+}
+
+.proList, .exList{
+    background: $secondary-color;
+    color: $text-color;
+    border-radius: $border-radius1;
+    width: 90%;
+    height: 70px;
+    padding: 10px 30px;
+    margin: 30px auto;
+    box-shadow: $box-shadow;
+    display: flex;
+    align-items: center;
+    p{
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 2.3em;
     }
 }

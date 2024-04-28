@@ -47,9 +47,14 @@ class Programme
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
+    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'programme')]
+    private Collection $commentaires;
+
+
     public function __construct()
     {
         $this->exercices = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,4 +136,36 @@ class Programme
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Commentaires>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaires $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setProgramme($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaires $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getProgramme() === $this) {
+                $commentaire->setProgramme(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

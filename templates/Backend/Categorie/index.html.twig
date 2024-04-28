@@ -1,20 +1,37 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello CategorieController!{% endblock %}
+{% extends "base.html.twig" %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<section class="container">
+		<h1 class='text-center'>admin des categories</h1>
+			<a href="" class="btn btn-secondaire">
+			<i class="bi bi-chat-text"></i>Acceuil</a>
+			<a href="{{path('admin.categories.create')}}" class='button btn-secondaire'>Ajouter</a>
+		<table class="table table-striped table-bordered" data-toggle="table" data-sort-name="fullName" data-sort-order="asc" data-pagination="true" data-search="true" data-show-columns="true">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>date de Creation</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for categorie in categories %}
+					<tr>
+						<td>{{categorie.name}}</td>
+						<td>{{categorie.createdAt|ago}}</td>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/martinmamadou/Desktop/projet_finalCCI/src/Controller/Backend/CategorieController.php</code></li>
-        <li>Your template at <code>/Users/martinmamadou/Desktop/projet_finalCCI/templates/backend/categorie/index.html.twig</code></li>
-    </ul>
-</div>
+						<td scope="col">
+							<div class="d-flex gap-2">
+								<a href="{{ path('admin.categories.edit', {id: categorie.id}) }}" class="btn btn-primaire">Modifier</a>
+								<form action="{{ path('admin.categories.delete', {id: categorie.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette categorie')">
+									<input type="hidden" name="token" value="{{ csrf_token('delete'~ categorie.id) }}">
+									<button type="submit" class="btn btn-danger">Supprimer</button>
+								</form>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+    </section>
 {% endblock %}
