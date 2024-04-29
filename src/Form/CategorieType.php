@@ -4,9 +4,10 @@ namespace App\Form;
 
 use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CategorieType extends AbstractType
 {
@@ -17,10 +18,14 @@ class CategorieType extends AbstractType
                 'label' => 'Nom',
                 'required' => 'false',
                 'attr' => [
-                    'placeholder' => 'Nom' 
+                    'placeholder' => 'Nom'
                 ]
             ])
-        ;
+
+            ->add('imageFile', FileType::class, [
+                'label' => 'Photo Categorie : ',
+                'required' => false
+            ]);;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

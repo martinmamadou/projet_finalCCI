@@ -18,12 +18,10 @@ class CategorieController extends AbstractController
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly CategorieRepository $CategRepository
-    )
-    {
-        
+    ) {
     }
 
-    #[Route('/admin/categories', name: '.index', methods:['GET'])]
+    #[Route('/admin/categories', name: '.index', methods: ['GET'])]
     public function index(): Response
     {
 
@@ -32,13 +30,15 @@ class CategorieController extends AbstractController
         ]);
     }
 
-    #[Route('/create','.create', methods: ['GET', 'POST'] )]
+    #[Route('/create', '.create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response|RedirectResponse
     {
         $categorie = new Categorie;
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
-        if($form->isSubmitted()&&$form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
+            $categorie
+                ->setEnable(1);
             $this->em->persist($categorie);
             $this->em->flush();
 
@@ -47,7 +47,7 @@ class CategorieController extends AbstractController
         }
 
         return $this->render('Backend/Categorie/create.html.twig', [
-            'form'=> $form
+            'form' => $form
         ]);
     }
 }
