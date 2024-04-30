@@ -21,7 +21,7 @@ class CategorieController extends AbstractController
     ) {
     }
 
-    #[Route('/admin/categories', name: '.index', methods: ['GET'])]
+    #[Route('', name: '.index', methods: ['GET'])]
     public function index(): Response
     {
 
@@ -49,5 +49,45 @@ class CategorieController extends AbstractController
         return $this->render('Backend/Categorie/create.html.twig', [
             'form' => $form
         ]);
+    }
+
+    #[Route('/{id}/edit', '.edit', methods: ['GET', 'POST'])]
+    public function edit(?Categorie $categorie, Request $request): Response|RedirectResponse
+    {
+        if (!$categorie) {
+            $this->addFlash('error', 'categorie inexistante');
+            return $this->redirectToRoute('admin.categories.index');
+        }
+        $form = $this->createForm(CategorieType::class, $categorie);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($categorie);
+            $this->em->flush();
+
+            $this->addFlash('success', 'Categorie modifier avec succès');
+            return $this->redirectToRoute('admin.categories.index');
+        }
+        return $this->render('Backend/Categorie/edit.html.twig', [
+            'form' => $form
+        ]);
+    }
+    #[Route('/{id}/delete', '.delete', methods: ['GET', 'POST'])]
+    public function delete(?Categorie $categorie, Request $request): Response|RedirectResponse
+    {
+        if (!$categorie) {
+
+            $this->addFlash('error', 'Categorie inexistante');
+            return $this->redirectToRoute('admin.categories.index');
+        }
+        if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->request->get('token'))) {
+
+            //on supprime en bdd
+            $this->em->remove($categorie);
+            $this->em->flush();
+
+            $this->addFlash('success', 'Categorie supprimer  avec succes');
+            return $this->redirectToRoute('admin.categories.index');
+        }
+        return $this->redirectToRoute('admin.categoriex.index');
     }
 }

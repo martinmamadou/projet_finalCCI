@@ -1,4 +1,4 @@
-.proList{
+.categList{
     background: white;
     width: 90%;
     height: 100px;
@@ -14,4 +14,25 @@
         text-transform: uppercase;
         font-size: 3em;
     }
+}
+
+.proList{
+   display: flex;
+   align-items: center;
+    height: 150px;
+    width: 90vw;
+    margin: 70px auto;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius2;
+  
+
+    p{
+        margin: 0 auto ;
+        font-size: 9em;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+
+    }
+
 }

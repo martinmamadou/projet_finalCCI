@@ -43,7 +43,7 @@ class SecurityController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $hasher): Response
     {
         $user = new User;
-        $form = $this->createForm(SecurityType::class, $user);
+        $form = $this->createForm(SecurityType::class, $user, ['isUser'=>false]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user

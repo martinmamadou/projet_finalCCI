@@ -46,12 +46,8 @@ class SecurityType extends AbstractType
                 'attr' => [
                     'placeholder' => 'S3CR3T'
                 ]
-            ])
+                ]);
 
-            ->add('imageFile', FileType::class, [
-                'label' => 'Photo de profil',
-                'required' => false
-            ]);
 
 
 
@@ -70,6 +66,15 @@ class SecurityType extends AbstractType
                     'multiple' => true,
                 ]);
         }
+
+
+        if($options['isUser']){
+            $builder
+            ->add('imageFile', FileType::class, [
+                'label' => 'Photo de profil',
+                'required' => false
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -77,6 +82,7 @@ class SecurityType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'isAdmin' => false,
+            'isUser' => true,
             'sanitize_html' => true,
         ]);
     }

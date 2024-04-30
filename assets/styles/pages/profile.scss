@@ -1,19 +1,33 @@
 .profile{
     color: $text-color;
     text-align: center;
-    img{
-        border: solid thin;
-        border-radius: 100%;
-        height: 150px;
-        width: 150px;
-    }
+    
+  
     .me{
-      
-        padding: 0 50px;
+        height: 100px;
+        position: relative;
+        border-radius: $border-radius1;
+        border: solid thin;
+        width: 85vw;
+        background: $secondary-color;
+        margin: 100px auto 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        img{
+            position: absolute;
+            object-fit: cover;
+            border-radius: 100%;
+            height: 150px;
+            width: 150px;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     }
 
     .info{
-        border-radius: $border-radius1;
+        border-radius: $border-radius2;
         border: solid thin;
         width: 85vw;
         margin: 20px auto;
@@ -22,11 +36,13 @@
         box-shadow: $box-shadow;
         
         .btn-container{
-        display: flex;
         justify-content: center;
         gap: 20px;
         align-items: center;
     }
+    }
+    p{
+        text-align: center;
     }
     
 }

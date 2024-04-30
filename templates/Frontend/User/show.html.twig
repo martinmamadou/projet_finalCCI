@@ -7,13 +7,14 @@
 {% block body %}
 	<section class="profile">
 		<h1>Mon profil</h1>
-		<img src="{{vich_uploader_asset(user)}}" alt="" height='50px' width='50px'>
 		<div class="me">
+		<img src="{{vich_uploader_asset(user)}}" alt="" height='50px' width='50px'>
+		
 			<div class="para">
 				<h2>{{user.username}}</h2>
 				<p>{{user.email}}</p>
 			</div>
-			<a href="{{path('user.profile.edit',{id:user.id})}}" class="button btn-primaire">Modifier</a>
+			
 		</div>
 		<div class="info">
 			<h3>Mes infos</h3>
@@ -50,9 +51,10 @@
 					</p>
 
 				{% endif %}
-				<a href="{{path('user.profile.infos',{id:user.id})}}" class="button btn-primaire">Modifier</a>
+				<a href="{{path('user.profile.infos',{id:user.id})}}" class="button btn-principal">Modifier</a>
 			</div>
 
 		</div>
+		<a href="{{path('user.profile.edit',{id:user.id})}}" class="button btn-principal">Modifier</a>
 	</section>
 {% endblock %}

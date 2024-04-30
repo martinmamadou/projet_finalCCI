@@ -10,6 +10,7 @@ use App\Entity\ProgrammeMaison;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -34,11 +35,11 @@ class ProMaisonType extends AbstractType
                     'placeholder' => 'super description'
                 ]
             ])
-            ->add('categorie', EntityType::class,[
+            ->add('categorie', EntityType::class, [
                 'label' => 'Categorie Programmes',
                 'class' =>  Categorie::class,
                 'choice_label' => 'name'
-            ] )
+            ])
             ->add('enable')
             ->add('exercices', CollectionType::class, [
                 'required' => false,
@@ -54,6 +55,13 @@ class ProMaisonType extends AbstractType
                 'allow_delete' => true,
                 'delete_empty' => true,
                 'by_reference' => false,
+            ])
+            ->add('type', ChoiceType::class, [
+                'label' => "type d'entrainement",
+                'choices' => [
+                    "salle" => "gym",
+                    "maison" => "home"
+                ]
             ]);
     }
 

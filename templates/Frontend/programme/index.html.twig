@@ -7,9 +7,12 @@
 	<section class="content">
 		{% for programme in programmes %}
 			<a href="{{path('user.programmes.list',{slug:programme.categorie.slug})}}">
-				<div class="proList">
-					<p>{{programme.categorie.name}}</p>
-				</div>
+				{% if programme.categorie.name is defined %}
+
+					<div class="proList" style="background: center / cover url('{{ vich_uploader_asset(programme.categorie)}}')">
+						<p>{{programme.categorie.name}}</p>
+					</div>
+				{% endif %}
 			</a>
 		{% endfor %}
 	</section>

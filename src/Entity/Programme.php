@@ -26,18 +26,18 @@ class Programme
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
-    #[Assert\Length(max:255)]
+    #[Assert\Length(max: 255)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(max:255)]
+    #[Assert\Length(max: 255)]
     #[Gedmo\Slug(fields: ['id', 'name'])]
     private ?string $slug = null;
 
-    
+
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank()]
-    #[Assert\Length(max:255)]
+    #[Assert\Length(max: 255)]
     private ?string $shortDescription = null;
 
     #[ORM\ManyToMany(targetEntity: Exercices::class, mappedBy: 'programme')]
@@ -47,9 +47,19 @@ class Programme
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
+    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'programme')]
+    private Collection $commentaires;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank()]
+    private ?string $type = null;
+
+
     public function __construct()
     {
         $this->exercices = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,6 +138,48 @@ class Programme
     public function setCategorie(?Categorie $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaires>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaires $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setProgramme($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaires $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getProgramme() === $this) {
+                $commentaire->setProgramme(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
