@@ -12,6 +12,8 @@ const commentaire = document.querySelector('.commentaire')
 const btnComment = document.querySelector('.comment')
 console.log(commentaire)
 
+
+
 btnComment.addEventListener('click', function(){
-    commentaire.classList.remove('close');
+    commentaire.classList.remove('closed');
 })
