@@ -38,9 +38,13 @@ class Exercices
     #[ORM\ManyToMany(targetEntity: Programme::class, inversedBy: 'exercices')]
     private Collection $programme;
 
+    #[ORM\ManyToMany(targetEntity: DetailExercice::class, mappedBy: 'exercice')]
+    private Collection $detailExercices;
+
     public function __construct()
     {
         $this->programme = new ArrayCollection();
+        $this->detailExercices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +96,33 @@ class Exercices
     public function removeProgramme(Programme $programme): static
     {
         $this->programme->removeElement($programme);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailExercice>
+     */
+    public function getDetailExercices(): Collection
+    {
+        return $this->detailExercices;
+    }
+
+    public function addDetailExercice(DetailExercice $detailExercice): static
+    {
+        if (!$this->detailExercices->contains($detailExercice)) {
+            $this->detailExercices->add($detailExercice);
+            $detailExercice->addExercice($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailExercice(DetailExercice $detailExercice): static
+    {
+        if ($this->detailExercices->removeElement($detailExercice)) {
+            $detailExercice->removeExercice($this);
+        }
 
         return $this;
     }
