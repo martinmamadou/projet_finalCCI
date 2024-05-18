@@ -12,13 +12,14 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use PhpParser\Node\Name;
 
 #[ORM\Entity(repositoryClass: ExercicesRepository::class)]
 #[UniqueEntity(fields: ['name'], message: 'ce nom est deja utilisé ')]
 #[HasLifecycleCallbacks]
 class Exercices
 {
-    use DateTimeTrait, EnableTrait; 
+    use DateTimeTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -38,13 +39,24 @@ class Exercices
     #[ORM\ManyToMany(targetEntity: Programme::class, inversedBy: 'exercices')]
     private Collection $programme;
 
-    #[ORM\ManyToMany(targetEntity: DetailExercice::class, mappedBy: 'exercice')]
-    private Collection $detailExercices;
+
+
+    #[ORM\Column(nullable: true)]
+    private ?int $repetitions = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $serie = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $temps = null;
+
+
+ 
 
     public function __construct()
     {
         $this->programme = new ArrayCollection();
-        $this->detailExercices = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -63,6 +75,12 @@ class Exercices
 
         return $this;
     }
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 
     public function getSlug(): ?string
     {
@@ -100,30 +118,43 @@ class Exercices
         return $this;
     }
 
-    /**
-     * @return Collection<int, DetailExercice>
-     */
-    public function getDetailExercices(): Collection
+ 
+ 
+
+    public function getRepetitions(): ?int
     {
-        return $this->detailExercices;
+        return $this->repetitions;
     }
 
-    public function addDetailExercice(DetailExercice $detailExercice): static
+    public function setRepetitions(?int $repetitions): static
     {
-        if (!$this->detailExercices->contains($detailExercice)) {
-            $this->detailExercices->add($detailExercice);
-            $detailExercice->addExercice($this);
-        }
+        $this->repetitions = $repetitions;
 
         return $this;
     }
 
-    public function removeDetailExercice(DetailExercice $detailExercice): static
+    public function getSerie(): ?int
     {
-        if ($this->detailExercices->removeElement($detailExercice)) {
-            $detailExercice->removeExercice($this);
-        }
+        return $this->serie;
+    }
+
+    public function setSerie(?int $serie): static
+    {
+        $this->serie = $serie;
 
         return $this;
     }
+
+    public function getTemps(): ?int
+    {
+        return $this->temps;
+    }
+
+    public function setTemps(?int $temps): static
+    {
+        $this->temps = $temps;
+
+        return $this;
+    }
+
 }

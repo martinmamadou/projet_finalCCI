@@ -40,17 +40,10 @@ class ProMaisonType extends AbstractType
                 'class' =>  Categorie::class,
                 'choice_label' => 'name'
             ])
-            ->add('enable')
             ->add('exercices', CollectionType::class, [
                 'required' => false,
                 'label' => false,
-                'entry_type' => EntityType::class,
-                'entry_options' => [
-                    'class' => Exercices::class,
-                    'choice_label' => 'name',
-                    'multiple' => false,
-                    'expanded' => false,
-                ],
+                'entry_type' => ExMaisonType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'delete_empty' => true,
@@ -69,6 +62,7 @@ class ProMaisonType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Programme::class,
+            'isUser' => true
         ]);
     }
 }

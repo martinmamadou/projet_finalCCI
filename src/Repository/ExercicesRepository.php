@@ -21,6 +21,23 @@ class ExercicesRepository extends ServiceEntityRepository
         parent::__construct($registry, Exercices::class);
     }
 
+    public function findDistinctFirstOccurrences()
+    {
+        $subQuery = $this->createQueryBuilder('sub')
+        ->select('MIN(sub.id)')
+        ->groupBy('sub.name')
+        ->getQuery()
+        ->getScalarResult();
+
+    // Extraire les valeurs d'ID minimaux de la sous-requête
+    $minIds = array_column($subQuery, 1);
+
+    // Récupérer les premières instances de chaque exercice en utilisant les ID minimaux
+    $qb = $this->createQueryBuilder('e');
+    $qb->where($qb->expr()->in('e.id', $minIds));
+
+    return $qb->getQuery()->getResult();
+    }
     //    /**
     //     * @return Exercices[] Returns an array of Exercices objects
     //     */

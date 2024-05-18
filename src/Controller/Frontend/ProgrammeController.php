@@ -29,13 +29,23 @@ class ProgrammeController extends AbstractController
     }
 
     #[Route('', name: '.index', methods: ['GET', 'POST'])]
-    public function index(): Response
-    {
-        return $this->render('Frontend/Programme/index.html.twig', [
-            'programmes' => $this->proRepo->findAll(),
-            'categories' => $this->categRepository->findAll()
-        ]);
+    public function index(string $type): Response
+{
+    // Vérifiez le type pour charger les programmes correspondants
+    if ($type === 'salle') {
+        $programmes = $this->proRepo->findBy(['type' => 'salle']);
+    } elseif ($type === 'maison') {
+        $programmes = $this->proRepo->findBy(['type' => 'maison']);
+    } else {
+        // Gérez le cas où le type n'est ni "salle" ni "maison"
+        throw $this->createNotFoundException('Type non valide');
     }
+
+    return $this->render('Frontend/Programme/index.html.twig', [
+        'programmes' => $programmes,
+        'categories' => $this->categRepository->findAll()
+    ]);
+}
 
     #[Route('/{slug}/list', name: '.list', methods: ['GET'])]
     public function list(string $slug): Response

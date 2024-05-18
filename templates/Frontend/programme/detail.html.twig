@@ -7,7 +7,7 @@
 
 {% block body %}
 	<section class="content">
-		<h1 class="text-center">Détails du Programme</h1>
+		<h1 class="text-center">{{programme.name}}</h1>
 		{% for ex in exercices %}
 			<div class="exList">
 				<p>{{ex.name}}</p>
