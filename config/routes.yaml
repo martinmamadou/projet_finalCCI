@@ -7,3 +7,4 @@ controllers:
 programmes_index:
     path: /programmes/{type}
     controller: 'App\Controller\Frontend\ProgrammeController::index'
+
