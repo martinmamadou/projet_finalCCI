@@ -7,12 +7,16 @@
 
 {% block body %}
 	<section class="content">
+
 		<h1 class="text-center">Détails du Programme</h1>
+
 		{% for ex in exercices %}
 			<div class="exList">
+
 				<p>{{ex.name}}</p>
 			</div>
 		{% endfor %}
+
 
 		<button class="comment button btn-principal">Ajouter un commentaire</button>
 		<div class="commentaire closed">
@@ -35,25 +39,20 @@
 
 		{% for commentaire in commentaires %}
 			{% if commentaire.programme.id == programme.id %}
-				<div class="card border-secondary ">
-					<p class="card-header bg-primary text-light mb-0">{{commentaire.name}}</p>
-					<div class="card-body">
-						<p class="card-text">{{commentaire.message|sanitize_html}}</p>
-						<p class="card-text">
+				<div class="display">
+					<h2>{{commentaire.name}}</h2>
+					<div class="display-content">
+						<p>{{commentaire.note}}</p>
 
-							{% for i in range(0,4) %}
-								<i class="bi bi-star{{ i<= commentaire.note ? '-fill'}}"></i>
+						<p>{{commentaire.message|sanitize_html}}</p>
 
-							{% endfor %}
-						</p>
-
-						<p class="card-text text-muted">{{commentaire.createdAt|ago}}</p>
+						<p>{{commentaire.createdAt|ago}}</p>
 					</div>
 				</div>
+
 
 			{% endif %}
 		{% endfor %}
 
-
-	</section>
-{% endblock %}
+	</div>
+</section>{% endblock %}

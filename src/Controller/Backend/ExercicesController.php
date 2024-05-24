@@ -22,67 +22,64 @@ class ExercicesController extends AbstractController
         private readonly EntityManagerInterface $em,
         private readonly ExercicesRepository $exoRepo
 
-    )
-    {
-        
+    ) {
     }
 
-    #[Route('/index', name: '.index', methods:['GET'])]
+    #[Route('/index', name: '.index', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('Backend/Exercice/index.html.twig', [
-        
+
             "exercices" => $this->exoRepo->findAll()
-           
+
         ]);
     }
 
 
-    #[Route('/create', '.create', methods:['GET','POST'])]
+    #[Route('/create', '.create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
         $exercice = new Exercices;
-        $form = $this->createForm(ExMaisonType::class, $exercice );
+        $form = $this->createForm(ExMaisonType::class, $exercice, ['isAdmin' => false]);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-           $this->em->persist($exercice);
-           $this->em->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($exercice);
+            $this->em->flush();
         }
 
         return $this->render('Backend/Exercice/create.html.twig', [
             'form' => $form
         ]);
     }
-    #[Route('/{id}/edit', '.edit', methods:['GET','POST'])]
-    public function edit(?Exercices $exercice, Request $request):Response|RedirectResponse{
-        if(!$exercice){
+    #[Route('/{id}/edit', '.edit', methods: ['GET', 'POST'])]
+    public function edit(?Exercices $exercice, Request $request): Response|RedirectResponse
+    {
+        if (!$exercice) {
             $this->addFlash('error', 'exercices inexistant');
             return $this->redirectToRoute('admin.exercices.index');
         }
-        $form = $this->createForm(ExMaisonType::class, $exercice,);
+        $form = $this->createForm(ExMaisonType::class, $exercice, ['isAdmin' => false]);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($exercice);
             $this->em->flush();
-            
-            $this->addFlash('success','Utilisateur modifier avec succès');
-           return $this->redirectToRoute('admin.exercices.index');
+
+            $this->addFlash('success', 'Utilisateur modifier avec succès');
+            return $this->redirectToRoute('admin.exercices.index');
         }
-        return $this->render('Backend/Exercice/edit.html.twig',[
+        return $this->render('Backend/Exercice/edit.html.twig', [
             'form' => $form
         ]);
-
-       
-        
     }
-    #[Route('/{id}/delete', '.delete', methods:['GET','POST'])]
-    public function delete(?Exercices $exercice, Request $request):Response|RedirectResponse{
-        if(!$exercice){
+    #[Route('/{id}/delete', '.delete', methods: ['GET', 'POST'])]
+    public function delete(?Exercices $exercice, Request $request): Response|RedirectResponse
+    {
+        if (!$exercice) {
 
             $this->addFlash('error', 'exercice inexistant');
             return $this->redirectToRoute('admin.exercices.index');
         }
-        if($this->isCsrfTokenValid('delete' . $exercice->getId(), $request->request->get('token'))) {
+        if ($this->isCsrfTokenValid('delete' . $exercice->getId(), $request->request->get('token'))) {
 
             //on supprime en bdd
             $this->em->remove($exercice);
@@ -90,7 +87,6 @@ class ExercicesController extends AbstractController
 
             $this->addFlash('success', 'exercice supprimer  avec succes');
             return $this->redirectToRoute('admin.exercices.index');
-            
         }
         return $this->redirectToRoute('admin.exercices.index');
     }

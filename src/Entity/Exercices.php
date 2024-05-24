@@ -38,6 +38,9 @@ class Exercices
     #[ORM\ManyToMany(targetEntity: Programme::class, inversedBy: 'exercices')]
     private Collection $programme;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $repetition = null;
+
     public function __construct()
     {
         $this->programme = new ArrayCollection();
@@ -92,6 +95,18 @@ class Exercices
     public function removeProgramme(Programme $programme): static
     {
         $this->programme->removeElement($programme);
+
+        return $this;
+    }
+
+    public function getRepetition(): ?int
+    {
+        return $this->repetition;
+    }
+
+    public function setRepetition(?int $repetition): static
+    {
+        $this->repetition = $repetition;
 
         return $this;
     }

@@ -116,4 +116,19 @@ main{
 .closed{
     display: none;
 }
+.overflow{
+    overflow: hidden;
+}
+
+.commentaire{
+    background: rgba(0, 0, 0, 0.359);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    min-height: 100vh;
+    overflow: hidden;
+    width: 100vw;
+    padding-top: 250px;
+}
 

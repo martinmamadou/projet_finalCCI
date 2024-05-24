@@ -15,19 +15,16 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 
-#[Route('admin/programmes','admin.programmes')]
+#[Route('admin/programmes', 'admin.programmes')]
 class ProgrammeController extends AbstractController
 {
 
-public function __construct(
-    private readonly EntityManagerInterface $em,
-    private readonly ProgrammeRepository $proRepository
-    )
-{
-    
-
-}
-    #[Route('', name: '.index', methods:['GET'])]
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly ProgrammeRepository $proRepository
+    ) {
+    }
+    #[Route('', name: '.index', methods: ['GET'])]
     public function index(): Response|RedirectResponse
     {
         return $this->render('Backend/Programme/index.html.twig', [
@@ -35,13 +32,13 @@ public function __construct(
         ]);
     }
 
-    #[Route('/create', name: '.create', methods:['GET','POST'])]
+    #[Route('/create', name: '.create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response|RedirectResponse
     {
         $programme = new Programme;
-        $form = $this->createForm(ProMaisonType::class, $programme);
+        $form = $this->createForm(ProMaisonType::class, $programme, ['isAdmin' => false]);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($programme);
             $this->em->flush();
         }
@@ -50,36 +47,35 @@ public function __construct(
         ]);
     }
 
-    #[Route('/{id}/edit', '.edit', methods:['GET','POST'])]
-    public function edit(?Programme $programme, Request $request):Response|RedirectResponse{
-        if(!$programme){
+    #[Route('/{id}/edit', '.edit', methods: ['GET', 'POST'])]
+    public function edit(?Programme $programme, Request $request): Response|RedirectResponse
+    {
+        if (!$programme) {
             $this->addFlash('error', 'programme inexistant');
             return $this->redirectToRoute('admin.programmes.index');
         }
         $form = $this->createForm(ProMaisonType::class, $programme);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($programme);
             $this->em->flush();
-            
-            $this->addFlash('success','programme modifier avec succès');
-           return $this->redirectToRoute('admin.programmes.index');
+
+            $this->addFlash('success', 'programme modifier avec succès');
+            return $this->redirectToRoute('admin.programmes.index');
         }
-        return $this->render('Backend/Programme/edit.html.twig',[
+        return $this->render('Backend/Programme/edit.html.twig', [
             'form' => $form
         ]);
-
-       
-        
     }
-    #[Route('/{id}/delete', '.delete', methods:['GET','POST'])]
-    public function delete(?Programme $programme, Request $request):Response|RedirectResponse{
-        if(!$programme){
+    #[Route('/{id}/delete', '.delete', methods: ['GET', 'POST'])]
+    public function delete(?Programme $programme, Request $request): Response|RedirectResponse
+    {
+        if (!$programme) {
 
             $this->addFlash('error', 'programme inexistant');
             return $this->redirectToRoute('admin.users.index');
         }
-        if($this->isCsrfTokenValid('delete' . $programme->getId(), $request->request->get('token'))) {
+        if ($this->isCsrfTokenValid('delete' . $programme->getId(), $request->request->get('token'))) {
 
             //on supprime en bdd
             $this->em->remove($programme);
@@ -87,9 +83,7 @@ public function __construct(
 
             $this->addFlash('success', 'programme supprimer  avec succes');
             return $this->redirectToRoute('admin.programmes.index');
-            
         }
         return $this->redirectToRoute('admin.programmes.index');
     }
 }
-
