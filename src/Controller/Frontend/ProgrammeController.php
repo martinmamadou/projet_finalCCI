@@ -29,69 +29,85 @@ class ProgrammeController extends AbstractController
     }
 
     #[Route('', name: '.index', methods: ['GET', 'POST'])]
-    public function index(): Response
-    {
-        return $this->render('Frontend/Programme/index.html.twig', [
-            'programmes' => $this->proRepo->findAll(),
-            'categories' => $this->categRepository->findAll()
-        ]);
+    public function index(string $type): Response
+{
+    // Vérifiez le type pour charger les programmes correspondants
+    if ($type === 'gym') {
+        $programmes = $this->proRepo->findBy(['type' => 'gym']);
+    } elseif ($type === 'home') {
+        $programmes = $this->proRepo->findBy(['type' => 'home']);
+    } else {
+        // Gérez le cas où le type n'est ni "salle" ni "maison"
+        throw $this->createNotFoundException('Type non valide');
     }
 
-    #[Route('/{slug}/list', name: '.list', methods: ['GET'])]
-    public function list(string $slug): Response
-    {
-        $categorie = $this->categRepository->findOneBy(['slug' => $slug]);
-        $programmes = [];
+    return $this->render('Frontend/Programme/index.html.twig', [
+        'programmes' => $programmes,
+        'categories' => $this->categRepository->findAll()
+    ]);
+}
 
-        if ($categorie) {
-            $programmes = $categorie->getProgramme();
-        }
-        return $this->render('Frontend/Programme/list.html.twig', [
-            'programmes' => $programmes,
-            'categories' => $categorie
-        ]);
+
+#[Route('/{slug}/{type}/list', name: '.list', methods: ['GET'])]
+public function list(string $slug, string $type): Response
+{
+    // Récupérez la catégorie correspondant au slug
+    $categorie = $this->categRepository->findOneBy(['slug' => $slug]);
+
+    // Initialisez une variable pour stocker les programmes
+    $programmes = [];
+
+    if ($categorie) {
+        // Récupérez les programmes de la catégorie en fonction du type
+        $programmes = $this->proRepo->findBy(['categorie' => $categorie, 'type' => $type]);
     }
+
+    // Renvoyez les données à la vue
+    return $this->render('Frontend/Programme/list.html.twig', [
+        'programmes' => $programmes,
+        'categorie' => $categorie,
+    ]);
+}
+
+
 
 
 
     #[Route('/{slug}/details', name: '.details', methods: ['GET','POST'])]
-    public function details(string $slug, Request $request, ?Programme $programme): Response
+    public function details(string $slug, Request $request): Response
     {
+        $programme = $this->proRepo->findOneBy(['slug' => $slug]);
+    
+        if (!$programme) {
+            $this->addFlash('error', 'Programme non trouvé');
+            return $this->redirectToRoute('user.programmes.index');
+        }
+    
         $commentaire = new Commentaires();
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
-        if($form->isSubmitted()&&$form->isValid())
-        {
-
+    
+        if ($form->isSubmitted() && $form->isValid()) {
             $commentaire
-            ->setUser(
-                $this->getUser()
-            )
-            ->setProgramme(
-                $programme
-            )
-            ->setEnable(0);
-
+                ->setUser($this->getUser())
+                ->setProgramme($programme)
+                ->setEnable(0);
+    
             $this->em->persist($commentaire);
             $this->em->flush();
-
-            $this->addFlash('success', 'commentaire creer avec succès');
-            
+    
+            $this->addFlash('success', 'Commentaire créé avec succès');
         }
-
-
-        $programme = $this->proRepo->findOneBy(['slug' => $slug]);
-        $exercice = [];
-
-        if ($programme) {
-            $exercice = $programme->getExercices();
-        }
-
+    
+        $exercices = $programme->getExercices();
+        $commentaires = $this->commentRepo->findAllByProgramme($programme);
+    
         return $this->render('Frontend/Programme/detail.html.twig', [
-            'exercices' => $exercice,
-             'programme' => $programme,
-             'form' => $form,
-             'commentaires'=>$this->commentRepo->findAllByProgramme()
+            'exercices' => $exercices,
+            'programme' => $programme,
+            'form' => $form,
+            'commentaires' => $commentaires,
         ]);
     }
+    
 }

@@ -40,7 +40,6 @@ class ProMaisonType extends AbstractType
                 'class' =>  Categorie::class,
                 'choice_label' => 'name'
             ])
-            ->add('enable')
             ->add('exercices', CollectionType::class, [
                 'required' => false,
                 'label' => false,
@@ -63,7 +62,7 @@ class ProMaisonType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Programme::class,
-            'isAdmin' => true
+            'isUser' => true
         ]);
     }
 }

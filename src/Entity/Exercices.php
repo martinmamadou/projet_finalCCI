@@ -12,13 +12,14 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use PhpParser\Node\Name;
 
 #[ORM\Entity(repositoryClass: ExercicesRepository::class)]
 #[UniqueEntity(fields: ['name'], message: 'ce nom est deja utilisé ')]
 #[HasLifecycleCallbacks]
 class Exercices
 {
-    use DateTimeTrait, EnableTrait; 
+    use DateTimeTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -38,12 +39,24 @@ class Exercices
     #[ORM\ManyToMany(targetEntity: Programme::class, inversedBy: 'exercices')]
     private Collection $programme;
 
+
+
     #[ORM\Column(nullable: true)]
-    private ?int $repetition = null;
+    private ?int $repetitions = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $serie = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $temps = null;
+
+
+ 
 
     public function __construct()
     {
         $this->programme = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -62,6 +75,12 @@ class Exercices
 
         return $this;
     }
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 
     public function getSlug(): ?string
     {
@@ -99,15 +118,43 @@ class Exercices
         return $this;
     }
 
-    public function getRepetition(): ?int
+ 
+ 
+
+    public function getRepetitions(): ?int
     {
-        return $this->repetition;
+        return $this->repetitions;
     }
 
-    public function setRepetition(?int $repetition): static
+    public function setRepetitions(?int $repetitions): static
     {
-        $this->repetition = $repetition;
+        $this->repetitions = $repetitions;
 
         return $this;
     }
+
+    public function getSerie(): ?int
+    {
+        return $this->serie;
+    }
+
+    public function setSerie(?int $serie): static
+    {
+        $this->serie = $serie;
+
+        return $this;
+    }
+
+    public function getTemps(): ?int
+    {
+        return $this->temps;
+    }
+
+    public function setTemps(?int $temps): static
+    {
+        $this->temps = $temps;
+
+        return $this;
+    }
+
 }

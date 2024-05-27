@@ -4,11 +4,14 @@
 {% block body %}
     <section class="container mt-4">
     <h1 class="text-center">Inscription</h1>
-
-    {{form_start(form, {'attr': {'class': "card p-3 w-50 mx-auto mt-3"}})}}
+    <div id="center-form">
+    {{form_start(form, {'attr': {'class': ""}})}}
     {{form_widget(form)}}
+    <div class="btn-container">
     <button type='submit' class="button btn-principal">S'inscrire</button>
+    </div>
     {{form_end(form)}}
+    </div>
     </section>
 
 {% endblock %}

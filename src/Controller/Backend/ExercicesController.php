@@ -40,7 +40,7 @@ class ExercicesController extends AbstractController
     public function create(Request $request): Response
     {
         $exercice = new Exercices;
-        $form = $this->createForm(ExMaisonType::class, $exercice, ['isAdmin' => false]);
+        $form = $this->createForm(ExMaisonType::class, $exercice, ['isUser'=>false] );
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($exercice);
@@ -58,7 +58,7 @@ class ExercicesController extends AbstractController
             $this->addFlash('error', 'exercices inexistant');
             return $this->redirectToRoute('admin.exercices.index');
         }
-        $form = $this->createForm(ExMaisonType::class, $exercice, ['isAdmin' => false]);
+        $form = $this->createForm(ExMaisonType::class, $exercice);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($exercice);

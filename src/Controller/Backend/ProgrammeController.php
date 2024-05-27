@@ -3,16 +3,17 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Programme;
-use App\Entity\ProgrammeMaison;
 use App\Form\ProMaisonType;
-use App\Repository\ProgrammeMaisonRepository;
+use App\Entity\ProgrammeMaison;
+use App\Repository\ExercicesRepository;
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Repository\ProgrammeMaisonRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 #[Route('admin/programmes', 'admin.programmes')]
@@ -36,14 +37,17 @@ class ProgrammeController extends AbstractController
     public function create(Request $request): Response|RedirectResponse
     {
         $programme = new Programme;
-        $form = $this->createForm(ProMaisonType::class, $programme, ['isAdmin' => false]);
+        $form = $this->createForm(ProMaisonType::class, $programme, ['isUser' => true]);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()){
+
             $this->em->persist($programme);
             $this->em->flush();
         }
+        
+        
         return $this->render('Backend/Programme/create.html.twig', [
-            'form' => $form
+            'form' => $form,
         ]);
     }
 

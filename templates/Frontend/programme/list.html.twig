@@ -1,31 +1,24 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	liste programmes
-	{{parent()}}
+    Liste programmes
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
+    <section class="content">
+        <h1 class="text-center">Programmes</h1>
 
-	<section class="content">
-		<h1 class="text-center">Programmes</h1>
-
-		{% for programme in programmes %}
-			{% if programme.type == 'home' %}
-
-				<a href="{{path('user.programmes.details', {slug:programme.slug})}}">
-					<div class="proList">
-						<p>{{programme.name}}</p>
-					</div>
-				</a>
-
-			{% else %}
-				<a href="{{path('user.programmes.details', {slug:programme.slug})}}">
-					<div class="proList">
-						<p>{{programme.name}}</p>
-					</div>
-				</a>
-			{% endif %}
-		{% endfor %}
-	</section>
+        {% for programme in programmes %}
+            {% if programme.getType() == 'gym' %}
+                <a href='{{path('user.programmes.details',{slug:programme.slug})}}'class="proList">
+                    <p>{{ programme.getName() }}</p>
+                </a>
+            {% elseif programme.getType() == 'home' %}
+                <a href='{{path('user.programmes.details',{slug:programme.slug})}}'class="proList">
+                    <p>{{ programme.getName() }}</p>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </section>
 {% endblock %}

@@ -18,7 +18,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[HasLifecycleCallbacks]
 class Programme
 {
-    use DateTimeTrait, EnableTrait;
+    use DateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -40,7 +40,7 @@ class Programme
     #[Assert\Length(max: 255)]
     private ?string $shortDescription = null;
 
-    #[ORM\ManyToMany(targetEntity: Exercices::class, mappedBy: 'programme')]
+    #[ORM\ManyToMany(targetEntity: Exercices::class, inversedBy: 'programme', cascade: ['persist'])]
     private Collection $exercices;
 
     #[ORM\ManyToOne(inversedBy: 'programme')]
@@ -54,6 +54,8 @@ class Programme
     #[Assert\Length(max: 255)]
     #[Assert\NotBlank()]
     private ?string $type = null;
+
+
 
 
     public function __construct()
@@ -183,4 +185,6 @@ class Programme
 
         return $this;
     }
+
+
 }

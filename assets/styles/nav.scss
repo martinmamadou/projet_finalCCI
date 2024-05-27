@@ -6,10 +6,20 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
+    padding: 0 5%;
     top: 0;
     z-index: 100;
     box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+    
+    .logo{
+        p{
+             margin: 0;
+             font-weight: 800;
+             font-size: 2em;
+             color: $text-color;
+        }
+       
+    }
     
     #burger-menu {
       cursor: pointer;
@@ -26,7 +36,7 @@ nav{
       span:after {
         background: #fff;
         display: block;
-        height: 1px;
+        height: 2px;
         opacity: 1;
         position: absolute;
         transition: 0.3s ease-in-out;
