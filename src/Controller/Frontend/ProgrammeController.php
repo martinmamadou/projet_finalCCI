@@ -2,10 +2,12 @@
 
 namespace App\Controller\Frontend;
 
+use App\Entity\ProType;
 use App\Entity\Programme;
 use App\Form\ProMaisonType;
 use App\Entity\Commentaires;
 use App\Form\CommentaireType;
+use App\Repository\ProTypeRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\ExercicesRepository;
 use App\Repository\ProgrammeRepository;
@@ -26,16 +28,18 @@ class ProgrammeController extends AbstractController
         private readonly CategorieRepository $categRepository,
         private readonly ExercicesRepository $exRepo,
         private readonly EntityManagerInterface $em,
-        private readonly CommentairesRepository $commentRepo
+        private readonly CommentairesRepository $commentRepo,
+        private readonly ProTypeRepository $protype
     ) {
     }
 
-    #[Route('/{type}', name: '.index', methods: ['GET', 'POST'])]
-    public function index(?string $type = null): Response
+    #[Route('/{slug}', name: '.index', methods: ['GET', 'POST'], defaults: ['slug' => null])]
+    public function index(?ProType $protype = null): Response
     {
+
         // Vérifiez le type pour charger les programmes correspondants
-        if ($type) {
-            $programmes = $this->proRepo->findBy(['type' => $type]);
+        if ($protype) {
+            $programmes = $this->proRepo->findBy(['proType' => $protype]);
         } else {
             // Gérez le cas où le type n'est ni "salle" ni "maison"
             $programmes = $this->proRepo->findAll();
@@ -43,7 +47,8 @@ class ProgrammeController extends AbstractController
 
         return $this->render('Frontend/Programme/index.html.twig', [
             'programmes' => $programmes,
-            'categories' => $this->categRepository->findAll()
+            'categories' => $this->categRepository->findAll(),
+            'protype' => $protype
         ]);
     }
 

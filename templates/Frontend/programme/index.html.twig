@@ -5,11 +5,13 @@
 
 {% block body %}
 	<section class="content">
-		<div class="programme-header {{ app.request.get('type') }}"></div>
-
+		<div class="programme-header" style="background: center / cover url('{{ protype ? vich_uploader_asset(protype) : '#' }}')"></div>
+		<pre>
+            {{ dump(_context) }}
+        </pre>
 		{% set previousName = '' %}
 		{% for programme in programmes %}
-			<a href="{{ path('user.programmes.list', {slug: programme.categorie.slug, type: programme.type}) }}">
+			<a href=" {{ path('user.programmes.list', {slug: programme.categorie.slug, type: programme.type} ) }}">
 				{% if programme.categorie.name != previousName %}
 					<div class="cateList" style="background: center / cover url('{{ vich_uploader_asset(programme.categorie) }}')">
 						<p>{{ programme.categorie.name }}</p>

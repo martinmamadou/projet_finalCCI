@@ -57,6 +57,10 @@ class Programme
     #[ORM\OneToMany(targetEntity: Exercices::class, mappedBy: 'programme', orphanRemoval: true, cascade:['persist','remove'])]
     private Collection $exercices;
 
+    #[ORM\ManyToOne(inversedBy: 'programme')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ProType $proType = null;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -184,6 +188,18 @@ class Programme
                 $exercice->setProgramme(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProType(): ?ProType
+    {
+        return $this->proType;
+    }
+
+    public function setProType(?ProType $proType): static
+    {
+        $this->proType = $proType;
 
         return $this;
     }
