@@ -1,3 +1,52 @@
+.dashboard{
+    background: url(/assets/img/banner.jpg) center/cover no-repeat fixed;
+    height: 92vh;
+    position: relative;
+    box-shadow: $box-shadow;
+    .shape{
+        background: rgba(255, 0, 0, 0.193);
+        height: 40vh;
+        width: 100%;
+        clip-path: polygon(0 0, 0% 100%, 100% 0);
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .shape1{
+        clip-path: polygon(100% 100%, 0% 100%, 100% 0);
+        background: rgba(255, 0, 0, 0.193);
+        height: 40vh;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    .header-text{
+        text-align: center;
+        z-index: 100;
+        position: relative;
+        z-index: 1;
+        p:first-child{
+            font-family: BebasNeue;
+            color: whitesmoke;
+            font-weight: 800;
+            font-size: 3em;
+            text-align: center;
+            padding-top: 150px;
+        }
+        h1{
+            margin: 50px 0 0;
+            padding: 0;
+            color: green;
+            font-size: 3em;
+        }
+    }
+    button{
+      margin-top: 120px;  
+    }
+}
+
+
 .title{
     text-align: center;
     text-transform: uppercase;

@@ -11,9 +11,9 @@
 
     p{
         margin: 0 auto ;
-        font-size: 8em;
+        font-size: 9em;
         font-weight: bold;
-        
+        font-family: BebasNeue;
         text-transform: uppercase;
 
     }
@@ -56,5 +56,17 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 
     .display-content{
         color: black;
+    }
+}
+
+.programme-header {
+    height: 50vh;
+
+    &.gym {
+        background: center / cover url('../../img/atGym.jpg');
+    }
+
+    &.home {
+        background: center / cover url('../../img/atHome.jpg');
     }
 }

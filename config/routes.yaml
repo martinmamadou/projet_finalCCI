@@ -1,10 +1,5 @@
 controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
-
-programmes_index:
-    path: /programmes/{type}
-    controller: 'App\Controller\Frontend\ProgrammeController::index'
-
+  resource:
+    path: ../src/Controller/
+    namespace: App\Controller
+  type: attribute
