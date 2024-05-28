@@ -40,8 +40,7 @@ class Programme
     #[Assert\Length(max: 255)]
     private ?string $shortDescription = null;
 
-    #[ORM\ManyToMany(targetEntity: Exercices::class, inversedBy: 'programme', cascade: ['persist'])]
-    private Collection $exercices;
+  
 
     #[ORM\ManyToOne(inversedBy: 'programme')]
     #[ORM\JoinColumn(nullable: false)]
@@ -55,13 +54,13 @@ class Programme
     #[Assert\NotBlank()]
     private ?string $type = null;
 
-
-
+    #[ORM\OneToMany(targetEntity: Exercices::class, mappedBy: 'programme', orphanRemoval: true, cascade:['persist','remove'])]
+    private Collection $exercices;
 
     public function __construct()
     {
-        $this->exercices = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->exercices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,33 +100,6 @@ class Programme
     public function setShortDescription(?string $shortDescription): static
     {
         $this->shortDescription = $shortDescription;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Exercices>
-     */
-    public function getExercices(): Collection
-    {
-        return $this->exercices;
-    }
-
-    public function addExercice(Exercices $exercice): static
-    {
-        if (!$this->exercices->contains($exercice)) {
-            $this->exercices->add($exercice);
-            $exercice->addProgramme($this);
-        }
-
-        return $this;
-    }
-
-    public function removeExercice(Exercices $exercice): static
-    {
-        if ($this->exercices->removeElement($exercice)) {
-            $exercice->removeProgramme($this);
-        }
 
         return $this;
     }
@@ -186,5 +158,34 @@ class Programme
         return $this;
     }
 
+    /**
+     * @return Collection<int, Exercices>
+     */
+    public function getExercices(): Collection
+    {
+        return $this->exercices;
+    }
+
+    public function addExercice(Exercices $exercice): static
+    {
+        if (!$this->exercices->contains($exercice)) {
+            $this->exercices->add($exercice);
+            $exercice->setProgramme($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExercice(Exercices $exercice): static
+    {
+        if ($this->exercices->removeElement($exercice)) {
+            // set the owning side to null (unless already changed)
+            if ($exercice->getProgramme() === $this) {
+                $exercice->setProgramme(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

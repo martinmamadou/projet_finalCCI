@@ -5,6 +5,7 @@ namespace App\Controller\Backend;
 use App\Entity\Exercices;
 use App\Form\ExMaisonType;
 use App\Entity\ExerciceMaison;
+use App\Entity\ExTemplate;
 use App\Form\ExTemplateType;
 use Doctrine\ORM\EntityManager;
 use App\Repository\ExercicesRepository;
@@ -18,7 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('admin/exercices', 'admin.exercices')]
-class ExercicesController extends AbstractController
+class ExTemplateController extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $em,
@@ -41,7 +42,7 @@ class ExercicesController extends AbstractController
     #[Route('/create', '.create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
-        $exercice = new Exercices;
+        $exercice = new ExTemplate;
         $form = $this->createForm(ExTemplateType::class, $exercice, ['isUser'=>false] );
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -54,7 +55,7 @@ class ExercicesController extends AbstractController
         ]);
     }
     #[Route('/{id}/edit', '.edit', methods: ['GET', 'POST'])]
-    public function edit(?Exercices $exercice, Request $request): Response|RedirectResponse
+    public function edit(?ExTemplate $exercice, Request $request): Response|RedirectResponse
     {
         if (!$exercice) {
             $this->addFlash('error', 'exercices inexistant');
@@ -74,7 +75,7 @@ class ExercicesController extends AbstractController
         ]);
     }
     #[Route('/{id}/delete', '.delete', methods: ['GET', 'POST'])]
-    public function delete(?Exercices $exercice, Request $request): Response|RedirectResponse
+    public function delete(?ExTemplate $exercice, Request $request): Response|RedirectResponse
     {
         if (!$exercice) {
 

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Exercices;
 use App\Entity\DetailExercice;
 use App\Entity\ExerciceMaison;
+use App\Entity\ExTemplate;
 use App\Entity\ProgrammeMaison;
 use Doctrine\ORM\Mapping\Entity;
 use App\Repository\ExercicesRepository;
@@ -25,20 +26,18 @@ class ExMaisonType extends AbstractType
     {
         $this->exercicesRepository = $exercicesRepository;
     }
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['isUser']) {
-            
-    
-    
-    
             $builder
-                ->add('name', EntityType::class, [
+                ->add('exercice', EntityType::class, [
                     'label' => 'Exercice',
-                    'class'=> Exercices::class,
-                    'choices' => $this->exercicesRepository->findDistinctFirstOccurrences(),
-                    'choice_label' => 'name'
+                    'class' => ExTemplate::class,
+                    'choice_label' => 'name',
+                    'by_reference' => false,
+                    'expanded' => false,
+                    'multiple' => false,
                 ])
                 ->add('repetitions', NumberType::class, [
                     'label' => 'Répétitions',
@@ -50,12 +49,9 @@ class ExMaisonType extends AbstractType
                     'label' => 'Séries',
                 ]);
         } else {
-            $builder->add('name', TextType::class, [
-                'label' => 'Nom de l\'exercice',
-            ]);
         }
     }
-      
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
