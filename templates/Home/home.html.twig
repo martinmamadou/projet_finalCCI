@@ -21,11 +21,10 @@
 		</div>
 		<div class="hmiddle-content">
 			{% for protype in protypes %}
-				<a href="{{path('user.programmes.index')}}" class='right'>
+				<a href="{{path('user.programmes.index', {slug:protype.slug})}}" class='right'>
 					<img src="{{vich_uploader_asset(protype)}}" alt="">
 					<h3>{{protype.name}}</h3>
 				</a>
-
 			{% endfor %}
 
 		</div>

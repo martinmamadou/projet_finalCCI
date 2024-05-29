@@ -1,36 +1,38 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Détails des programmes
-    {{ parent() }}
+	Détails des programmes
+	{{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <section class="content">
-        <h1 class="text-center">{{ programme.name }}</h1>
-        {% for ex in exercices %}
-            <div class="exList">
-                <p>{{ ex.exercice.name }}</p>
-            </div>
-        {% endfor %}
+	<section class="content">
 
-        <button class="comment button btn-principal">Ajouter un commentaire</button>
-        <div class="commentaire closed">
-            {% if is_granted('ROLE_USER') %}
-                {% include "Frontend/programme/_form.html.twig" %}
-            {% else %}
-                <div class="no-comment">
-                    <p>
-                        Veuillez vous
-                        <a href="{{ path('app.login') }}">
-                            <strong>connecter</strong>
-                        </a>
-                        pour pouvoir commenter</p>
-                </div>
-            {% endif %}
-        </div>
 
-        <h2 class='mt-4'>Commentaires:</h2>
+		<h1 class="text-center">{{ programme.name }}</h1>
+		{% for ex in exercices %}
+			<div class="exList">
+				<p>{{ ex.exercice.name }}</p>
+			</div>
+		{% endfor %}
+
+		<button class="comment button btn-principal">Ajouter un commentaire</button>
+		<div class="commentaire closed">
+			{% if is_granted('ROLE_USER') %}
+				{% include "Frontend/programme/_form.html.twig" %}
+			{% else %}
+				<div class="no-comment">
+					<p>
+						Veuillez vous
+						<a href="{{ path('app.login') }}">
+							<strong>connecter</strong>
+						</a>
+						pour pouvoir commenter</p>
+				</div>
+			{% endif %}
+		</div>
+
+		<h2 class='mt-4'>Commentaires:</h2>
 
 		{% for commentaire in commentaires %}
 			{% if commentaire.programme.id == programme.id %}

@@ -40,7 +40,7 @@ class Programme
     #[Assert\Length(max: 255)]
     private ?string $shortDescription = null;
 
-  
+
 
     #[ORM\ManyToOne(inversedBy: 'programme')]
     #[ORM\JoinColumn(nullable: false)]
@@ -49,12 +49,8 @@ class Programme
     #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'programme')]
     private Collection $commentaires;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\Length(max: 255)]
-    #[Assert\NotBlank()]
-    private ?string $type = null;
 
-    #[ORM\OneToMany(targetEntity: Exercices::class, mappedBy: 'programme', orphanRemoval: true, cascade:['persist','remove'])]
+    #[ORM\OneToMany(targetEntity: Exercices::class, mappedBy: 'programme', orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $exercices;
 
     #[ORM\ManyToOne(inversedBy: 'programme')]
@@ -150,17 +146,6 @@ class Programme
         return $this;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): static
-    {
-        $this->type = $type;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Exercices>
@@ -203,5 +188,4 @@ class Programme
 
         return $this;
     }
-
 }

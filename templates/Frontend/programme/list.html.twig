@@ -1,24 +1,24 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Liste programmes
-    {{ parent() }}
+	Liste programmes
+	{{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <section class="content">
-        <h1 class="text-center">Programmes</h1>
+	<section class="content">
+		<div class="programme-header" style="background: center / cover url('{{ categorie ? vich_uploader_asset(categorie) : '#' }}')"></div>
+		<h1 class="text-center">Programmes</h1>
 
-        {% for programme in programmes %}
-            {% if programme.getType() == 'gym' %}
-                <a href='{{path('user.programmes.details',{slug:programme.slug})}}'class="proList">
-                    <p>{{ programme.getName() }}</p>
-                </a>
-            {% elseif programme.getType() == 'home' %}
-                <a href='{{path('user.programmes.details',{slug:programme.slug})}}'class="proList">
-                    <p>{{ programme.getName() }}</p>
-                </a>
-            {% endif %}
-        {% endfor %}
-    </section>
+
+		{% for programme in programmes %}
+
+
+			<a href='{{path('user.programmes.details',{slug:programme.slug})}}' class="proList">
+				<p>{{ programme.getName() }}</p>
+			</a>
+
+
+		{% endfor %}
+	</section>
 {% endblock %}

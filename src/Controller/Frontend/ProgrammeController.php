@@ -2,6 +2,7 @@
 
 namespace App\Controller\Frontend;
 
+use App\Entity\Categorie;
 use App\Entity\ProType;
 use App\Entity\Programme;
 use App\Form\ProMaisonType;
@@ -33,9 +34,10 @@ class ProgrammeController extends AbstractController
     ) {
     }
 
-    #[Route('/{slug}', name: '.index', methods: ['GET', 'POST'], defaults: ['slug' => null])]
-    public function index(?ProType $protype = null): Response
+    #[Route('/{slug}', name: '.index', methods: ['GET', 'POST'])]
+    public function index(string $slug): Response
     {
+        $protype = $this->protype->findOneBy(["slug" => $slug]);
 
         // Vérifiez le type pour charger les programmes correspondants
         if ($protype) {
@@ -53,24 +55,33 @@ class ProgrammeController extends AbstractController
     }
 
 
-    #[Route('/{slug}/{type}/list', name: '.list', methods: ['GET'])]
-    public function list(string $slug, string $type): Response
+
+    #[Route('/{type}/{slug}/list', name: '.list', methods: ['GET'])]
+    public function list(string $slug, string $type, ?ProType $protype = null): Response
     {
-        // Récupérez la catégorie correspondant au slug
-        $categorie = $this->categRepository->findOneBy(['slug' => $slug]);
+
+        // Récupérer la catégorie correspondant au slug
+        $categorie = $this->categRepository->findOneBy(["slug" => $slug]);
+
+        // Récupérer le type de programme correspondant au slug
+        $protype = $this->protype->findOneBy(["slug" => $type]);
 
         // Initialisez une variable pour stocker les programmes
         $programmes = [];
 
+        // Vérifiez si la catégorie et le type de programme existent
         if ($categorie) {
-            // Récupérez les programmes de la catégorie en fonction du type
-            $programmes = $this->proRepo->findBy(['categorie' => $categorie, 'type' => $type]);
+            $programmes = $this->proRepo->findBy(["categorie" => $categorie]);
+            if ($protype) {
+                $programmes = $this->proRepo->findBy(["proType" => $protype]);
+            }
         }
 
         // Renvoyez les données à la vue
         return $this->render('Frontend/Programme/list.html.twig', [
             'programmes' => $programmes,
             'categorie' => $categorie,
+            'protype' => $protype
         ]);
     }
 
@@ -79,7 +90,7 @@ class ProgrammeController extends AbstractController
 
 
     #[Route('/{slug}/details', name: '.details', methods: ['GET', 'POST'])]
-    public function details(string $slug, Request $request): Response
+    public function details(string $slug, Request $request, ?Categorie $categorie): Response
     {
         $programme = $this->proRepo->findOneBy(['slug' => $slug]);
 
@@ -111,6 +122,7 @@ class ProgrammeController extends AbstractController
             'exercices' => $exercices,
             'programme' => $programme,
             'form' => $form,
+            'categorie' => $categorie,
             'commentaires' => $commentaires,
         ]);
     }

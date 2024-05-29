@@ -5,6 +5,7 @@ namespace App\Controller\Backend;
 use App\Entity\Exercices;
 use App\Form\ExMaisonType;
 use App\Entity\ExerciceMaison;
+use App\Entity\ProType;
 use App\Form\ExTemplateType;
 use Doctrine\ORM\EntityManager;
 use App\Repository\ExercicesRepository;
@@ -42,9 +43,13 @@ class ExercicesController extends AbstractController
     public function create(Request $request): Response
     {
         $exercice = new Exercices;
-        $form = $this->createForm(ExTemplateType::class, $exercice, ['isUser'=>false] );
+        $form = $this->createForm(ExTemplateType::class, $exercice, ['isUser' => false]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $exercice
+                ->setTemps('0')
+                ->setRepetitions('0')
+                ->setSerie('0');
             $this->em->persist($exercice);
             $this->em->flush();
         }

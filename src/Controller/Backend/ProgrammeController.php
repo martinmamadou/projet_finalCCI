@@ -5,6 +5,7 @@ namespace App\Controller\Backend;
 use App\Entity\Programme;
 use App\Form\ProMaisonType;
 use App\Entity\ProgrammeMaison;
+use App\Entity\ProType;
 use App\Repository\ExercicesRepository;
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,16 +37,18 @@ class ProgrammeController extends AbstractController
     #[Route('/create', name: '.create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response|RedirectResponse
     {
+
+
         $programme = new Programme;
         $form = $this->createForm(ProMaisonType::class, $programme, ['isUser' => true]);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $this->em->persist($programme);
             $this->em->flush();
         }
-        
-        
+
+
         return $this->render('Backend/Programme/create.html.twig', [
             'form' => $form,
         ]);

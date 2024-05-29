@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Categorie;
 use App\Entity\Programme;
+use App\Entity\ProType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,7 +23,26 @@ class ProgrammeRepository extends ServiceEntityRepository
         parent::__construct($registry, Programme::class);
     }
 
-   
+
+    public function FindAllByCateg(Categorie $categorie): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.categorie = :categorie')
+            ->setParameter('categorie', $categorie)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByProType(ProType $protype): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.protype = :protype')
+            ->setParameter('protype', $protype)
+            ->getQuery()
+            ->getResult();
+    }
+
+
 
     //    /**
     //     * @return Programme[] Returns an array of Programme objects

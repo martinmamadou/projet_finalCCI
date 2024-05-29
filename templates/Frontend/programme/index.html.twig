@@ -11,7 +11,10 @@
         </pre>
 		{% set previousName = '' %}
 		{% for programme in programmes %}
-			<a href=" {{ path('user.programmes.list', {slug: programme.categorie.slug, type: programme.type} ) }}">
+			<pre>
+            {{ dump(_context) }}
+        </pre>
+			<a href=" {{ path('user.programmes.list', {slug: programme.categorie.slug, type: programme.protype.slug} ) }}">
 				{% if programme.categorie.name != previousName %}
 					<div class="cateList" style="background: center / cover url('{{ vich_uploader_asset(programme.categorie) }}')">
 						<p>{{ programme.categorie.name }}</p>

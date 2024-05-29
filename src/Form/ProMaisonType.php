@@ -7,6 +7,8 @@ use App\Entity\ExerciceMaison;
 use App\Entity\Exercices;
 use App\Entity\Programme;
 use App\Entity\ProgrammeMaison;
+use App\Entity\ProType;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -49,12 +51,11 @@ class ProMaisonType extends AbstractType
                 'delete_empty' => true,
                 'by_reference' => false,
             ])
-            ->add('type', ChoiceType::class, [
+            ->add('proType', EntityType::class, [
                 'label' => "type d'entrainement",
-                'choices' => [
-                    "salle" => "gym",
-                    "maison" => "home"
-                ]
+                'class' => ProType::class,
+                'choice_label' => 'name'
+
             ]);
     }
 

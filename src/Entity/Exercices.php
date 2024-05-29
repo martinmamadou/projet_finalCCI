@@ -47,8 +47,8 @@ class Exercices
     }
 
 
- 
- 
+
+
 
     public function getRepetitions(): ?int
     {
@@ -109,5 +109,4 @@ class Exercices
 
         return $this;
     }
-
 }
