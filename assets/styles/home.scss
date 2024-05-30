@@ -77,12 +77,17 @@
     width: 90vw;
     margin: 0 auto;
     
+    @media(min-width:650px) {
+        display: flex;
+        gap: 3%;
+        justify-content: center;
+    }
    
 
     .left,.right{
        
         position: relative;
-       
+        max-width: 500px;
         border-radius: 5px;
         box-shadow: $box-shadow;
         display: block;

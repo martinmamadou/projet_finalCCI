@@ -6,19 +6,20 @@
 {% block body %}
 	<section class='content'>
 		<h1 class="text-center">Mes Favoris</h1>
-		<pre>
-            {{ dump(_context) }}
-        </pre>
-		{% for fav in favoris %}
+		{% if favoris|length < 1  %}
+			<p>Il n'y a rien ici</p>
+		{% else %}
+			{% for fav in favoris %}
 
-			<a href='{{path('user.programmes.details',{slug:fav.programme.slug})}}' class="proList">
-				<p>{{ fav.programme.getName() }}</p>
-				<form action="{{ path('user.favoris.delete', {id: fav.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce programme de vos favoris ? ')">
-					<input type="hidden" name="token" value="{{ csrf_token('delete'~ fav.id) }}">
-					<button type="submit" class="btn btn-danger add">supprimer</button>
-				</form>
-			</a>
-		{% endfor %}
+				<a href='{{path('user.programmes.details',{slug:fav.programme.slug})}}' class="proList">
+					<p>{{ fav.programme.getName() }}</p>
+					<form action="{{ path('user.favoris.delete', {id: fav.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce programme de vos favoris ? ')">
+						<input type="hidden" name="token" value="{{ csrf_token('delete'~ fav.id) }}">
+						<button type="submit" class="btn btn-danger add">supprimer</button>
+					</form>
+				</a>
+			{% endfor %}
+		{% endif %}
 
 	</section>
 {% endblock %}

@@ -1,4 +1,6 @@
-
+h2{
+    text-align: center;
+}
 .cateList{
    display: flex;
    align-items: center;
@@ -21,25 +23,44 @@
 }
 
 .proList, .exList{
-    background: rgba( 255, 255, 255, 0.15 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-border-radius: 10px;
-border: 1px solid rgba( 255, 255, 255, 0.18 );
+    text-align: center;
+    background: rgb(255, 172, 5);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
     width: 90vw;
-    height: 100px;
-    margin: 0 auto 45px;
+    height: 150px;
+    margin: 60px auto 45px;
     box-shadow: $box-shadow;
     padding: 0 20px ;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    p{
+    display: block;
+    position: relative;
+    
+    p:first-child{
+        position: absolute;
+        top: 0px;  /* position the top  edge of the element at the middle of the parent */
+        left: 50%; /* position the left edge of the element at the middle of the parent */
+
+        transform: translate(-50%, -50%); 
+        text-align: center;
         text-transform: capitalize;
         font-weight: bold;
-        font-size: 1.8em;
-
-
+        font-size: 2.5em;
+        text-transform: uppercase;
     }
+    p{
+        padding: 40px 0 ;
+    }
+    button{
+        position: relative;
+        background: none;
+        border: none;
+        transition: 0.3s ease;
+        :hover{
+            transform: scale(2);
+        }
+    }
+    
 }
 
 
@@ -61,12 +82,30 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 
 .programme-header {
     height: 50vh;
-
-    &.gym {
-        background: center / cover url('../../img/atGym.jpg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: $box-shadow;
+    span{
+        position: absolute;
+        height: 50vh;
+        width: 50vw;
+        background: rgba(0, 0, 0, 0.348);
+        right: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
     }
 
-    &.home {
-        background: center / cover url('../../img/atHome.jpg');
+    h1{
+        z-index: 2;
+        position: relative;
+        font-size: 4em;
+        padding: 0;
+        margin: 0;
+        text-align: center;
     }
+
 }

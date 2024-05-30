@@ -5,21 +5,27 @@
 
 {% block body %}
 	<section class="content">
-		<div class="programme-header" style="background: center / cover url('{{ protype ? vich_uploader_asset(protype) : '#' }}')"></div>
-		<pre>
-            {{ dump(_context) }}
-        </pre>
-		{% set previousName = '' %}
+		<div class="programme-header" style="background: center / cover fixed url('{{ protype ? vich_uploader_asset(protype) : '#' }}')">
+			<h1>Programmes
+				{{protype.slug}}</h1>
+			<span></span>
+		</div>
+
+		<div class="title">
+			<hr>
+			<h2>Sélectionnez votre catégorie</h2>
+			<hr>
+		</div>
+
+		{% set previousName = [] %}
 		{% for programme in programmes %}
-			<pre>
-            {{ dump(_context) }}
-        </pre>
+
 			<a href=" {{ path('user.programmes.list', {slug: programme.categorie.slug, type: programme.protype.slug} ) }}">
-				{% if programme.categorie.name != previousName %}
+				{% if programme.categorie.name not in previousName %}
 					<div class="cateList" style="background: center / cover url('{{ vich_uploader_asset(programme.categorie) }}')">
 						<p>{{ programme.categorie.name }}</p>
 					</div>
-					{% set previousName = programme.categorie.name %}
+					{% set previousName = previousName|merge([programme.categorie.name])%}
 				{% endif %}
 			</a>
 		{% endfor %}

@@ -186,3 +186,18 @@ input{
 .banner{
     height: 100vh;
 }
+
+.title{
+    text-align: center;
+    text-transform: uppercase;
+    margin: 60px 0;
+    color: $text-color;
+        hr{
+            color: $text-color;
+            width: 85%;
+            margin: 30px auto;
+        }
+        h2{
+            font-weight: bold;
+        }
+}

@@ -7,18 +7,25 @@
 
 {% block body %}
 	<section class="content">
-		<div class="programme-header" style="background: center / cover url('{{ categorie ? vich_uploader_asset(categorie) : '#' }}')"></div>
-		<h1 class="text-center">Programmes</h1>
+		<div class="programme-header" style="background: center / cover url('{{ categorie ? vich_uploader_asset(categorie) : '#' }}')">
 
+			<h1 class="text-center">Programmes
+				{{categorie.slug}}</h1>
+
+
+		</div>
 
 		{% for programme in programmes %}
 
 
 			<a href='{{path('user.programmes.details',{slug:programme.slug})}}' class="proList">
 				<p>{{ programme.getName() }}</p>
+				<p>{{programme.shortDescription}}</p>
 				<form action="{{ path('user.favoris.add', {slug: programme.slug}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir ajouter ce Type ')">
 					<input type="hidden" name="token" value="{{ csrf_token('add'~ programme.slug) }}">
-					<button type="submit" class="btn btn-danger add">ajouter</button>
+					<button type="submit" class='fav'>
+						<i class="fa-regular fa-heart heart"></i>
+					</button>
 				</form>
 			</a>
 

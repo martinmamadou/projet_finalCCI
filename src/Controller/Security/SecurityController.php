@@ -43,7 +43,7 @@ class SecurityController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $hasher): Response
     {
         $user = new User;
-        $form = $this->createForm(SecurityType::class, $user, ['isUser'=>false]);
+        $form = $this->createForm(SecurityType::class, $user, ['isUser' => false]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user
@@ -55,7 +55,6 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app.login');
             $this->addFlash('success', 'inscription reussi');
         }
-
         return $this->render('Security/register.html.twig', [
             'form' => $form,
         ]);
