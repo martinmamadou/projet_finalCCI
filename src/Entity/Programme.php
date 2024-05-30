@@ -57,10 +57,14 @@ class Programme
     #[ORM\JoinColumn(nullable: false)]
     private ?ProType $proType = null;
 
+    #[ORM\OneToMany(targetEntity: Favoris::class, mappedBy: 'programme', orphanRemoval: true)]
+    private Collection $favoris;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->exercices = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -185,6 +189,36 @@ class Programme
     public function setProType(?ProType $proType): static
     {
         $this->proType = $proType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favoris>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Favoris $favori): static
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+            $favori->setProgramme($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favoris $favori): static
+    {
+        if ($this->favoris->removeElement($favori)) {
+            // set the owning side to null (unless already changed)
+            if ($favori->getProgramme() === $this) {
+                $favori->setProgramme(null);
+            }
+        }
 
         return $this;
     }
