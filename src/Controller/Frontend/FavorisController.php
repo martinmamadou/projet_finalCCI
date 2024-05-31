@@ -40,10 +40,22 @@ class FavorisController extends AbstractController
             $this->addFlash('error', 'programme inexistant');
             return $this->redirectToRoute('admin.users.index');
         }
+
+        $existingFavoris = $this->em->getRepository(Favoris::class)->findOneBy([
+            'user' => $this->getUser(),
+            'programme' => $programme,
+        ]);
+
+        if ($existingFavoris) {
+            $this->addFlash('error', 'Le programme existe déjà dans vos favoris.');
+            return $this->redirectToRoute('user.favoris.index');
+        }
+
         if ($this->isCsrfTokenValid('add' . $programme->getSlug(), $request->request->get('token'))) {
             $favoris = new Favoris();
             $favoris->setUser($this->getUser());
             $favoris->setProgramme($programme);
+
 
             $this->em->persist($favoris);
             $this->em->flush();

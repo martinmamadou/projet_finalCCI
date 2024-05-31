@@ -3,6 +3,7 @@
     height: 92vh;
     position: relative;
     box-shadow: $box-shadow;
+    animation: homeDisplay 2s ease 0s 1 normal forwards;
     .shape{
         background: rgba(255, 0, 0, 0.193);
         height: 40vh;
@@ -11,6 +12,7 @@
         position: absolute;
         top: 0;
         left: 0;
+        
     }
     .shape1{
         clip-path: polygon(100% 100%, 0% 100%, 100% 0);
@@ -20,12 +22,14 @@
         position: absolute;
         bottom: 0;
         right: 0;
+        
     }
     .header-text{
         text-align: center;
         z-index: 100;
         position: relative;
         z-index: 1;
+        animation: text 2s ease 0s 1 normal forwards;
         p:first-child{
             font-family: BebasNeue;
             color: whitesmoke;
