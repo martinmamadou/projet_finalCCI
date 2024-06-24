@@ -42,6 +42,16 @@ class ProgrammeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllWithComments()
+{
+    return $this->createQueryBuilder('p')
+        ->join('p.commentaires', 'c') // Joindre les commentaires
+        ->groupBy('p.id') // Regrouper par programme
+        ->orderBy('p.moyenne', 'DESC') // Trier par la moyenne des notes (descendant)
+        ->getQuery()
+        ->getResult();
+}
+
 
 
     //    /**

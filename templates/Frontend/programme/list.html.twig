@@ -16,6 +16,8 @@
 
 			<a href='{{path('user.programmes.details',{slug:programme.slug})}}' class="proList">
 				<p>{{ programme.getName() }}</p>
+				
+				
 				<form action="{{ path('user.favoris.add', {slug: programme.slug}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir ajouter ce Type ')">
 					<input type="hidden" name="token" value="{{ csrf_token('add'~ programme.slug) }}">
 					<button type="submit" class="btn btn-danger add">ajouter</button>

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin|parent()
+{% endblock %}
+
+{% block body %}
+    <section class="container">
+        <h1 class='text-center'>Administration</h1>
+
+        <a href="{{path('admin.users.index')}}">
+        <div class="listing">
+            <p>Utilisateurs</p>
+        </div>
+        </a>
+        <a href="{{path('admin.programmes.index')}}">
+        <div class="listing">
+            <p>Programmes</p>
+        </div>
+        </a>
+        <a href="{{path('admin.exercices.index')}}"> 
+        <div class="listing">
+            <p>exercices</p>
+        </div>
+        </a>
+        <a href="{{path('admin.categories.index')}}">
+        <div class="listing">
+            <p>categories</p>
+        </div>
+        </a>
+    </section>
+{% endblock %}

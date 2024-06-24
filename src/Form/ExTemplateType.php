@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Exercices;
 use App\Entity\ExTemplate;
 use phpDocumentor\Reflection\DocBlock\Description;
 use Symfony\Component\Form\AbstractType;

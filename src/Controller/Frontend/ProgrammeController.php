@@ -70,12 +70,14 @@ class ProgrammeController extends AbstractController
         $programmes = [];
 
         // Vérifiez si la catégorie et le type de programme existent
-        if ($categorie) {
-            $programmes = $this->proRepo->findBy(["categorie" => $categorie]);
-            if ($protype) {
-                $programmes = $this->proRepo->findBy(["proType" => $protype]);
+        if ($protype) {
+            $programmes = $this->proRepo->findBy(["proType" => $protype]);
+            if ($categorie) {
+                $programmes = $this->proRepo->findBy(["categorie" => $categorie]);
             }
+            
         }
+        
 
         // Renvoyez les données à la vue
         return $this->render('Frontend/Programme/list.html.twig', [
@@ -108,9 +110,10 @@ class ProgrammeController extends AbstractController
                 ->setUser($this->getUser())
                 ->setProgramme($programme)
                 ->setEnable(0);
-
             $this->em->persist($commentaire);
+            $programme->addCommentaire($commentaire); // Appelle setMoyenne() via addCommentaire
             $this->em->flush();
+            dd($programme);
 
             $this->addFlash('success', 'Commentaire créé avec succès');
         }

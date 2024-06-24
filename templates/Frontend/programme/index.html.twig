@@ -1,19 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProgrammeController!
+{% block title %}
+
+Hello ProgrammeController!
 {% endblock %}
 
 {% block body %}
 	<section class="content">
 		<div class="programme-header" style="background: center / cover url('{{ protype ? vich_uploader_asset(protype) : '#' }}')"></div>
-		<pre>
-            {{ dump(_context) }}
-        </pre>
+		<h1 class='text-center'>Selectionnez votre categorie </h1>
 		{% set previousName = '' %}
 		{% for programme in programmes %}
-			<pre>
-            {{ dump(_context) }}
-        </pre>
 			<a href=" {{ path('user.programmes.list', {slug: programme.categorie.slug, type: programme.protype.slug} ) }}">
 				{% if programme.categorie.name != previousName %}
 					<div class="cateList" style="background: center / cover url('{{ vich_uploader_asset(programme.categorie) }}')">

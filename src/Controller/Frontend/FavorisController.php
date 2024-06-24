@@ -4,6 +4,7 @@ namespace App\Controller\Frontend;
 
 use App\Entity\Favoris;
 use App\Entity\Programme;
+use App\Entity\User;
 use App\Repository\FavorisRepository;
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,8 +27,16 @@ class FavorisController extends AbstractController
     #[Route('', name: '.index', methods: ['GET'])]
     public function index(?Programme $programme): Response
     {
+
+        $user = $this->getUser();
+
+        if(!$user){
+            $this->redirectToRoute('app.home');
+        }
+        
+
         return $this->render('Frontend/Favoris/index.html.twig', [
-            'favoris' => $this->favRepo->findAll(),
+            'favoris' => $this->favRepo->findByUser($user),
             'programmes' => $programme
         ]);
     }
@@ -51,7 +60,7 @@ class FavorisController extends AbstractController
             $this->addFlash('success', 'programme ajouté avec succes');
             return $this->redirectToRoute('user.favoris.index');
         }
-        return $this->redirectToRoute('admin.programmes.index');
+        return $this->redirectToRoute('app.home');
     }
 
     #[Route('/{id}/delete', '.delete', methods: ['GET', 'POST'])]
@@ -69,6 +78,7 @@ class FavorisController extends AbstractController
             $this->addFlash('success', 'programme supprimé avec succes');
             return $this->redirectToRoute('user.favoris.index');
         }
-        return $this->redirectToRoute('admin.programmes.index');
+        return $this->redirectToRoute('app.home');
     }
+  
 }

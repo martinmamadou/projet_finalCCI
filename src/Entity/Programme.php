@@ -60,6 +60,11 @@ class Programme
     #[ORM\OneToMany(targetEntity: Favoris::class, mappedBy: 'programme', orphanRemoval: true)]
     private Collection $favoris;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $moyenne = null;
+
+ 
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -133,6 +138,7 @@ class Programme
         if (!$this->commentaires->contains($commentaire)) {
             $this->commentaires->add($commentaire);
             $commentaire->setProgramme($this);
+            $this->setMoyenne();
         }
 
         return $this;
@@ -145,7 +151,27 @@ class Programme
             if ($commentaire->getProgramme() === $this) {
                 $commentaire->setProgramme(null);
             }
+            $this->setMoyenne();
         }
+
+        return $this;
+    }
+
+    public function getMoyenne(): ?float
+    {
+        return $this->moyenne;
+    }
+
+    public function setMoyenne(): static
+    {
+        $totalNotes = 0;
+        $nombreCommentaires = count($this->commentaires);
+
+        foreach ($this->commentaires as $commentaire) {
+            $totalNotes += $commentaire->getNote();
+        }
+
+        $this->moyenne = $nombreCommentaires > 0 ? $totalNotes / $nombreCommentaires : 0;
 
         return $this;
     }
@@ -222,4 +248,8 @@ class Programme
 
         return $this;
     }
+
+
+    
+
 }
