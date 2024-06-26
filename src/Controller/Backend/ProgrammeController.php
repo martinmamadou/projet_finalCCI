@@ -43,7 +43,7 @@ class ProgrammeController extends AbstractController
         $form = $this->createForm(ProMaisonType::class, $programme, ['isUser' => true]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $programme->setUser($this->getUser());
             $this->em->persist($programme);
             $this->em->flush();
         }

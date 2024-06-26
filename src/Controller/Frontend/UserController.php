@@ -28,11 +28,12 @@ class UserController extends AbstractController
 
     ) {
     }
-    #[Route('/{id}', name: '', methods: ['GET', 'POST'])]
+    #[Route('', name:'.index', methods: ['GET', 'POST'])]
     public function show(?User $user, ?UserInfo $info): Response|RedirectResponse
     {
+        $user = $this->getUser();
         if (!$user) {
-            $this->addFlash('error', 'utilisateur inexistant');
+            $this->addFlash('error', 'veillez vous connectez');
             return $this->redirectToRoute('app.home');
         }
 

@@ -56,4 +56,6 @@ class Favoris
 
         return $this;
     }
+
+    
 }

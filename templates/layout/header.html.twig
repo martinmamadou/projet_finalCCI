@@ -1,47 +1,18 @@
 <nav>
-	<div class="logo">
-		<p>Sporting</p>
-	</div>
-	<div id="burger-menu">
-		<span></span>
-	</div>
-
-	<div id="menu">
-		<ul>
-
-			<li>
-				<a class='li-item' href="{{path('app.home')}}">Home</a>
-			</li>
-			<div class="separator"></div>
-
-
-			{% if app.user %}
-				<li>
-					<a href="{{path('user.profile', {id:app.user.id})}}" class="li-item">Profile</a>
-				</li>
-				<div class="separator"></div>
-				<li>
-					<a class='li-item' href="{{path('admin.index')}}">Admin</a>
-				</li>
-				<div class="separator"></div>
-				<li>
-					<a class='li-item' href="/logout">Deconnexion</a>
-				</li>
-				<div class="separator"></div>
-				
-			{% else %}
-
-				<li>
-					<a class='li-item' href="/login">Connexion</a>
-				</li>
-				<div class="separator"></div>
-
-				<li>
-					<a class='li-item' href="/register">inscription</a>
-				</li>
-				<div class="separator"></div>
-			{% endif %}
-		</ul>
-	</div>
+	<ul>
+		<li{% if app.request.attributes.get('_route') in [
+    			'user.programmes.index',
+    			'user.programmes.details',
+    			'user.programmes.list'
+				] %} class="active"{% endif %}> <a href=""><i class="fa-solid fa-medal fa-2xl"></i></a></li>
+		<li{% if app.request.get('_route') == 'user.favoris.index' %} class="active"{% endif %}><a href="{{path('user.favoris.index')}}"><i class="fa-solid fa-heart fa-2xl"></i></a></li>
+		<li{% if app.request.get('_route') == 'app.home' %} class="active"{% endif %}><a href="{{path('app.home')}}"><i class="fa-solid fa-house fa-2xl"></i></a></li>
+		<li{% if app.request.get('_route') == 'user.profile.index' %} class="active"{% endif %}><a href="{{path('user.profile.index')}}"><i class="fa-solid fa-user fa-2xl"></i></a></li>
+		{% if app.user %}
+		<li><a href="/logout"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a></li>
+		{% else %}
+		<li><a href="{{path('app.login')}}"><i class="fa-solid fa-right-to-bracket fa-2xl"></i></a></li>
+		{% endif %}
+	</ul>
 
 </nav>

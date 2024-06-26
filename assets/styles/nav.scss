@@ -1,136 +1,49 @@
 nav{
-   position: fixed;
-    height: 50px;
-    width: 100%;
-    background: $primary-color;
+  background: rgba( 255, 255, 255, 0.15 );
+  box-shadow: $box-shadow;
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  backdrop-filter: blur( 12px );
+  -webkit-backdrop-filter: blur( 12px );
+  height: 70px;
+  position: fixed;
+  width: 80vw;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  ul{
+    flex: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+    padding: 15px;
+    margin: 0;
     
-    .logo{
-        p{
-             margin: 0;
-             font-weight: 800;
-             font-size: 2em;
-             color: $text-color;
-        }
-       
-    }
-    
-    #burger-menu {
-      cursor: pointer;
-      height: 27px;
-      width: 27px;
-      margin: 50px;
-      overflow: visible;
-      position: relative;
-      z-index: 2;
-    
-      // THE LINES
-      span,
-      span:before,
-      span:after {
-        background: #fff;
-        display: block;
-        height: 2px;
-        opacity: 1;
-        position: absolute;
-        transition: 0.3s ease-in-out;
-      }
-    
-      span:before,
-      span:after {
-        content: '';
-      }
-    
-      // TOP
-      span:before {
-        left: 0px;
-        top: -10px;
-        width: 27px;
-      }
-    
-      // MIDDLE
-      span {
-        right: 0px;
-        top: 13px;
-        width: 27px;
-      }
-    
-      // BOTTOM
-      span:after {
-        left: 0px;
-        top: 10px;
-        width: 27px;
-      }
-    
-      // ROTATION ON CLICK
-      &.close {
-        // TOP
-        span:before {
-          top: 0px;
-          transform: rotate(90deg);
-          width: 27px;
-        }
-    
-        // MIDDLE
-        span {
-          transform: rotate(-45deg);
-          top: 13px;
-          width: 27px;
-        }
-    
-        // BOTTOM
-        span:after {
-          top: 0px;
-          left: 0;
-          transform: rotate(90deg);
-          opacity: 0;
-          width: 0;
+    li{
+      color: $text-color;
+      a{
+        color: $text-color;
+
+        :hover{
+          transform: scale(11.5px);
         }
       }
     }
-    
-    #menu {
-      z-index: 1;
-      min-width: 100%;
-      min-height: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 0;
-      visibility: hidden;
-      opacity: 0;
-      text-align: center;
-      padding-top: 20px;
-      transition: all 0.3s ease-in-out;
-    
-      &.overlay {
-        visibility: visible;
-        opacity: 1;
-        padding-top: 100px;
-        background: rgba(0, 0, 0, 0.9);
-      }
-    
-      ul {
-        padding: 0;
-      }
-    
-      li {
-        list-style: none;
-      }
-    
-      a {
-        color: #fff;
-        display: block;
-        font-size: 32px;
-        margin: 20px 0;
-        text-decoration: none;
-      }
-    }
+
   }
- 
+}
+
+.active{
+  background: $primary-color;
+  height: 60px;
+  width: 70px;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

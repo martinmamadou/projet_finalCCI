@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\Favoris;
+use App\Entity\Programme;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -29,6 +30,16 @@ class FavorisRepository extends ServiceEntityRepository
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();
+    }
+
+    public function isFavoritedByUser(User $user, Programme $programme): bool
+    {
+        $favoris = $this->findOneBy([
+            'user' => $user,
+            'programme' => $programme,
+        ]);
+
+        return $favoris !== null;
     }
 
     //    /**

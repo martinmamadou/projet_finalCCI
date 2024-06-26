@@ -21,22 +21,30 @@
 }
 
 .proList, .exList{
+    display: block;
+    position: relative;
     background: rgba( 255, 255, 255, 0.15 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     width: 90vw;
-    height: 100px;
+    min-height: 100px;
     margin: 0 auto 45px;
     box-shadow: $box-shadow;
     padding: 0 20px ;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
     p{
+        text-align: center;
         text-transform: capitalize;
         font-weight: bold;
         font-size: 1.8em;
+    }
+    button{
+        position: absolute;
+        top: 0;
+        right: 10px;
+        background: none;
+        border: none;
     }
 }
 
@@ -68,3 +76,4 @@
         background: center / cover url('../../img/atHome.jpg');
     }
 }
+

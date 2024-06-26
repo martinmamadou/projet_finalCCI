@@ -14,7 +14,9 @@ use App\Repository\ExercicesRepository;
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentairesRepository;
+use App\Repository\FavorisRepository;
 use App\Repository\ProgrammeMaisonRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -30,7 +32,8 @@ class ProgrammeController extends AbstractController
         private readonly ExercicesRepository $exRepo,
         private readonly EntityManagerInterface $em,
         private readonly CommentairesRepository $commentRepo,
-        private readonly ProTypeRepository $protype
+        private readonly ProTypeRepository $protype,
+        private readonly FavorisRepository $favRepo,
     ) {
     }
 
@@ -78,12 +81,21 @@ class ProgrammeController extends AbstractController
             
         }
         
+        $user = $this->getUser();
+        $favoritedProgrammes = [];
+
+        foreach ($programmes as $programme) {
+            if ($this->favRepo->isFavoritedByUser($user, $programme)) {
+                $favoritedProgrammes[] = $programme;
+            }
+        }
 
         // Renvoyez les données à la vue
         return $this->render('Frontend/Programme/list.html.twig', [
             'programmes' => $programmes,
             'categorie' => $categorie,
-            'protype' => $protype
+            'protype' => $protype,
+            'favoris' => $favoritedProgrammes
         ]);
     }
 

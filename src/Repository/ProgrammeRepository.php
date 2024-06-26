@@ -48,6 +48,7 @@ class ProgrammeRepository extends ServiceEntityRepository
         ->join('p.commentaires', 'c') // Joindre les commentaires
         ->groupBy('p.id') // Regrouper par programme
         ->orderBy('p.moyenne', 'DESC') // Trier par la moyenne des notes (descendant)
+        ->setMaxResults(10)
         ->getQuery()
         ->getResult();
 }

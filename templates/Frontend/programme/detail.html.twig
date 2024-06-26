@@ -39,7 +39,10 @@
 				<div class="display">
 					<h2>{{commentaire.name}}</h2>
 					<div class="display-content">
-						<p>{{commentaire.note}}</p>
+    					{% for i in range(0, 4) %}
+        					<i class="{{ i < commentaire.note ? 'fa-solid' : 'fa-regular' }} fa-star"></i>
+    					{% endfor %}
+					</div>
 
 						<p>{{commentaire.message|sanitize_html}}</p>
 

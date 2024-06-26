@@ -88,10 +88,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Favoris::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $favoris;
 
+    #[ORM\OneToMany(targetEntity: Programme::class, mappedBy: 'user')]
+    private Collection $programmes;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->favoris = new ArrayCollection();
+        $this->programmes = new ArrayCollection();
     }
 
     public function __serialize(): array
@@ -332,6 +336,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($favori->getUser() === $this) {
                 $favori->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Programme>
+     */
+    public function getProgrammes(): Collection
+    {
+        return $this->programmes;
+    }
+
+    public function addProgramme(Programme $programme): static
+    {
+        if (!$this->programmes->contains($programme)) {
+            $this->programmes->add($programme);
+            $programme->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgramme(Programme $programme): static
+    {
+        if ($this->programmes->removeElement($programme)) {
+            // set the owning side to null (unless already changed)
+            if ($programme->getUser() === $this) {
+                $programme->setUser(null);
             }
         }
 
