@@ -67,13 +67,40 @@
 
 .programme-header {
     height: 50vh;
-
-    &.gym {
-        background: center / cover url('../../img/atGym.jpg');
+    padding-top: 100px;
+    p{
+        
+        font-weight: 600;
+        font-size: 4em;
+        background: rgba(0, 0, 0, 0.272);
+        padding: 10px;
+        text-align: center;
+        font-family: $title-fam;
     }
+}
 
-    &.home {
-        background: center / cover url('../../img/atHome.jpg');
+.exList{
+    .titre{
+        font-family: $title-fam;
+        background: none;
     }
+    p{
+            margin: 10px auto;
+            background: $primary-color;
+            box-shadow: $box-shadow;
+            border-radius: 3px;
+            width: 80%;
+            font-weight: 300;
+        
+    }
+}
+
+.overlay{
+    position: absolute;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.592);
+    width: 100vw;
+    top: 0;
+    left: 0;
 }
 

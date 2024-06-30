@@ -6,18 +6,24 @@
 {% endblock %}
 
 {% block body %}
-	<section class="content">
 
+	<section class="content">
+	
 
 		<h1 class="text-center">{{ programme.name }}</h1>
 		{% for ex in exercices %}
 			<div class="exList">
-				<p>{{ ex.exercice.name }}</p>
+				<p class = 'titre'>{{ ex.exercice.name }}</p>
+				<p> Repetitions : {{ ex.repetitions }}</p>
+				<p> Serie : {{ ex.serie }}</p>
+				<p> Temps : {{ ex.temps }}</p>
 			</div>
 		{% endfor %}
-
+			<a href="{{path('programmes.training',{slug:programme.slug})}}" class='button btn-principal'>Commencez</a>
 		<button class="comment button btn-principal">Ajouter un commentaire</button>
+		<div class="overlay closed">
 		<div class="commentaire closed">
+		</div>
 			{% if is_granted('ROLE_USER') %}
 				{% include "Frontend/programme/_form.html.twig" %}
 			{% else %}
@@ -33,6 +39,7 @@
 		</div>
 
 		<h2 class='mt-4'>Commentaires:</h2>
+		
 
 		{% for commentaire in commentaires %}
 			{% if commentaire.programme.id == programme.id %}
@@ -55,4 +62,5 @@
 		{% endfor %}
 
 	</div>
+	
 </section>{% endblock %}

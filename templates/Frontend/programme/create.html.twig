@@ -6,8 +6,8 @@
 {% block body %}
 	<section class="content">
 		<h1 class="text-center">Creation de mon programme</h1>
+		
 		{% include "Backend/Programme/_form.html.twig" %}
-
-		<a href="{{path('user.profile',{id:app.user.id})}}" class='btn-dng button'>Annuler</a>
+		<a href="{{path('user.profile.index')}}" class='btn-dng button'>Annuler</a>
 	</section>
 {% endblock %}

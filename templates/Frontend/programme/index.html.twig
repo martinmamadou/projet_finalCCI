@@ -7,7 +7,13 @@ Hello ProgrammeController!
 
 {% block body %}
 	<section class="content">
-		<div class="programme-header" style="background: center / cover url('{{ protype ? vich_uploader_asset(protype) : '#' }}')"></div>
+		<div class="programme-header" style="background: center / cover url('{{ protype ? vich_uploader_asset(protype) : '#' }}')">
+			{% if protype %}
+			<p>Programme {{protype.name}}</p>
+			{% else %}
+				<p>Programme</p>
+			{% endif %}
+		</div>
 		<h1 class='text-center'>Selectionnez votre categorie </h1>
 		{% set previousName = '' %}
 		{% for programme in programmes %}

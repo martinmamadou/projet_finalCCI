@@ -1,4 +1,5 @@
-{{ form_start(form, {'attr': {'class': 'card p-3 w-50 mx-auto mt-3'}}) }}
+<div id="center-form">
+{{ form_start(form) }}
 {{ form_row(form.name) }}
 {{form_row(form.shortDescription)}}
 {{form_row(form.categorie)}}
@@ -19,3 +20,4 @@
 </ul>
 <button type="submit" class="button btn-secondaire">Ajouter</button>
 {{ form_end(form) }}
+</div>

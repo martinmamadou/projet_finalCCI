@@ -6,47 +6,43 @@
 
 {% block body %}
 	<section class="profile">
-		<h1>Mon profil</h1>
-		<div class="me">
-		<img src="{{vich_uploader_asset(user)}}" alt="" height='50px' width='50px'>
-		
-			<div class="para">
-				<h2>{{user.username}}</h2>
-				<p>{{user.email}}</p>
-			</div>
-			<a href="{{path('user.favoris.index')}}">favoris</a>
-			
+		<div class='banner'>
+		<div class='shaping'>
+		<h2>{{user.username}}</h2>
 		</div>
-		<div class="info">
-			<h3>Mes infos</h3>
-			<div class="info-container">
+		<img src="{{vich_uploader_asset(user)}}" alt="" height='50px' width='50px'>
+		</div>
+		<a href="{{path('user.profile.edit',{id:user.id})}}" class="button btn-principal">Modifier</a>
+		<p class = 'info-list'>{{user.email}}</p>
+		
+			
 				{% if user.userInfo is empty %}
-					<p>
+					<p class='info-list'>
 						Taille : 0 cm
 					</p>
-					<p>
+					<p class='info-list'>
 						Poids : 0.0 kg
 
 					</p>
-					<p>
+					<p class='info-list'>
 						IMC : 0
 
 					</p>
 
 
 				{% else %}
-					<p>
+					<p class='info-list'>
 						Taille :
 						{{user.userInfo.taille}}
 						cm
 					</p>
 
 
-					<p>
+					<p class='info-list'>
 						Poids :
 						{{user.userInfo.poids}}
 						kg</p>
-					<p>
+					<p class='info-list'>
 						IMC :
 						{{user.userInfo.poids / (user.userInfo.taille * user.userInfo.taille ) * 10000 }}
 					</p>
@@ -56,6 +52,6 @@
 			</div>
 
 		</div>
-		<a href="{{path('user.profile.edit',{id:user.id})}}" class="button btn-principal">Modifier</a>
+		
 	</section>
 {% endblock %}

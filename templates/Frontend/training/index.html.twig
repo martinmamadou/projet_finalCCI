@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TrainingController!{% endblock %}
+
+{% block body %}
+    {% for ex in programme.exercices %}
+        <div class="exercice-container">
+                <p>{{ex.exercice.name}}</p>
+        </div>
+        <div class="pause">
+            <p>pause</p>
+        </div>
+    {% endfor %}
+{% endblock %}

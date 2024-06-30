@@ -34,11 +34,14 @@ class SecurityType extends AbstractType
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
+                
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => 'false',
-                'first_options'  => ['label' => 'Mot de Passe :', 'attr' => [
-                    'placeholder' => 'S3CR3T'
+                'first_options'  => ['label' => 'Mot de Passe :','toggle'=>true,'attr' => [
+                    'placeholder' => 'S3CR3T',
+                    
+                    
                 ]],
                 'second_options' => ['label' => 'Confirmation Mot de passe : ',  'attr' => [
                     'placeholder' => 'S3CR3T'

@@ -140,7 +140,7 @@ h2{
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 2;
+    
     min-height: 100vh;
     overflow: hidden;
     width: 100vw;
@@ -153,10 +153,10 @@ h2{
     margin: 30px auto;
    
     padding: 10px 20px;
-    background: rgba( 255, 255, 255, 0.05 );
+    background: rgba( 255, 255, 255, 0.15 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 3px );
-    -webkit-backdrop-filter: blur( 3px );
+    backdrop-filter: blur( 7px );
+    -webkit-backdrop-filter: blur( 7px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
@@ -170,10 +170,10 @@ label{
 }
 
 input,textarea{
-    border: solid 1px black;
+    border-bottom: solid thin white;
     width: 100%;
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.241);
+    background: none;
     resize: none;
     margin-bottom: 30px;
 }

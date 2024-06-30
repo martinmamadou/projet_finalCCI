@@ -19,4 +19,5 @@ return [
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     Liip\TestFixturesBundle\LiipTestFixturesBundle::class => ['dev' => true, 'test' => true],
+    Symfony\UX\TogglePassword\TogglePasswordBundle::class => ['all' => true],
 ];

@@ -37,7 +37,7 @@ class ProgrammeController extends AbstractController
     ) {
     }
 
-    #[Route('/{slug}', name: '.index', methods: ['GET', 'POST'])]
+    #[Route('/index/{slug}', name: '.index', methods: ['GET', 'POST'])]
     public function index(string $slug): Response
     {
         $protype = $this->protype->findOneBy(["slug" => $slug]);
@@ -45,10 +45,7 @@ class ProgrammeController extends AbstractController
         // Vérifiez le type pour charger les programmes correspondants
         if ($protype) {
             $programmes = $this->proRepo->findBy(['proType' => $protype]);
-        } else {
-            // Gérez le cas où le type n'est ni "salle" ni "maison"
-            $programmes = $this->proRepo->findAll();
-        }
+        } 
 
         return $this->render('Frontend/Programme/index.html.twig', [
             'programmes' => $programmes,
@@ -145,6 +142,11 @@ class ProgrammeController extends AbstractController
     #[Route('/create', name: '.create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response|RedirectResponse
     {
+        $user = $this->getUser();
+        if(!$user){
+            $this->addFlash('error', 'Veuillez vous connectez');
+            return $this->redirectToRoute('app.home');
+        }
         $programme = new Programme;
         $form = $this->createForm(ProMaisonType::class, $programme, ['isUser' => true]);
         $form->handleRequest($request);
@@ -153,7 +155,6 @@ class ProgrammeController extends AbstractController
             $this->em->persist($programme);
             $this->em->flush();
         }
-
 
         return $this->render('Frontend/Programme/create.html.twig', [
             'form' => $form,
