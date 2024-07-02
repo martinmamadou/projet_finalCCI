@@ -14,13 +14,14 @@
 		{% for ex in exercices %}
 			<div class="exList">
 				<p class = 'titre'>{{ ex.exercice.name }}</p>
-				<p> Repetitions : {{ ex.repetitions }}</p>
-				<p> Serie : {{ ex.serie }}</p>
-				<p> Temps : {{ ex.temps }}</p>
 			</div>
 		{% endfor %}
-			<a href="{{path('programmes.training',{slug:programme.slug})}}" class='button btn-principal'>Commencez</a>
-		<button class="comment button btn-principal">Ajouter un commentaire</button>
+			<div class="btn-container">
+				<a href="{{path('programmes.training',{slug:programme.slug})}}" class='button btn-principal'>Commencez</a>
+			</div>
+			<div class="btn-container">
+				<button class="comment button btn-principal">Ajouter un commentaire</button>
+			</div>
 		<div class="overlay closed">
 		<div class="commentaire closed">
 		</div>

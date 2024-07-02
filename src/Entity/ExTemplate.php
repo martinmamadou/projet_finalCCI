@@ -40,6 +40,9 @@ class ExTemplate
     #[ORM\OneToMany(targetEntity: Exercices::class, mappedBy: 'exercice', orphanRemoval: true)]
     private Collection $exercices;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $gifurl = null;
+
     public function __construct()
     {
         $this->exercices = new ArrayCollection();
@@ -112,6 +115,18 @@ class ExTemplate
                 $exercice->setExercice(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGifurl(): ?string
+    {
+        return $this->gifurl;
+    }
+
+    public function setGifurl(?string $gifurl): static
+    {
+        $this->gifurl = $gifurl;
 
         return $this;
     }

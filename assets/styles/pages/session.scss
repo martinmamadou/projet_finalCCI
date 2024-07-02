@@ -1,0 +1,20 @@
+.exercice-container{
+    height: 80vh;
+    text-align: center;
+    background: url('../../img/background/layered-waves-haikei.svg');
+    padding-top: 40px;
+    h2{
+        font-size: 3.5em;
+        margin-bottom: 100px;
+    }
+    p{
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: 2em;
+        text-align: center;
+    }
+}
+
+.hidden{
+    display: none;
+}

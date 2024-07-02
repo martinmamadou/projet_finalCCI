@@ -58,6 +58,7 @@ h2{
     font-weight: bold;
     font-family: BebasNeue;
     font-size: 3em;
+    color: $text-color;
 }
 
 .container{
@@ -184,7 +185,7 @@ input{
 
 .btn-container{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     button{
         width: 50%;
     }

@@ -4,3 +4,4 @@ parameters:
     database_name: 'Test'
     database_user: 'root'
     database_password: 'dwwm2023'
+    rapidapi_api_key: '09c1e08947mshff274454c6424c8p18336bjsn5884bb3df1f5'
