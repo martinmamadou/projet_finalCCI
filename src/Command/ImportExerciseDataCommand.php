@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\ExTemplate;
+use App\Entity\Membre;
 use App\Service\ExerciseApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -44,8 +45,25 @@ class ImportExerciseDataCommand extends Command
         foreach ($exercises as $exercise) {
             $exTemplate = new ExTemplate();
             $exTemplate->setName($exercise['name']);
-            $exTemplate->setShortDes($exercise['description'] ?? '');
             $exTemplate->setGifurl($exercise['gifUrl']);
+            $instructions = is_array($exercise['instructions']) ? implode(" ", $exercise['instructions']) : $exercise['instructions'];
+            $exTemplate->setInstruction($instructions ?? '');
+
+            // Rechercher le membre par son nom (ou un autre critère unique)
+            $membreName = $exercise['target'] ?? null;
+            if ($membreName) {
+                $membre = $this->entityManager->getRepository(Membre::class)->findOneBy(['name' => $membreName]);
+
+                // Si le membre n'existe pas encore, le créer
+                if (!$membre) {
+                    $membre = new Membre();
+                    $membre->setName($membreName);
+                    $this->entityManager->persist($membre);
+                }
+
+                // Associer le membre à l'ExTemplate
+                $exTemplate->addMembre($membre);
+            }
 
             $this->entityManager->persist($exTemplate);
         }

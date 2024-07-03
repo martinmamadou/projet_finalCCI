@@ -18,6 +18,7 @@
         <div class="exercice-container hidden">
                 <h2>{{ex.exercice.name}}</h2>
                 
+                <img src="{{ex.exercice.gifUrl}}" alt="">
                 {% if ex.repetitions %}
                     <p>Repetitions</p>
                 <p>{{ex.repetitions}}</p>
@@ -28,6 +29,8 @@
                 <p>Série</p>
                 <p>{{ex.serie}}</p>
 
+                <p>Instructions</p>
+                <p>{{ex.exercice.Instruction}}</p>
                 
                 
         </div>

@@ -13,7 +13,9 @@
 		<h1 class="text-center">{{ programme.name }}</h1>
 		{% for ex in exercices %}
 			<div class="exList">
-				<p class = 'titre'>{{ ex.exercice.name }}</p>
+				<pre>
+					{{ dump(ex.exercice.name) }}
+				</pre>
 			</div>
 		{% endfor %}
 			<div class="btn-container">
@@ -41,7 +43,7 @@
 
 		<h2 class='mt-4'>Commentaires:</h2>
 		
-
+		
 		{% for commentaire in commentaires %}
 			{% if commentaire.programme.id == programme.id %}
 				<div class="display">

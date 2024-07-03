@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\DateTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ExTemplateRepository;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
@@ -32,20 +33,22 @@ class ExTemplate
     #[Gedmo\Slug(fields: ['id', 'name'])]
     private ?string $slug = null;
 
-    #[Assert\NotBlank()]
-    #[Assert\Length(max:255)]
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $shortDes = null;
-
     #[ORM\OneToMany(targetEntity: Exercices::class, mappedBy: 'exercice', orphanRemoval: true)]
     private Collection $exercices;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $gifurl = null;
 
+    #[ORM\OneToMany(targetEntity: Membre::class, mappedBy: 'exTemplate')]
+    private Collection $membres;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $instruction = null;
+
     public function __construct()
     {
         $this->exercices = new ArrayCollection();
+        $this->membres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,17 +80,6 @@ class ExTemplate
         return $this;
     }
 
-    public function getShortDes(): ?string
-    {
-        return $this->shortDes;
-    }
-
-    public function setShortDes(?string $shortDes): static
-    {
-        $this->shortDes = $shortDes;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Exercices>
@@ -127,6 +119,48 @@ class ExTemplate
     public function setGifurl(?string $gifurl): static
     {
         $this->gifurl = $gifurl;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Membre>
+     */
+    public function getMembres(): Collection
+    {
+        return $this->membres;
+    }
+
+    public function addMembre(Membre $membre): static
+    {
+        if (!$this->membres->contains($membre)) {
+            $this->membres->add($membre);
+            $membre->setExTemplate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMembre(Membre $membre): static
+    {
+        if ($this->membres->removeElement($membre)) {
+            // set the owning side to null (unless already changed)
+            if ($membre->getExTemplate() === $this) {
+                $membre->setExTemplate(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getInstruction(): ?string
+    {
+        return $this->instruction;
+    }
+
+    public function setInstruction(string $instruction): static
+    {
+        $this->instruction = $instruction;
 
         return $this;
     }
