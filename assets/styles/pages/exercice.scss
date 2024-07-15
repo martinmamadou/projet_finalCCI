@@ -1,0 +1,28 @@
+.ex-grid {
+
+    .ex{
+        background: rgba( 255, 255, 255, 0.15 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        text-align: center;
+        padding: 5px;
+        min-height: 70px;
+        img{
+            height: 90px;
+            width: 90px;
+        }
+        p{
+            font-family: 'BebasNeue';
+            text-align: center;
+            font-size: 2em;
+        }
+    }
+}
+
+#myInput{
+    background: whitesmoke;
+    width: 80vw;
+    margin: 15px auto;
+}
+    
+    

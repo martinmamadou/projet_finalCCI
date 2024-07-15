@@ -46,7 +46,7 @@ class Programme
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
-    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'programme')]
+    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'programme',orphanRemoval: true)]
     private Collection $commentaires;
 
 

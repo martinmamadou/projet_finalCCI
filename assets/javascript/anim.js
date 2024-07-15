@@ -1,5 +1,4 @@
 
-
         document.addEventListener('DOMContentLoaded', function() {
             let options = {
                 root: null,
@@ -9,10 +8,9 @@
 
             let observer = new IntersectionObserver(function(entries, observer) {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                        observer.unobserve(entry.target); // Stop observing once animated
-                    }
+                    if (entry.intersectionRatio > 0) {
+                        entry.target.classList.toggle('animate');
+                      }
                 });
             }, options);
 

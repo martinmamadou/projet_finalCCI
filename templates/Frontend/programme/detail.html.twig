@@ -45,7 +45,9 @@
 		
 		
 		{% for commentaire in commentaires %}
-			{% if commentaire.programme.id == programme.id %}
+			{% if commentaire is not null %}
+			
+			
 				<div class="display">
 					<h2>{{commentaire.name}}</h2>
 					<div class="display-content">
@@ -59,7 +61,6 @@
 						<p>{{commentaire.createdAt|ago}}</p>
 					</div>
 				</div>
-
 
 			{% endif %}
 		{% endfor %}
