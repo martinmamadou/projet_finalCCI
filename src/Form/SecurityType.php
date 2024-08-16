@@ -22,7 +22,8 @@ class SecurityType extends AbstractType
                 'label' => 'Nom d\'utilisateur :',
                 'required' => 'false',
                 'attr' => [
-                    'placeholder' => 'johndoe'
+                    'placeholder' => 'johndoe',
+                    'class' => 'username-field'
                 ]
             ])
             ->add('email', EmailType::class, [

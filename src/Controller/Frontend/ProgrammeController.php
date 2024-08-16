@@ -37,20 +37,25 @@ class ProgrammeController extends AbstractController
     ) {
     }
 
-    #[Route('/index/{slug}', name: '.index', methods: ['GET', 'POST'])]
-    public function index(string $slug): Response
+    #[Route('/', name: '.index', methods: ['GET', 'POST'])]
+    public function index(): Response
     {
-        $protype = $this->protype->findOneBy(["slug" => $slug]);
+        $programme = $this->proRepo->findAll();
+        $user = $this->getUser();
+        $favoritedProgrammes = [];
+        $programmes = [];
 
-        // Vérifiez le type pour charger les programmes correspondants
-        if ($protype) {
-            $programmes = $this->proRepo->findBy(['proType' => $protype]);
-        } 
+        foreach ($programmes as $programme) {
+            if ($this->favRepo->isFavoritedByUser($user, $programme)) {
+                $favoritedProgrammes[] = $programme;
+            }
+        }
 
         return $this->render('Frontend/Programme/index.html.twig', [
-            'programmes' => $programmes,
+            'programmes' => $programme,
             'categories' => $this->categRepository->findAll(),
-            'protype' => $protype
+            'protype' => $this->protype->findAll(),
+            'favoris' => $favoritedProgrammes
         ]);
     }
 
@@ -199,5 +204,9 @@ class ProgrammeController extends AbstractController
             return $this->redirectToRoute('admin.programmes.index');
         }
         return $this->redirectToRoute('admin.programmes.index');
+    }
+    #[Route('/preview','.preview')]
+    public function preview(){
+        
     }
 }

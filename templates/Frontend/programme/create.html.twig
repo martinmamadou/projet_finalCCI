@@ -3,6 +3,18 @@
 {% block title %}Creation de Programme
 {% endblock %}
 
+
+{% block stylesheets %}
+	{{parent()}}
+	{{encore_entry_link_tags('admin')}}
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+	{{encore_entry_script_tags('admin')}}
+{% endblock %}
+
+
 {% block body %}
 	<section class="content">
 		<h1 class="text-center">Creation de mon programme</h1>

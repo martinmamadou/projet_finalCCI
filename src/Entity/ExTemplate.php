@@ -39,17 +39,19 @@ class ExTemplate
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $gifurl = null;
 
-    #[ORM\OneToMany(targetEntity: Membre::class, mappedBy: 'exTemplate')]
-    private Collection $membres;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $instruction = null;
 
+    #[ORM\ManyToMany(targetEntity: Membre::class, mappedBy: 'exTemplate')]
+    private Collection $membres;
+
     public function __construct()
     {
-        $this->exercices = new ArrayCollection();
         $this->membres = new ArrayCollection();
     }
+
+  
 
     public function getId(): ?int
     {
@@ -123,6 +125,19 @@ class ExTemplate
         return $this;
     }
 
+  
+    public function getInstruction(): ?string
+    {
+        return $this->instruction;
+    }
+
+    public function setInstruction(string $instruction): static
+    {
+        $this->instruction = $instruction;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Membre>
      */
@@ -135,7 +150,7 @@ class ExTemplate
     {
         if (!$this->membres->contains($membre)) {
             $this->membres->add($membre);
-            $membre->setExTemplate($this);
+            $membre->addExTemplate($this);
         }
 
         return $this;
@@ -144,24 +159,12 @@ class ExTemplate
     public function removeMembre(Membre $membre): static
     {
         if ($this->membres->removeElement($membre)) {
-            // set the owning side to null (unless already changed)
-            if ($membre->getExTemplate() === $this) {
-                $membre->setExTemplate(null);
-            }
+            $membre->removeExTemplate($this);
         }
 
         return $this;
     }
 
-    public function getInstruction(): ?string
-    {
-        return $this->instruction;
-    }
 
-    public function setInstruction(string $instruction): static
-    {
-        $this->instruction = $instruction;
-
-        return $this;
-    }
+ 
 }

@@ -1,4 +1,80 @@
+.programme-head{
+    background: url(/assets/img/atGym.jpg) center/cover fixed;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: $box-shadow;
+}
 
+.programme-preview{
+    position: relative;
+    height: 70vh;
+    background: url(/assets/img/atHome.jpg) center/cover;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    .overlay{
+        min-height: 70vh;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+    .programme-text{
+        position: relative;
+        padding: 100px 10px 0;
+        h1{
+            text-align: left;
+            font-size: 3.5em;
+            padding-bottom: 0;
+        }
+        i{
+            color: $text-color;
+        }
+    }
+    .show-comment{
+        background: none;
+        border: none;
+        color: $text-color;
+    }
+    .start{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border-radius: 0;
+        border-bottom-right-radius: 20px;
+        border-top-left-radius: 10px;
+    }
+    .preview{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border: solid thin $button-primary;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding: 25px;
+        margin: 0;
+        text-transform: capitalize;
+    }
+}
+
+.comment{
+    margin: 50px 0;
+}
+.comment-display{
+    background: none;
+    padding: 0 15px;
+    i{
+        color: $button-primary;
+    }
+}
+
+.filters{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 20px 0;
+}
 .cateList{
    display: flex;
     align-items: center;
@@ -20,7 +96,7 @@
 
 }
 
-.proList, .exList{
+.exList{
     display: block;
     position: relative;
     background: rgba( 255, 255, 255, 0.15 );
@@ -39,13 +115,7 @@
         font-weight: bold;
         font-size: 1.8em;
     }
-    button{
-        position: absolute;
-        top: 0;
-        right: 10px;
-        background: none;
-        border: none;
-    }
+  
 }
 
 
@@ -62,20 +132,6 @@
 
     .display-content{
         color: black;
-    }
-}
-
-.programme-header {
-    height: 50vh;
-    padding-top: 100px;
-    p{
-        
-        font-weight: 600;
-        font-size: 4em;
-        background: rgba(0, 0, 0, 0.272);
-        padding: 10px;
-        text-align: center;
-        font-family: $title-fam;
     }
 }
 
@@ -104,3 +160,95 @@
     left: 0;
 }
 
+.pro-list{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba( 255, 255, 255, 0.02 );
+box-shadow: $box-shadow;
+backdrop-filter: blur( 0px );
+-webkit-backdrop-filter: blur( 0px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+    margin: 30px auto;
+    width: 80%;
+    padding: 10px 8px;
+    
+    .img-container{
+        height: 80px;
+        width: 80px;
+        border-radius: 8px;
+    }
+
+    button{
+        position: absolute;
+        top: 0;
+        right: 10px;
+        background: none;
+        border: none;
+    }
+}
+
+  .accordion {
+    height: fit-content;
+    background: none;
+    border: none;
+    border-bottom: solid thin $button-primary;
+    display: block;
+    width: 90vw;
+    margin: 0 auto;
+    padding: 15px 15px;
+    color: $text-color;
+    font-family: 'BebasNeue';
+    font-size: 1.5em;
+    transition: 0.3s ease;
+    border-radius: 2px;
+    text-align: left;
+    
+  }
+  
+  .active, .accordion:hover {
+    background-color: $button-primary;
+  }
+  
+  .panel {
+    color: $text-color;
+    padding: 0 18px;
+    width: 90vw;
+    margin: 0 auto;
+    background-color: #1d1541;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  
+  /* Style the accordion panel. Note: hidden by default */
+  
+  .ex-content{
+    position: relative;
+    background: url('../../img/atGym.jpg') center/cover;
+    max-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    .exercice-container{
+        background: #1112129b;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: $box-shadow;
+        margin-top: 350px;
+        h2{
+            font-size: 3em;
+            padding: 0;
+            margin: 0;
+        }
+       
+    }
+    .btn-principal{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+  }

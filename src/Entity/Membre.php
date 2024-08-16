@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MembreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MembreRepository::class)]
@@ -16,9 +18,13 @@ class Membre
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'membres')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?ExTemplate $exTemplate = null;
+    #[ORM\ManyToMany(targetEntity: ExTemplate::class, inversedBy: 'membres')]
+    private Collection $exTemplate;
+
+    public function __construct()
+    {
+        $this->exTemplate = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -37,14 +43,26 @@ class Membre
         return $this;
     }
 
-    public function getExTemplate(): ?ExTemplate
+    /**
+     * @return Collection<int, ExTemplate>
+     */
+    public function getExTemplate(): Collection
     {
         return $this->exTemplate;
     }
 
-    public function setExTemplate(?ExTemplate $exTemplate): static
+    public function addExTemplate(ExTemplate $exTemplate): static
     {
-        $this->exTemplate = $exTemplate;
+        if (!$this->exTemplate->contains($exTemplate)) {
+            $this->exTemplate->add($exTemplate);
+        }
+
+        return $this;
+    }
+
+    public function removeExTemplate(ExTemplate $exTemplate): static
+    {
+        $this->exTemplate->removeElement($exTemplate);
 
         return $this;
     }

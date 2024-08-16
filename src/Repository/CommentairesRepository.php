@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Commentaires;
+use App\Entity\Programme;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,11 +22,14 @@ class CommentairesRepository extends ServiceEntityRepository
         parent::__construct($registry, Commentaires::class);
     }
 
-    public function findAllByProgramme(): array
+    public function findAllByProgramme(Programme $programme): array
     {
         $query = $this->createQueryBuilder('c')
-            ->select('c', 'p')
-            ->leftJoin('c.programme', 'p');
+            ->select('c')
+            ->leftJoin('c.programme', 'p')
+            ->where('p.id = :programmeId')
+            ->setParameter('programmeId', $programme->getId());
+    
         return $query
             ->getQuery()
             ->getResult();

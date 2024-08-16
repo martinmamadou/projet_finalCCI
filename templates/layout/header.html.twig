@@ -1,10 +1,12 @@
+{% if app.request.get('_route') != 'app.landing' %}
+
 <nav>
 	<ul>
 		<li{% if app.request.attributes.get('_route') in [
     			'user.programmes.index',
     			'user.programmes.details',
     			'user.programmes.list'
-				] %} class="active"{% endif %}> <a href=""><i class="fa-solid fa-medal fa-2xl"></i></a></li>
+				] %} class="active"{% endif %}> <a href="{{path('user.programmes.index')}}"><i class="fa-solid fa-medal fa-2xl"></i></a></li>
 				{% if is_granted ('ROLE_ADMIN') %}
 					<li{% if app.request.get('_route') == 'admin.index' %} class="active"{% endif %}><a href='{{path('admin.index')}}'><i class="fa-solid fa-lock fa-2xl"></i></a></li>
 					{% else %}
@@ -21,3 +23,4 @@
 	</ul>
 
 </nav>
+{% endif %}

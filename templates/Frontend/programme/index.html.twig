@@ -1,30 +1,86 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-
-Hello ProgrammeController!
+Programmes
 {% endblock %}
 
 {% block body %}
-	<section class="content">
-		<div class="programme-header" style="background: center / cover url('{{ protype ? vich_uploader_asset(protype) : '#' }}')">
-			{% if protype %}
-			<p>Programme {{protype.name}}</p>
-			{% else %}
-				<p>Programme</p>
-			{% endif %}
-		</div>
-		<h1 class='text-center'>Selectionnez votre categorie </h1>
-		{% set previousName = '' %}
-		{% for programme in programmes %}
-			<a href=" {{ path('user.programmes.list', {slug: programme.categorie.slug, type: programme.protype.slug} ) }}">
-				{% if programme.categorie.name != previousName %}
-					<div class="cateList" style="background: center / cover url('{{ vich_uploader_asset(programme.categorie) }}')">
-						<p>{{ programme.categorie.name }}</p>
-					</div>
-					{% set previousName = programme.categorie.name %}
-				{% endif %}
-			</a>
-		{% endfor %}
-	</section>
+<section class="content">
+	<div class="programme-head">
+    	<h1>Programme</h1>
+	</div>
+	<div class="input-container">
+    	<input type="text" id="myInput" class='search' placeholder="Rechercher un programme...">
+	</div>
+    <div class="filters">
+        <button class="filter-button button" data-protype="all">Tous</button>
+        {% for pro in protype %}
+            <button class="filter-button button" data-protype="{{ pro.name }}">{{ pro.name }}</button>
+        {% endfor %}
+    </div>
+    <div class="programme-list">
+        {% for programme in programmes %}
+		<a href='{{path('user.programmes.details',{slug:programme.slug})}}'>
+            <div class="pro-list programme-item" data-protype="{{ programme.proType.name }}">
+                <div class="img-container" style="background: center/cover url('{{vich_uploader_asset(programme.categorie)}}')"></div>
+                <div class='text-container'>
+                    <h2>{{ programme.name }}</h2>
+                    <p><i class="fa-solid fa-dumbbell"></i> {{programme.exercices|length}}</p>
+			    </div>
+				{% if programme in favoris %}
+				
+            <button type="submit"><i class="fa-solid fa-heart"></i></button>
+        	</form>
+    	{% else %}
+       	 <form action="{{ path('user.favoris.add', { slug: programme.slug }) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir ajouter ce programme à vos favoris ?')">
+            	<input type="hidden" name="token" value="{{ csrf_token('add' ~ programme.slug) }}">
+            	<button type="submit"><i class="fa-regular fa-heart"></i></button>
+        	</form>
+    	{% endif %}
+            </div>
+		</a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const programmeItems = document.querySelectorAll('.programme-item');
+    const searchInput = document.getElementById("myInput");
+
+    function filterProgrammes() {
+        const filter = searchInput.value.toUpperCase();
+        const selectedProType = document.querySelector('.filter-button.act')?.getAttribute('data-protype') || 'all';
+
+        programmeItems.forEach(item => {
+            const programmeName = item.querySelector('p').textContent.toUpperCase();
+            const programmeType = item.getAttribute('data-protype');
+            const matchesFilter = programmeName.indexOf(filter) > -1;
+            const matchesType = selectedProType === 'all' || selectedProType === programmeType;
+
+            if (matchesFilter && matchesType) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            filterButtons.forEach(btn => btn.classList.remove('act'));
+            this.classList.add('act');
+            filterProgrammes();
+        });
+    });
+
+    searchInput.addEventListener('keyup', filterProgrammes);
+
+    // Initialize with all programmes visible
+    filterProgrammes();
+});
+</script>
 {% endblock %}

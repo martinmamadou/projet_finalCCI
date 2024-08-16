@@ -16,15 +16,23 @@ class HomeController extends AbstractController
         private readonly ProgrammeRepository $programmeRepo
     ) {
     }
-    #[Route('', name: 'app.home')]
+    #[Route('', name: 'app.landing')]
+    public function landing(): Response
+    {   
+        return $this->render('Home/landing.html.twig', [
+        ]);
+    }
+
+    #[Route('/home', name: 'app.home')]
     public function index(): Response
     {
        $programmes = $this->programmeRepo->findAllWithComments();
-       
+       $newPro=$this->programmeRepo->findAll();
         
         return $this->render('Home/home.html.twig', [
             'protypes' => $this->protype->findAll(),
-            'programmes' => $programmes
+            'programmes' => $programmes,
+            'new' => $newPro
         ]);
     }
 }

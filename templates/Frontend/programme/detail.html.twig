@@ -9,24 +9,36 @@
 
 	<section class="content">
 	
-
-		<h1 class="text-center">{{ programme.name }}</h1>
-		{% for ex in exercices %}
-			<div class="exList">
-				<pre>
-					{{ dump(ex.exercice.name) }}
-				</pre>
-			</div>
-		{% endfor %}
-			<div class="btn-container">
-				<a href="{{path('programmes.training',{slug:programme.slug})}}" class='button btn-principal'>Commencez</a>
-			</div>
-			<div class="btn-container">
-				<button class="comment button btn-principal">Ajouter un commentaire</button>
-			</div>
-		<div class="overlay closed">
-		<div class="commentaire closed">
+		<div class="programme-preview">
+		<div class="overlay"></div>
+		<div class="programme-text">
+		<h1>{{ programme.name }}</h1>
+		<div class="display-content">
+    					{% for i in range(0, 4) %}
+        					<i class="{{ i < programme.moyenne ? 'fa-solid' : 'fa-regular' }} fa-star"></i>
+    					{% endfor %}
+					</div>
+		<p>{{programme.shortDescription}}</p>
+			<p><i class="fa-solid fa-person fa-xl"></i> Biceps</p>
+			<a href="#comment"><button class='show-comment'><i class="fa-regular fa-comment fa-xl"></i> {{programme.commentaires|length}}</button>
+		</a>
+				
+		
 		</div>
+		<a href="{{path('programmes.training',{slug:programme.slug})}}" class='button btn-principal start'><i class="fa-solid fa-play"></i></a>
+		<a href="{{path('programmes.preview',{slug:programme.slug})}}"class="preview button button-principal">preview</a>
+		</div>
+
+
+
+
+			
+			<div class="btn-container">
+				<button class="comment button btn-principal">Commenter</button>
+			</div>
+		<div class="overlay closed "></div>
+		<div class="commentaire closed ">
+		
 			{% if is_granted('ROLE_USER') %}
 				{% include "Frontend/programme/_form.html.twig" %}
 			{% else %}
@@ -38,17 +50,18 @@
 						</a>
 						pour pouvoir commenter</p>
 				</div>
+				</div>
 			{% endif %}
 		</div>
 
-		<h2 class='mt-4'>Commentaires:</h2>
+		<h2 >Commentaires:</h2>
 		
 		
 		{% for commentaire in commentaires %}
 			{% if commentaire is not null %}
 			
 			
-				<div class="display">
+				<div class="comment-display" id='comment'>
 					<h2>{{commentaire.name}}</h2>
 					<div class="display-content">
     					{% for i in range(0, 4) %}
@@ -60,6 +73,7 @@
 
 						<p>{{commentaire.createdAt|ago}}</p>
 					</div>
+					<hr>
 				</div>
 
 			{% endif %}

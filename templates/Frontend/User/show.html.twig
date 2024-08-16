@@ -5,53 +5,21 @@
 {% endblock %}
 
 {% block body %}
-	<section class="profile">
-		<div class='banner'>
-		<div class='shaping'>
-		<h2>{{user.username}}</h2>
-		</div>
-		<img src="{{vich_uploader_asset(user)}}" alt="" height='50px' width='50px'>
-		</div>
-		<a href="{{path('user.profile.edit',{id:user.id})}}" class="button btn-principal">Modifier</a>
-		<p class = 'info-list'>{{user.email}}</p>
-		
-			
-				{% if user.userInfo is empty %}
-					<p class='info-list'>
-						Taille : 0 cm
-					</p>
-					<p class='info-list'>
-						Poids : 0.0 kg
+	<section class="content profile">
+		<h1>profile</h1>
 
-					</p>
-					<p class='info-list'>
-						IMC : 0
-
-					</p>
-
-
-				{% else %}
-					<p class='info-list'>
-						Taille :
-						{{user.userInfo.taille}}
-						cm
-					</p>
-
-
-					<p class='info-list'>
-						Poids :
-						{{user.userInfo.poids}}
-						kg</p>
-					<p class='info-list'>
-						IMC :
-						{{user.userInfo.poids / (user.userInfo.taille * user.userInfo.taille ) * 10000 }}
-					</p>
-
-				{% endif %}
-				<a href="{{path('user.profile.infos',{id:user.id})}}" class="button btn-principal">Modifier</a>
+		<div class="user-info">
+			<div class="left">
+			<img src="{{vich_uploader_asset(user)}}" alt="" width='70' height='70'>
 			</div>
-
+			<div class="right">
+				<div class="top">
+					<p>{{user.username}}</p>
+					<a href='{{path('user.profile.edit',{id:user.id})}}'><i class="fa-regular fa-pen-to-square"></i></a>
+				</div>
+				<div class="bottom">
+				</div>
+			</div>
 		</div>
-		
 	</section>
 {% endblock %}

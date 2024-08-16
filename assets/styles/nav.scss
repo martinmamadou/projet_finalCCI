@@ -35,10 +35,13 @@ nav{
     }
 
   }
+  i{
+    box-shadow: $box-shadow;
+  }
 }
 
 .active{
-  background: $primary-color;
+  background: $button-primary;
   height: 60px;
   width: 70px;
   padding: 20px;

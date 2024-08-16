@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    welcome 
+{% endblock %}
+
+{% block body %}
+    <section class="content landing">
+   
+    <div class="overlay"> </div>
+    <div class="left">
+     <img src="{{asset('/img/logo/logo.png')}}" alt="" width='200' height='200'>
+    </div>
+    <div class="right">
+    <h1>Sporting</h1>
+    <p>Bonjour et bienvenue sur Sporting ! Nous sommes votre destination ultime pour des programmes d'entraînement personnalisés, conçus pour vous aider à atteindre vos objectifs de remise en forme, que vous préfériez vous entraîner à la maison ou en salle de sport.</p>
+        <div class="btn-container">
+            <a href="{{path('app.register')}}" class='button btn-principal'>inscription</a>
+            <a href="{{path('app.login')}}" class='button btn-secondaire'>connexion</a>
+        </div>
+   </div>
+    </section>
+{% endblock %}

@@ -1,45 +1,21 @@
 .profile{
-    color: $text-color;
-    text-align: center;
-    .banner{
-        background: url(../../img/background/wave-haikei-2.svg);
-        position: relative;
-        height: 50vh;
-        margin-bottom: 50px;
-    
-        
-        img{
-            border-radius: 50%;
-            
-            height:100px;
-            width: 100px;
-            position: absolute;
-            top: 28vh;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            overflow: hidden;
-            box-shadow: $box-shadow;
-        }
-    }
-    .info-list{
-        padding: 0 20px;
-        width: 90vw;
-        margin: 8px auto;
-        background: rgba( 255, 255, 255, 0.15 );
-        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-        border-radius: 2px;
-        border: 1px solid rgba( 255, 255, 255, 0.18 );
-        backdrop-filter: blur( 8px );
-        -webkit-backdrop-filter: blur( 4px );
-        color: $text-color;
-        height: 35px;
+    .user-info{
         display: flex;
         align-items: center;
-    }
-    a{
-        :first-child{
-            text-align: left;
+        padding: 0 15px;
+        gap: 20px;
+        img{
+            border-radius: 50%;
+        }
+        .right{
+            .top{
+                display: flex;
+            }
+            .bottom{
+                display: flex;
+            }
+            
+
         }
     }
 }

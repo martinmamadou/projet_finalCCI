@@ -13,32 +13,25 @@
 {% endblock %}
 
 {% block body %}
-    <section class="content">
+    <section class="content ex-content">
     {% for ex in programme.exercices %}
         <div class="exercice-container hidden">
                 <h2>{{ex.exercice.name}}</h2>
                 
-                <img src="{{ex.exercice.gifUrl}}" alt="">
                 {% if ex.repetitions %}
-                    <p>Repetitions</p>
-                <p>{{ex.repetitions}}</p>
+                <p>X{{ex.repetitions}}</p>
                 {% else %}
-                    <p>Temps</p>
-                    <p>{{ex.temps}}</p>
+                    <p>{{ex.temps}}s</p>
                 {% endif %}
                 <p>Série</p>
                 <p>{{ex.serie}}</p>
-
-                <p>Instructions</p>
-                <p>{{ex.exercice.Instruction}}</p>
-                
-                
         </div>
         
         
     {% endfor %}
-    <div class="btn-container">
+            
     <button id="suivant" class='button btn-principal'>Suivant</button>
-    </div>
+
+              
     </section>
 {% endblock %}

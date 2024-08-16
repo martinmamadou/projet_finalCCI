@@ -18,42 +18,23 @@
             {% include "Home/_swiperTendance.html.twig" %}
         </div>
 
+        <div class="home-new">
+            <h2 class="title">Nouveautés</h2>
+            {% for programme in new %}
+            <a href='{{path('user.programmes.details',{slug:programme.slug})}}'>
+                <div class="pro-list">
+                <div class="img-container" style="background: center/cover url('{{vich_uploader_asset(programme.categorie)}}')"></div>
+                <div class='text-container'>
+                    <h2>{{ programme.name }}</h2>
+                    <p><i class="fa-solid fa-dumbbell"></i> {{programme.exercices|length}}</p>
+			    </div>
+                </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
        
 
-        <div class="htop-Content">
-		 	<hr>
-        	<h2 class="title anim fade-inL">Get Started</h2>
-       	 	<hr>
-            <div class="left"></div>
-            <div class="right anim fade-inR">
-                <p>Bonjour et bienvenue sur Sporting ! Nous sommes votre destination ultime pour des programmes d'entraînement personnalisés, conçus pour vous aider à atteindre vos objectifs de remise en forme, que vous préfériez vous entraîner à la maison ou en salle de sport. Nos programmes sont soigneusement élaborés par des experts en fitness, et sont adaptés à tous les niveaux, des débutants aux athlètes confirmés.</p>
-            </div>
-        </div>
-
         
-
-        <div class="hmiddle-content">
-            <hr>
-            <h2 class="title anim fade-inb">Nos Programmes</h2>
-            <hr>
-            {% include "Home/_swiperProType.html.twig" %}
-        </div>
-
-        <div class="bottom-content">
-
-            <div class="section1">
-            <i class="fa-solid fa-angle-down fa-2xl anim shake" style="color: #D64045;"></i>
-            </div>
-            <div class="section2">
-            <h2 class="title anim fade-inb">A vous de jouer</h2>
-            
-            <p class="anim fade-inC">Creez votre propre programme et partager le avec la communauté</p>
-            <div class="btn-container">
-            <a href="{{path('user.programmes.create')}}" class ='button btn-principal anim bounce-l'>Creer mon programme</a>
-            </div>
-            </div>
-
-            
-        </div>
     </section>
 {% endblock %}

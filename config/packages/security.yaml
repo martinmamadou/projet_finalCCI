@@ -21,6 +21,7 @@ security:
                 check_path: app.login
                 enable_csrf: true
                 use_referer: true 
+                default_target_path: app.home
             logout:
                 path: /logout
                 target: /

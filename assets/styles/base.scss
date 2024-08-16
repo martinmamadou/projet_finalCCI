@@ -51,8 +51,9 @@ h1{
     color: $text-color;
     font-weight: bold;
     text-transform: uppercase;
-    margin: 75px 0;
+    padding: 75px 0;
     font-family: BebasNeue;
+    text-align: center;
 }
 h2{
     font-weight: bold;
@@ -77,20 +78,38 @@ h2{
 
 .btn-principal{
     background: $button-primary;
-    transition: 0.3s ease;
-    padding: 8px 12px;
+  transition: 0.3s ease;
+  padding: 25px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: solid 1px $button-primary;
+  text-transform: capitalize;
 }
 
 .btn-secondaire{
-    border: none;
-    border-radius: 5px;
-    background: rgb(0, 204, 255);
+    border: solid 1px $button-primary;
     transition: 0.3s ease;
-    padding: 8px 12px;
-    padding: 8px 12px;
+    padding: 25px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    text-transform: capitalize;
 
 }
-
+.filter-button{
+    text-align: center;
+    border: solid thin $button-primary;
+    padding: 8px 20px;
+    
+}
+.act{
+    background: $button-primary;
+    padding: 8px 20px;
+    border: none;
+}
 .btn-dng{
     border: none;
     border-radius: 5px;
@@ -154,38 +173,62 @@ h2{
     margin: 30px auto;
    
     padding: 10px 20px;
-    background: rgba( 255, 255, 255, 0.15 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 7px );
-    -webkit-backdrop-filter: blur( 7px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    
+    
+}
+
+.form-control{
+    background: none;
+    border: none;
+    padding: 0 30px;
+    border-bottom: solid thin $button-primary;
+    color: $text-color
+}
+
+input{
+    background: none;
+    border: none;
+    border-bottom:solid 1px $button-primary;
+    color: $text-color;
+    padding: 10px 30px;
+    width: 100%;
+}
+.form-control:focus{
+    background: $button-primary;
+    border: none;
+    outline: none;
+    color: $text-color;
 }
 
 label{
     display: block;
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
     color: $text-color;
 }
 
-input,textarea{
-    border-bottom: solid thin white;
-    width: 100%;
-    border-radius: 5px;
-    background: none;
-    resize: none;
-    margin-bottom: 30px;
-}
 
-input{
-    padding: 10px 4px;
-}
 
+.input-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .icon{
+        position: absolute;
+        left: 10px;
+        background: none;
+        border: none;
+        font-size: 0.9em;
+        color: $text-color;
+    }
+}
 .btn-container{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     button{
         width: 50%;
     }

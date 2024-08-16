@@ -23,8 +23,16 @@ class TrainingController extends AbstractController
     {
         $programme = $this->proRepo->findOneBy(['slug'=>$slug]);
         
-
         return $this->render('frontend/training/index.html.twig', [
+            'programme' => $programme
+        ]);
+    }
+    #[Route('/{slug}/preview', name: '.preview', methods: ['GET'])]
+    public function preview(string $slug): Response
+    {
+        $programme = $this->proRepo->findOneBy(['slug'=>$slug]);
+        
+        return $this->render('frontend/training/preview.html.twig', [
             'programme' => $programme
         ]);
     }
