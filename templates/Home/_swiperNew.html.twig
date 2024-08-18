@@ -1,0 +1,28 @@
+{% if programmes is not null %}
+			
+<div
+	<div class="swiper slider-new">
+    <div class="swiper-wrapper">
+        {% if programmes|length > 0 %}
+            {% for programme in new %}
+                <div class="swiper-slide">
+                    <a href="{{ path('user.programmes.details', {slug: programme.slug}) }}" id="ex-link">
+                        <div class="pro-list" style="background: center/cover url('{{ vich_uploader_asset(programme.categorie) }}')">
+                            <div class="text-container">
+                                <h2>{{ programme.name }}</h2>
+                                <p><i class="fa-solid fa-dumbbell"></i> {{ programme.exercices|length }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>rien à voir ici</p>
+        {% endif %}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+	{% else %}
+				<p>Aucun donnée pour le moment</p>
+		{% endif %}

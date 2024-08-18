@@ -72,8 +72,10 @@ h2{
   }
 
 .separator{
-    width: 100%;
-    border-top: 1px solid white;
+    width: 80%;
+    border-top: 2px solid $text-color;
+    margin: 10px auto;
+
 }
 
 .btn-principal{
@@ -264,3 +266,4 @@ label{
     height: 20px;
     width: 20px;
 }
+

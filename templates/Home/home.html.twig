@@ -20,18 +20,7 @@
 
         <div class="home-new">
             <h2 class="title">Nouveautés</h2>
-            {% for programme in new %}
-            <a href='{{path('user.programmes.details',{slug:programme.slug})}}'>
-                <div class="pro-list">
-                <div class="img-container" style="background: center/cover url('{{vich_uploader_asset(programme.categorie)}}')"></div>
-                <div class='text-container'>
-                    <h2>{{ programme.name }}</h2>
-                    <p><i class="fa-solid fa-dumbbell"></i> {{programme.exercices|length}}</p>
-			    </div>
-                </div>
-                </div>
-            </a>
-            {% endfor %}
+            {% include "Home/_swiperNew.html.twig" %}
         </div>
        
 

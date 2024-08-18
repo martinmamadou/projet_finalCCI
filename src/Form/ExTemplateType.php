@@ -6,6 +6,7 @@ use App\Entity\Exercices;
 use App\Entity\ExTemplate;
 use phpDocumentor\Reflection\DocBlock\Description;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,9 +18,15 @@ class ExTemplateType extends AbstractType
         $builder
             ->add('name', TextType::class, [
             'label' => 'Nom de l\'exercice',
+            'required' => false,
+
             ])
-            ->add('shortDes', TextType::class, [
-                'label' => 'Description'
+            ->add('instruction', TextareaType::class, [
+                'label' => 'Description',
+                'attr' => [
+                    'row' => 10
+                ],
+                'required' => false
             ])
         ;
     }

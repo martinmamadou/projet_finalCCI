@@ -1,0 +1,28 @@
+{% if favoris is not null %}
+			
+<div
+	<div class="swiper slider-new">
+    <div class="swiper-wrapper">
+        {% if favoris|length > 0 %}
+            {% for fav in favoris %}
+                <div class="swiper-slide">
+                    <a href="{{ path('user.programmes.details', {slug: fav.programme.slug}) }}" id="ex-link">
+                        <div class="pro-list" style="background: center/cover url('{{ vich_uploader_asset(fav.programme.categorie) }}')">
+                            <div class="text-container">
+                                <h2>{{ fav.programme.name }}</h2>
+                                <p><i class="fa-solid fa-dumbbell"></i> {{ fav.programme.exercices|length }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>rien à voir ici</p>
+        {% endif %}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+	{% else %}
+				<p>Aucun donnée pour le moment</p>
+		{% endif %}

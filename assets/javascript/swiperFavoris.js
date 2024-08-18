@@ -4,7 +4,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/scss';
 import 'swiper/scss/pagination';
 
-const swiperArticle = new Swiper('.slider-programme', {
+const swiperArticle = new Swiper('.slider-fav', {
     modules: [Pagination, Autoplay],
     direction: 'horizontal',
     loop: true,
@@ -15,8 +15,6 @@ const swiperArticle = new Swiper('.slider-programme', {
     grabCursor: true,
     pagination: {
         el: '.swiper-pagination',
-        type:'progressbar',
-        clickable: true,
-        
+        clickable: true,   
     },
 });

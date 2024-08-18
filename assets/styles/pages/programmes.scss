@@ -161,19 +161,16 @@
 }
 
 .pro-list{
+    backdrop-filter: blur(5px);
     position: relative;
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba( 255, 255, 255, 0.02 );
-box-shadow: $box-shadow;
-backdrop-filter: blur( 0px );
--webkit-backdrop-filter: blur( 0px );
-border-radius: 10px;
-border: 1px solid rgba( 255, 255, 255, 0.18 );
     margin: 30px auto;
     width: 80%;
     padding: 10px 8px;
+    height: 170px;
+    border-radius: 16px;
     
     .img-container{
         height: 80px;
@@ -251,4 +248,17 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
         left: 50%;
         transform: translate(-50%,-50%);
     }
+   
   }
+
+  .programme-list{
+    @media (min-width: 768px) {
+        display: grid;
+        grid-template-columns: repeat(2, 0.5fr); // Crée deux colonnes de largeur égale
+        gap: 10px;  // Passe à une colonne sur les petits écrans
+
+        .programme-item{
+            max-width: 300px;
+        }
+    }
+}

@@ -21,8 +21,8 @@ Programmes
     <div class="programme-list">
         {% for programme in programmes %}
 		<a href='{{path('user.programmes.details',{slug:programme.slug})}}'>
-            <div class="pro-list programme-item" data-protype="{{ programme.proType.name }}">
-                <div class="img-container" style="background: center/cover url('{{vich_uploader_asset(programme.categorie)}}')"></div>
+            <div class="pro-list programme-item" data-protype="{{ programme.proType.name }}" style="background: center/cover url('{{vich_uploader_asset(programme.categorie)}}')">
+                <div class="img-container" ></div>
                 <div class='text-container'>
                     <h2>{{ programme.name }}</h2>
                     <p><i class="fa-solid fa-dumbbell"></i> {{programme.exercices|length}}</p>

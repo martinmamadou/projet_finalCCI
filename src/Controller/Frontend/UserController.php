@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Form\InfoType;
 use App\Entity\UserInfo;
 use App\Form\SecurityType;
+use App\Repository\FavorisRepository;
+use App\Repository\ProgrammeRepository;
 use App\Repository\UserInfoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +26,9 @@ class UserController extends AbstractController
 
     public function __construct(
         private readonly EntityManagerInterface $em,
-        private readonly UserInfoRepository $UserInfoRepository
+        private readonly UserInfoRepository $UserInfoRepository,
+        private readonly FavorisRepository $favRepo,
+        private readonly ProgrammeRepository $proRepo,
 
     ) {
     }
@@ -32,6 +36,8 @@ class UserController extends AbstractController
     public function show(?User $user, ?UserInfo $info): Response|RedirectResponse
     {
         $user = $this->getUser();
+        $favoris = $this->favRepo->findByUser($user);
+        
         if (!$user) {
             $this->addFlash('error', 'veillez vous connectez');
             return $this->redirectToRoute('app.home');
@@ -39,7 +45,9 @@ class UserController extends AbstractController
 
         return $this->render('Frontend/User/show.html.twig', [
             'user' => $user,
-            'info' => $info
+            'info' => $info,
+            'favoris' => $favoris,
+            'programme' => $this->proRepo->findAll(),
         ]);
     }
 

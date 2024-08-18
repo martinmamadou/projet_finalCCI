@@ -40,9 +40,15 @@
             color: green;
             font-size: 3em;
         }
+        a{
+            display: flex;
+            justify-content: center;
+            margin: 50px 0;
+        }
     }
-    button{
-      margin-top: 120px;  
+    .btn-container{
+      display: flex;
+      justify-content: center;
     }
 }
 
