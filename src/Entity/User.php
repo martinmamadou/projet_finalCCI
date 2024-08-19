@@ -91,6 +91,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Programme::class, mappedBy: 'user')]
     private Collection $programmes;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -368,6 +371,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $programme->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

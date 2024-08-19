@@ -41,27 +41,41 @@ class FavorisController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}/add', '.add', methods: ['GET', 'POST'])]
-    public function add(?Programme $programme, Request $request): Response|RedirectResponse
-    {
+    #[Route('/{slug}/add', name: '.add', methods: ['GET', 'POST'])]
+public function add(?Programme $programme, Request $request): Response|RedirectResponse
+{
+    if (!$programme) {
+        $this->addFlash('error', 'Programme inexistant');
+        return $this->redirectToRoute('admin.users.index');
+    }
 
-        if (!$programme) {
-            $this->addFlash('error', 'programme inexistant');
-            return $this->redirectToRoute('admin.users.index');
-        }
-        if ($this->isCsrfTokenValid('add' . $programme->getSlug(), $request->request->get('token'))) {
-            $favoris = new Favoris();
+    if ($this->isCsrfTokenValid('add' . $programme->getSlug(), $request->request->get('token'))) {
+
+        $favoris = $this->em->getRepository(Favoris::class)->findOneBy([
+            'user' => $this->getUser(),
+            'programme' => $programme
+        ]) ?? new Favoris(); // Ternaire : récupère le Favoris s'il existe, sinon en crée un nouveau
+
+        if (!$favoris->getId()) { // Si le Favoris est nouveau (sans ID)
             $favoris->setUser($this->getUser());
             $favoris->setProgramme($programme);
 
             $this->em->persist($favoris);
             $this->em->flush();
 
-            $this->addFlash('success', 'programme ajouté avec succes');
-            return $this->redirectToRoute('user.favoris.index');
+            $this->addFlash('success', 'Programme ajouté avec succès');
+        } else {
+            
+            $this->addFlash('info', 'Programme déjà dans vos favoris');
+            return $this->redirectToRoute('user.programmes.index');
         }
-        return $this->redirectToRoute('app.home');
+
+        return $this->redirectToRoute('user.favoris.index');
     }
+
+    return $this->redirectToRoute('app.home');
+}
+
 
     #[Route('/{id}/delete', '.delete', methods: ['GET', 'POST'])]
     public function delete(?Favoris $favoris, Request $request): Response|RedirectResponse

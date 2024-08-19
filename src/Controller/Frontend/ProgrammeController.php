@@ -45,9 +45,9 @@ class ProgrammeController extends AbstractController
         $favoritedProgrammes = [];
         $programmes = [];
 
-        foreach ($programmes as $programme) {
-            if ($this->favRepo->isFavoritedByUser($user, $programme)) {
-                $favoritedProgrammes[] = $programme;
+        foreach ($programme as $programmes) {
+            if ($this->favRepo->findByUser($user)) {
+                $favoritedProgrammes[] = $programmes;
             }
         }
 

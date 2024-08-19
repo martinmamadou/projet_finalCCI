@@ -32,14 +32,15 @@ class FavorisRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function isFavoritedByUser(User $user, Programme $programme): bool
+    public function isFavoritedByUser(User $user, Programme $programme): array
     {
-        $favoris = $this->findOneBy([
-            'user' => $user,
-            'programme' => $programme,
-        ]);
-
-        return $favoris !== null;
+        return $this->createQueryBuilder('f')
+        ->where('f.user = :user')
+        ->andWhere('f.programme = :programme')
+        ->setParameter('user', $user)
+        ->setParameter('programme', $programme)
+        ->getQuery()
+        ->getResult();
     }
 
     //    /**
