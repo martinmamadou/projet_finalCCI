@@ -10,7 +10,7 @@
     {% for ex in programme.exercices %}
          <button class="accordion">{{ex.exercice.name}}</button>
             <div class="panel">
-                <p>{{ex.exercice.Instruction|slice(200)}}</p>
+                <p>{{ex.exercice.Instruction}}</p>
             </div>
 
     {% endfor %}

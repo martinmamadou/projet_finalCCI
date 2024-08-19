@@ -173,9 +173,11 @@ h2{
     max-width: 90vw;
     min-width: 50vw;
     margin: 30px auto;
-   
     padding: 10px 20px;
     
+    @media (min-width :980px){
+        width: 50vw;
+    }
     
 }
 
