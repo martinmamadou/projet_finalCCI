@@ -9,7 +9,7 @@ Programmes
 	<div class="programme-head">
     	<h1>Programme</h1>
         <pre>
-            {{ dump(favoris) }}
+            {{ dump(fav) }}
         </pre>
 	</div>
 	<div class="input-container">
@@ -30,7 +30,10 @@ Programmes
                     <h2>{{ programme.name }}</h2>
                     <p><i class="fa-solid fa-dumbbell"></i> {{programme.exercices|length}}</p>
 			    </div>
-		{% if programme in favoris %}	
+		{% if programme in fav %}
+        <pre>
+            {{ dump(fav) }}
+        </pre>
             <button type="submit"><i class="fa-solid fa-heart" style="color: #fb98d2;"></i></button>
         	</form>
     	{% else %}

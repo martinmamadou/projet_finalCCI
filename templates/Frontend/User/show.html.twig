@@ -17,7 +17,11 @@
 					<h2>{{user.username}}</h2>
 					<p>{{user.email}}</p>
 					<div class="info">
+                        {% if user.userInfo.taille is not null %}
 						<p>| {{user.userInfo.taille}}cm |</p>
+                        {% else %}
+                            <p>|0 cm |</p>
+                        {% endif %}
 						<p>{{user.userInfo.poids}}kg |</p>
 						<a href='{{path('user.profile.infos',{id:user.id})}}'><i class="fa-regular fa-pen-to-square"></i></a>
 					</div>

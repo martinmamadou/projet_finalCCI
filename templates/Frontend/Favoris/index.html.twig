@@ -6,18 +6,28 @@
 {% block body %}
 	<section class='content'>
 		<h1 class="text-center">Mes Favoris</h1>
-		<pre>
-            {{ dump(_context) }}
-        </pre>
+		
 		{% for fav in favoris %}
-
-			<a href='{{path('user.programmes.details',{slug:fav.programme.slug})}}' class="proList">
-				<p>{{ fav.programme.getName() }}</p>
+            {% if fav %}
+            
+			<a href='{{path('user.programmes.details',{slug:fav.programme.slug})}}' >
+				<div class="pro-list programme-item" data-protype="{{ fav.programme.proType.name }}" style="background: center/cover url('{{vich_uploader_asset(fav.programme.categorie)}}')">
+                <div class='text-container'>
+                    <h2>{{ fav.programme.name }}</h2>
+                    <p><i class="fa-solid fa-dumbbell"></i> {{fav.programme.exercices|length}}</p>
+			    </div>
 				<form action="{{ path('user.favoris.delete', {id: fav.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce programme de vos favoris ? ')">
 					<input type="hidden" name="token" value="{{ csrf_token('delete'~ fav.id) }}">
 					<button type="submit" class="btn btn-danger add">supprimer</button>
 				</form>
 			</a>
+            </div>
+            {% endif %}
+            {% else %}
+                <h2>Nothing here...</h2>
+                <div class="btn-container">
+                <a href="{{path('user.programmes.index')}}" class='button btn-principal'>Ajouter</a>
+                </div>
 		{% endfor %}
 
 	</section>

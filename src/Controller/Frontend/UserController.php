@@ -89,6 +89,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $info->setUser($user);
+            $info->setTaille(0);
+            $info->setPoids(0);
 
             $this->em->persist($info);
             $this->em->flush();

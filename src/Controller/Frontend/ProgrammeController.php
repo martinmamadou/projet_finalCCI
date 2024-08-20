@@ -34,8 +34,7 @@ class ProgrammeController extends AbstractController
         private readonly CommentairesRepository $commentRepo,
         private readonly ProTypeRepository $protype,
         private readonly FavorisRepository $favRepo,
-    ) {
-    }
+    ) {}
 
     #[Route('/', name: '.index', methods: ['GET', 'POST'])]
     public function index(): Response
@@ -43,19 +42,27 @@ class ProgrammeController extends AbstractController
         $programme = $this->proRepo->findAll();
         $user = $this->getUser();
         $favoritedProgrammes = [];
-        $programmes = [];
+        $userFavoris = $this->favRepo->findByUser($user);
 
-        foreach ($programme as $programmes) {
-            if ($this->favRepo->findByUser($user)) {
-                $favoritedProgrammes[] = $programmes;
+
+        foreach ($programme as $singleProgramme) {
+            $programmeSlug = $singleProgramme->getSlug();
+
+            foreach ($userFavoris as $fav) {
+                
+                if ($fav->getProgramme()->getSlug() === $programmeSlug) {
+                    $favoritedProgrammes[] = $singleProgramme;
+            
+                }
             }
         }
+
 
         return $this->render('Frontend/Programme/index.html.twig', [
             'programmes' => $programme,
             'categories' => $this->categRepository->findAll(),
             'protype' => $this->protype->findAll(),
-            'favoris' => $favoritedProgrammes
+            'fav' => $favoritedProgrammes
         ]);
     }
 
@@ -80,9 +87,8 @@ class ProgrammeController extends AbstractController
             if ($categorie) {
                 $programmes = $this->proRepo->findBy(["categorie" => $categorie]);
             }
-            
         }
-        
+
         $user = $this->getUser();
         $favoritedProgrammes = [];
 
@@ -148,7 +154,7 @@ class ProgrammeController extends AbstractController
     public function create(Request $request): Response|RedirectResponse
     {
         $user = $this->getUser();
-        if(!$user){
+        if (!$user) {
             $this->addFlash('error', 'Veuillez vous connectez');
             return $this->redirectToRoute('app.home');
         }
@@ -205,8 +211,6 @@ class ProgrammeController extends AbstractController
         }
         return $this->redirectToRoute('admin.programmes.index');
     }
-    #[Route('/preview','.preview')]
-    public function preview(){
-        
-    }
+    #[Route('/preview', '.preview')]
+    public function preview() {}
 }

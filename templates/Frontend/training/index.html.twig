@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TrainingController!{% endblock %}
+{% block title %}Hello TrainingController!
+{% endblock %}
 
 {% block stylesheets %}
 	{{parent()}}
@@ -13,25 +14,70 @@
 {% endblock %}
 
 {% block body %}
-    <section class="content ex-content">
-    {% for ex in programme.exercices %}
-        <div class="exercice-container hidden">
-                <h2>{{ex.exercice.name}}</h2>
-                
-                {% if ex.repetitions %}
-                <p>X{{ex.repetitions}}</p>
-                {% else %}
-                    <p>{{ex.temps}}s</p>
-                {% endif %}
-                <p>Série</p>
-                <p>{{ex.serie}}</p>
-        </div>
-        
-        
-    {% endfor %}
-            
-    <button id="suivant" class='button btn-principal'>Suivant</button>
+	<section class="content ex-content">
+		{% for ex in programme.exercices %}
+			<div class="exercice-container ">
+				<h2>{{ex.exercice.name}}</h2>
 
-              
-    </section>
+				{% if ex.repetitions %}
+					<p>X{{ex.repetitions}}</p>
+				{% else %}
+					<p class='timer'>{{ex.temps}}s</p>
+				{% endif %}
+				<p>Série</p>
+				<p>{{ex.serie}}</p>
+			</div>
+		{% endfor %}
+        
+
+		<button id="suivant" class='button btn-principal'>Suivant</button>
+
+
+	</section>
+	<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const exercices = document.querySelectorAll('.exercice-container');
+    let currentIndex = 0;
+
+    // Hide all divs except the first one
+    exercices.forEach((ex, index) => {
+        if (index !== 0) {
+            ex.style.display = 'none';
+        }
+    });
+
+    // Function to show the next div and hide the current one
+    function showNextExercice() {
+        if (currentIndex < exercices.length - 1) {
+            exercices[currentIndex].style.display = 'none';
+            currentIndex++;
+            exercices[currentIndex].style.display = 'block';
+            startTimerIfPresent(exercices[currentIndex]);
+        }
+    }
+
+    // Function to start the timer if present
+    function startTimerIfPresent(exercice) {
+        const timerElement = exercice.querySelector('.timer');
+        if (timerElement) {
+            let time = parseInt(timerElement.textContent);
+            const interval = setInterval(() => {
+                if (time > 0) {
+                    time--;
+                    timerElement.textContent = `${time}s`;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+    }
+
+    // Add event listener to the button
+    document.getElementById('suivant').addEventListener('click', showNextExercice);
+
+    // Start the timer for the first exercice if present
+    startTimerIfPresent(exercices[currentIndex]);
+});
+</script>
+
 {% endblock %}
