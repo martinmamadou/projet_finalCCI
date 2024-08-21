@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ExercicesRepository;
 use Doctrine\Common\Collections\Collection;
@@ -25,9 +26,6 @@ class Exercices
 
     #[ORM\Column(nullable: true)]
     private ?int $repetitions = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $serie = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $temps = null;
@@ -62,17 +60,6 @@ class Exercices
         return $this;
     }
 
-    public function getSerie(): ?int
-    {
-        return $this->serie;
-    }
-
-    public function setSerie(?int $serie): static
-    {
-        $this->serie = $serie;
-
-        return $this;
-    }
 
     public function getTemps(): ?int
     {
@@ -109,4 +96,5 @@ class Exercices
 
         return $this;
     }
+
 }

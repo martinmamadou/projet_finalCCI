@@ -18,7 +18,6 @@
 		{% for ex in programme.exercices %}
 			<div class="exercice-container ">
 				<h2>{{ex.exercice.name}}</h2>
-
 				{% if ex.repetitions %}
 					<p>X{{ex.repetitions}}</p>
 				{% else %}
@@ -28,56 +27,73 @@
 				<p>{{ex.serie}}</p>
 			</div>
 		{% endfor %}
-        
+		<div class="resume hidden">
+			<div id='success'>
+				<img src="{{ asset('img/animated/success.gif') }}" alt="">
+			</div>
+			<h2>
+				Bravo !!!
+			</h2>
+			<p>Vous avez completé
+				{{programme.name}}</p>
+		</div>
 
 		<button id="suivant" class='button btn-principal'>Suivant</button>
+		<a href="{{path('app.home')}}" class='button btn-principal hidden terminer'>Accueil</a>
 
 
 	</section>
 	<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const exercices = document.querySelectorAll('.exercice-container');
-    let currentIndex = 0;
+		document.addEventListener('DOMContentLoaded', function () {
+const exercices = document.querySelectorAll('.exercice-container');
+const resume = document.querySelector('.resume')
+console.log(resume)
+let currentIndex = 0;
 
-    // Hide all divs except the first one
-    exercices.forEach((ex, index) => {
-        if (index !== 0) {
-            ex.style.display = 'none';
-        }
-    });
-
-    // Function to show the next div and hide the current one
-    function showNextExercice() {
-        if (currentIndex < exercices.length - 1) {
-            exercices[currentIndex].style.display = 'none';
-            currentIndex++;
-            exercices[currentIndex].style.display = 'block';
-            startTimerIfPresent(exercices[currentIndex]);
-        }
-    }
-
-    // Function to start the timer if present
-    function startTimerIfPresent(exercice) {
-        const timerElement = exercice.querySelector('.timer');
-        if (timerElement) {
-            let time = parseInt(timerElement.textContent);
-            const interval = setInterval(() => {
-                if (time > 0) {
-                    time--;
-                    timerElement.textContent = `${time}s`;
-                } else {
-                    clearInterval(interval);
-                }
-            }, 1000);
-        }
-    }
-
-    // Add event listener to the button
-    document.getElementById('suivant').addEventListener('click', showNextExercice);
-
-    // Start the timer for the first exercice if present
-    startTimerIfPresent(exercices[currentIndex]);
+// Hide all divs except the first one
+exercices.forEach((ex, index) => {
+if (index !== 0) {
+ex.style.display = 'none';
+}
 });
-</script>
+
+// Function to show the next div and hide the current one
+function showNextExercice() {
+if (currentIndex < exercices.length - 1) {
+exercices[currentIndex].style.display = 'none';
+currentIndex++;
+exercices[currentIndex].style.display = 'block';
+startTimerIfPresent(exercices[currentIndex]);
+} else {
+exercices[currentIndex].style.display = 'none';
+resume.classList.remove('hidden')
+document.querySelector('.terminer').classList.remove('hidden')
+document.getElementById('suivant').classList.add('hidden')
+}
+}
+
+// Function to start the timer if present
+function startTimerIfPresent(exercice) {
+const timerElement = exercice.querySelector('.timer');
+if (timerElement) {
+let time = parseInt(timerElement.textContent);
+const interval = setInterval(() => {
+if (time > 0) {
+time--;
+timerElement.textContent = `${time}s`;
+} else {
+clearInterval(interval);
+}
+}, 1000);
+}
+}
+
+// Add event listener to the button
+document.getElementById('suivant').addEventListener('click', showNextExercice);
+
+// Start the timer for the first exercice if present
+startTimerIfPresent(exercices[currentIndex]);
+});
+	</script>
 
 {% endblock %}

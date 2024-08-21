@@ -2,21 +2,22 @@
 
 namespace App\Controller\Frontend;
 
-use App\Entity\Categorie;
 use App\Entity\ProType;
+use App\Entity\Categorie;
 use App\Entity\Programme;
 use App\Form\ProMaisonType;
 use App\Entity\Commentaires;
 use App\Form\CommentaireType;
+use App\Repository\UserRepository;
+use App\Repository\FavorisRepository;
 use App\Repository\ProTypeRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\ExercicesRepository;
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentairesRepository;
-use App\Repository\FavorisRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\ProgrammeMaisonRepository;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -58,11 +59,15 @@ class ProgrammeController extends AbstractController
         }
 
 
+       
+
+
         return $this->render('Frontend/Programme/index.html.twig', [
             'programmes' => $programme,
             'categories' => $this->categRepository->findAll(),
             'protype' => $this->protype->findAll(),
-            'fav' => $favoritedProgrammes
+            'fav' => $favoritedProgrammes,
+            
         ]);
     }
 

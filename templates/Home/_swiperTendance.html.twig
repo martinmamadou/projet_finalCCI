@@ -10,7 +10,9 @@
                 <div class="pro-list" style="background: center/cover url('{{ vich_uploader_asset(programme.categorie) }}')">
                     <div class="text-container">
                         <h2>{{ programme.name }}</h2>
+                        <p>{{programme.shortDescription}}</p>
                         <p><i class="fa-solid fa-dumbbell"></i> {{ programme.exercices|length }}</p>
+                        <i class="fa-solid fa-fire" style="color: #FFD43B;"></i>
                     </div>
                 </div>
             </a>

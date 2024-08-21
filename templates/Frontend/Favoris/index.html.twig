@@ -22,13 +22,14 @@
 				</form>
 			</a>
             </div>
+            
             {% endif %}
             {% else %}
                 <h2>Nothing here...</h2>
-                <div class="btn-container">
+                
+		{% endfor %}
+        <div class="btn-container">
                 <a href="{{path('user.programmes.index')}}" class='button btn-principal'>Ajouter</a>
                 </div>
-		{% endfor %}
-
 	</section>
 {% endblock %}

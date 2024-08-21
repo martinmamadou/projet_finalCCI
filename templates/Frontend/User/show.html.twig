@@ -31,7 +31,10 @@
 				</div>
 				<div class="separator"></div>
 				<div class="bottom">
-				<p>Vos programme favoris</p>
+                <div class="link">
+				    <p>Vos programme favoris</p>
+                    <a href="{{path('user.favoris.index')}}">voir tout</a>
+                </div>
 				{% include "Frontend/User/_swiperFav.html.twig" %}
 				</div>
 			</div>

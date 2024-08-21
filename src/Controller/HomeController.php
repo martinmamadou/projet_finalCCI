@@ -27,12 +27,13 @@ class HomeController extends AbstractController
     public function index(): Response
     {
        $programmes = $this->programmeRepo->findAllWithComments();
-       $newPro=$this->programmeRepo->findAll();
+       $newPro = $this->programmeRepo->findByDate();
+       
         
         return $this->render('Home/home.html.twig', [
             'protypes' => $this->protype->findAll(),
             'programmes' => $programmes,
-            'new' => $newPro
+            'news' => $newPro
         ]);
     }
 }

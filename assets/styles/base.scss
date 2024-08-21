@@ -197,6 +197,11 @@ input{
     padding: 10px 30px;
     width: 100%;
 }
+
+input::placeholder{
+    color: $text-color;
+    opacity: 1;
+}
 .form-control:focus{
     background: $button-primary;
     border: none;

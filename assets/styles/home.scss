@@ -37,7 +37,7 @@
         h1{
             margin: 50px 0 0;
             padding: 0;
-            color: green;
+            color: #FFD43B;
             font-size: 3em;
         }
         a{
@@ -45,11 +45,27 @@
             justify-content: center;
             margin: 50px 0;
         }
+       
     }
     .btn-container{
       display: flex;
       justify-content: center;
     }
+
+    @media (min-width:1024px){
+        .header-text{
+            p:first-child{
+                padding-top: 100px;
+            }
+           h1{
+            font-size: 7em;
+            margin-top: 5px;
+            } 
+
+        }
+        
+    
+}
 }
 
 .hstart-content{
@@ -77,6 +93,33 @@
     .proList{
         margin-bottom: 10px;
     }
+
+@media (min-width: 650px){
+    .swiper{
+        display: none;
+    }
+    .programme-list{
+        display: grid;
+        grid-template-columns: repeat(2, 0.5fr); // Crée deux colonnes de largeur égale
+        gap: 10px;  // Passe à une colonne sur les petits écrans
+
+        .programme-item{
+            max-width: 300px;
+        }
+    }
+    
+}
+@media (min-width: 860px){
+    .programme-list{
+        display: grid;
+        grid-template-columns: repeat(3, 0.5fr); // Crée deux colonnes de largeur égale
+        gap: 10px;  // Passe à une colonne sur les petits écrans
+
+        .programme-item{
+            max-width: 300px;
+        }
+    }
+}
 }
 
 
