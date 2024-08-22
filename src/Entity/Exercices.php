@@ -38,6 +38,9 @@ class Exercices
     #[ORM\JoinColumn(nullable: false)]
     private ?ExTemplate $exercice = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $repos = null;
+
 
     public function getId(): ?int
     {
@@ -93,6 +96,18 @@ class Exercices
     public function setExercice(?ExTemplate $exercice): static
     {
         $this->exercice = $exercice;
+
+        return $this;
+    }
+
+    public function getRepos(): ?int
+    {
+        return $this->repos;
+    }
+
+    public function setRepos(?int $repos): static
+    {
+        $this->repos = $repos;
 
         return $this;
     }
