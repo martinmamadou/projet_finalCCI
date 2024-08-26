@@ -36,12 +36,13 @@ class UserController extends AbstractController
     public function show(?User $user, ?UserInfo $info): Response|RedirectResponse
     {
         $user = $this->getUser();
-        $favoris = $this->favRepo->findByUser($user);
-        
         if (!$user) {
-            $this->addFlash('error', 'veillez vous connectez');
+            $this->addFlash('error', ' Veuillez vous connecter. ');
             return $this->redirectToRoute('app.home');
         }
+        $favoris = $this->favRepo->findByUser($user);
+        
+        
 
         return $this->render('Frontend/User/show.html.twig', [
             'user' => $user,

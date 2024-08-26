@@ -42,6 +42,10 @@ class ProgrammeController extends AbstractController
     {
         $programme = $this->proRepo->findAll();
         $user = $this->getUser();
+        if (!$user) {
+            $this->addFlash('error', ' Veuillez vous connecter. ');
+            return $this->redirectToRoute('app.home');
+        }
         $favoritedProgrammes = [];
         $userFavoris = $this->favRepo->findByUser($user);
 

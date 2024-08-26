@@ -21,6 +21,11 @@ class TrainingController extends AbstractController
     #[Route('/{slug}/training', name: '.training', methods: ['GET'])]
     public function index(string $slug): Response
     {
+        $user = $this->getUser();
+        if (!$user) {
+            $this->addFlash('error', ' Veuillez vous connecter. ');
+            return $this->redirectToRoute('app.login');
+        }
         $programme = $this->proRepo->findOneBy(['slug'=>$slug]);
         
         return $this->render('frontend/training/index.html.twig', [

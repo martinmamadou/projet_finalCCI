@@ -15,6 +15,8 @@
         {{ form_row(registrationForm.email) }}
         {{form_widget(registrationForm)}}
 
+        <p>Déjà inscrit(e) ? <a href="{{ path('app.login') }}">Se connecter</a></p> 
+
         <button type="submit" class="button btn-principal">Register</button>
         </div>
     {{ form_end(registrationForm) }}

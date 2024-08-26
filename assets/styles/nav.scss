@@ -39,16 +39,7 @@ nav{
     box-shadow: $box-shadow;
   }
   @media (min-width:768px){
-    height: fit-content;
-    width: fit-content;
-    top: 50%;
-    left: 60px;
-    
-    ul{
-      padding: 25px 5px;
-      flex-direction: column;
-      gap: 25px;
-    }
+    width: 30vw;
   }
 }
 
