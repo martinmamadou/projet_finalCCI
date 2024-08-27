@@ -267,3 +267,6 @@ label{
     width: 20px;
 }
 
+::placeholder{
+    color: $text-color;
+}

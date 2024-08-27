@@ -5,7 +5,7 @@ function removeCollectionForm(e) {
 function addFormToCollection(e) {
     //on stocke element html (ul) en ciblant le button, puis son dataset, puis son nom de holder class
     const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-
+    
     
   
     //on crée un nouvel element li qui sera implementer dans ul
