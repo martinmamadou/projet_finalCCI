@@ -2,21 +2,22 @@
 
 namespace App\Controller\Frontend;
 
-use App\Entity\Categorie;
 use App\Entity\ProType;
+use App\Entity\Categorie;
 use App\Entity\Programme;
 use App\Form\ProMaisonType;
 use App\Entity\Commentaires;
 use App\Form\CommentaireType;
+use App\Repository\UserRepository;
+use App\Repository\FavorisRepository;
 use App\Repository\ProTypeRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\ExercicesRepository;
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentairesRepository;
-use App\Repository\FavorisRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\ProgrammeMaisonRepository;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -34,28 +35,43 @@ class ProgrammeController extends AbstractController
         private readonly CommentairesRepository $commentRepo,
         private readonly ProTypeRepository $protype,
         private readonly FavorisRepository $favRepo,
-    ) {
-    }
+    ) {}
 
     #[Route('/', name: '.index', methods: ['GET', 'POST'])]
     public function index(): Response
     {
         $programme = $this->proRepo->findAll();
         $user = $this->getUser();
+        if (!$user) {
+            $this->addFlash('error', ' Veuillez vous connecter. ');
+            return $this->redirectToRoute('app.home');
+        }
         $favoritedProgrammes = [];
-        $programmes = [];
+        $userFavoris = $this->favRepo->findByUser($user);
 
-        foreach ($programmes as $programme) {
-            if ($this->favRepo->isFavoritedByUser($user, $programme)) {
-                $favoritedProgrammes[] = $programme;
+
+        foreach ($programme as $singleProgramme) {
+            $programmeSlug = $singleProgramme->getSlug();
+
+            foreach ($userFavoris as $fav) {
+                
+                if ($fav->getProgramme()->getSlug() === $programmeSlug) {
+                    $favoritedProgrammes[] = $singleProgramme;
+            
+                }
             }
         }
+
+
+       
+
 
         return $this->render('Frontend/Programme/index.html.twig', [
             'programmes' => $programme,
             'categories' => $this->categRepository->findAll(),
             'protype' => $this->protype->findAll(),
-            'favoris' => $favoritedProgrammes
+            'fav' => $favoritedProgrammes,
+            
         ]);
     }
 
@@ -80,9 +96,8 @@ class ProgrammeController extends AbstractController
             if ($categorie) {
                 $programmes = $this->proRepo->findBy(["categorie" => $categorie]);
             }
-            
         }
-        
+
         $user = $this->getUser();
         $favoritedProgrammes = [];
 
@@ -148,7 +163,7 @@ class ProgrammeController extends AbstractController
     public function create(Request $request): Response|RedirectResponse
     {
         $user = $this->getUser();
-        if(!$user){
+        if (!$user) {
             $this->addFlash('error', 'Veuillez vous connectez');
             return $this->redirectToRoute('app.home');
         }
@@ -205,8 +220,6 @@ class ProgrammeController extends AbstractController
         }
         return $this->redirectToRoute('admin.programmes.index');
     }
-    #[Route('/preview','.preview')]
-    public function preview(){
-        
-    }
+    #[Route('/preview', '.preview')]
+    public function preview() {}
 }

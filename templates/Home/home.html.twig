@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-	{{parent()}}
-	{{encore_entry_link_tags('admin')}}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin') }}
 {% endblock %}
 
 {% block javascripts %}
-	{{parent()}}
-	{{encore_entry_script_tags('admin')}}
+    {{ parent() }}
+    {{ encore_entry_script_tags('admin') }}
 {% endblock %}
 
 {% block body %}
-    <section class="">
+    <section class="content anim animate fade-inC">
         {% include "Home/_dashboard.html.twig" %}
         <div class="hstart-content">
             <h2 class='title'>Tendances</h2>
@@ -21,9 +21,19 @@
         <div class="home-new">
             <h2 class="title">Nouveautés</h2>
             {% include "Home/_swiperNew.html.twig" %}
-        </div>
-       
-
-        
+            <div class="programme-list hidden">
+                {% for new in news %}
+                <a href="{{ path('user.programmes.details', {slug: new.slug}) }}">
+                    <div class="pro-list programme-item" data-protype="{{ new.proType.name }}" style="background: center/cover url('{{ vich_uploader_asset(new.categorie) }}')">
+                        <div class='text-container'>
+                            <h2>{{ new.name }}</h2>
+                            <p>{{ new.shortDescription }}</p>
+                            <p><i class="fa-solid fa-dumbbell fa-xs"></i> {{ new.exercices|length }}</p>
+                        </div>
+                    </div>
+                </a> 
+                {% endfor %}
+            </div> 
+        </div> >
     </section>
 {% endblock %}

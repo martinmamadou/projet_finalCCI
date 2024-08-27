@@ -36,28 +36,4 @@ class SecurityController extends AbstractController
         ]);
     }
 
-
-    #[Route('/register', name: 'app.register', methods: ['GET', 'POST'])]
-
-
-    public function register(Request $request, UserPasswordHasherInterface $hasher): Response
-    {
-        $user = new User;
-        $form = $this->createForm(SecurityType::class, $user, ['isUser'=>false]);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user
-                ->setEnable(true)
-                ->setPassword($hasher->hashPassword($user, $form->get('password')->getData()));
-            $this->em->persist($user);
-            $this->em->flush();
-
-            return $this->redirectToRoute('app.login');
-            $this->addFlash('success', 'inscription reussi');
-        }
-
-        return $this->render('Security/register.html.twig', [
-            'form' => $form,
-        ]);
-    }
 }

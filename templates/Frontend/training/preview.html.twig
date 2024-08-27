@@ -4,24 +4,36 @@
     Preview des Exercices
 {% endblock %}
 {% block body %}
-<section class="content">
+<section class="content preview-page">
     <h1>Preview de {{programme.name}}</h1>
-</section>
+
     {% for ex in programme.exercices %}
-         <button class="accordion">{{ex.exercice.name}}</button>
+         <button class="accordion">{{ex.exercice.name}}
+            <span class=''>
+                <i class="fa-solid fa-angle-down"></i>
+            </span>
+            <span class='hidden'>
+                <i class="fa-solid fa-angle-up"></i>
+            </span>
+         </button>
+         
             <div class="panel">
-                <p>{{ex.exercice.Instruction|slice(200)}}</p>
+                <p>{{ex.exercice.Instruction}}</p>
             </div>
 
     {% endfor %}
+    <div class="btn-container">
+    <a href="{{path('programmes.training',{slug:programme.slug})}}" class='button btn-principal'>Commencez</a>
+    </div>
+</section>
     <script>
-    var acc = document.getElementsByClassName("accordion");
-var i;
+    let acc = document.getElementsByClassName("accordion");
+let i;
 
 for (i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", function() {
     this.classList.toggle("active");
-    var panel = this.nextElementSibling;
+    const panel = this.nextElementSibling;
     if (panel.style.maxHeight) {
       panel.style.maxHeight = null;
     } else {

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TrainingController!{% endblock %}
+{% block title %}Entrainement
+{% endblock %}
 
 {% block stylesheets %}
 	{{parent()}}
@@ -13,25 +14,101 @@
 {% endblock %}
 
 {% block body %}
-    <section class="content ex-content">
-    {% for ex in programme.exercices %}
-        <div class="exercice-container hidden">
-                <h2>{{ex.exercice.name}}</h2>
-                
-                {% if ex.repetitions %}
-                <p>X{{ex.repetitions}}</p>
-                {% else %}
-                    <p>{{ex.temps}}s</p>
-                {% endif %}
-                <p>Série</p>
-                <p>{{ex.serie}}</p>
-        </div>
-        
-        
-    {% endfor %}
+	<section class="content ex-content">
+		{% for ex in programme.exercices %}
+			<div class="exercice-container ">
+            <div class="exo">
+				<h2>{{ex.exercice.name}}</h2>
+				{% if ex.repetitions %}
+					<p>X{{ex.repetitions}}</p>
+				{% else %}
+					<p class='timer'>{{ex.temps}}s</p>
+				{% endif %}
+                </div>
+                <div class="repos hidden ">
+                    <p>Repos</p>
+                    <p class="timer">{{ex.repos}}</p>
+                </div>
+			</div>
             
-    <button id="suivant" class='button btn-principal'>Suivant</button>
+		{% endfor %}
+		<div class="resume hidden">
+			<div id='success'>
+				<img src="{{ asset('img/animated/success.gif') }}" alt="">
+			</div>
+			<h2>
+				Bravo !!!
+			</h2>
+			<p>Vous avez completé
+				{{programme.name}}</p>
+		</div>
 
-              
-    </section>
+		<button id="suivant" class='button btn-principal'>Suivant</button>
+		<a href="{{path('app.home')}}" class='button btn-principal hidden terminer'>Accueil</a>
+
+
+	</section>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const exercices = document.querySelectorAll('.exercice-container');
+    let currentIndex = 0;
+
+    // Hide all divs except the first one
+    exercices.forEach((ex, index) => {
+        if (index !== 0) {
+            ex.style.display = 'none';
+        }
+    });
+
+    // Function to show the next div and hide the current one
+    function showNextExercice() {
+        const currentExercice = exercices[currentIndex];
+        const repos = currentExercice.querySelector('.repos');
+        const exo = currentExercice.querySelector('.exo');
+
+        if (currentIndex < exercices.length - 1) {
+            if (!repos.classList.contains('hidden')) {
+                currentExercice.style.display = 'none';
+                currentIndex++;
+                const nextExercice = exercices[currentIndex];
+                nextExercice.style.display = 'block';
+                repos.classList.add('hidden');
+                exo.classList.remove('hidden');
+                startTimerIfPresent(nextExercice);
+            } else {
+                repos.classList.remove('hidden');
+                exo.classList.add('hidden');
+            }
+        } else {
+            currentExercice.style.display = 'none';
+            document.querySelector('.resume').classList.remove('hidden');
+            document.querySelector('.terminer').classList.remove('hidden');
+            document.getElementById('suivant').classList.add('hidden');
+        }
+    }
+
+    // Function to start the timer if present
+    function startTimerIfPresent(exercice) {
+        const timerElement = exercice.querySelector('.timer');
+        if (timerElement) {
+            let time = parseInt(timerElement.textContent);
+            const interval = setInterval(() => {
+                if (time > 0) {
+                    time--;
+                    timerElement.textContent = `${time}s`;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+    }
+
+    // Add event listener to the button
+    document.getElementById('suivant').addEventListener('click', showNextExercice);
+
+    // Start the timer for the first exercice if present
+    startTimerIfPresent(exercices[currentIndex]);
+});
+</script>
+
 {% endblock %}

@@ -14,10 +14,9 @@
 body{
     margin: 0;
     padding: 0;
-    
     box-sizing: border-box;
     background: $background;
-
+  
 }
 main{
     min-height: 100vh;
@@ -69,6 +68,7 @@ h2{
 .alert {
     margin-bottom: 0;
     opacity: 0.5;
+    
   }
 
 .separator{
@@ -173,9 +173,11 @@ h2{
     max-width: 90vw;
     min-width: 50vw;
     margin: 30px auto;
-   
     padding: 10px 20px;
     
+    @media (min-width :980px){
+        width: 50vw;
+    }
     
 }
 
@@ -194,6 +196,11 @@ input{
     color: $text-color;
     padding: 10px 30px;
     width: 100%;
+}
+
+::placeholder{
+    color: $text-color;
+    opacity: 1;
 }
 .form-control:focus{
     background: $button-primary;

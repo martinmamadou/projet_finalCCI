@@ -45,8 +45,8 @@ class ExMaisonType extends AbstractType
                 ->add('temps', NumberType::class, [
                     'label' => 'Temps (en secondes)',
                 ])
-                ->add('serie', NumberType::class, [
-                    'label' => 'Séries',
+                ->add('repos', NumberType::class, [
+                    'label' => 'Repos (en secondes)',
                 ]);
         } else {
         }

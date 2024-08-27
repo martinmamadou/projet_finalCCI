@@ -53,6 +53,13 @@ class ProgrammeRepository extends ServiceEntityRepository
         ->getResult();
 }
 
+public function findByDate(){
+    return $this->createQueryBuilder('p')
+    ->orderBy('p.createdAt','DESC')
+    ->getQuery()
+    ->getResult();
+}
+
 
 
     //    /**

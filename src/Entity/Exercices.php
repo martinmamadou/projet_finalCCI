@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ExercicesRepository;
 use Doctrine\Common\Collections\Collection;
@@ -27,9 +28,6 @@ class Exercices
     private ?int $repetitions = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $serie = null;
-
-    #[ORM\Column(nullable: true)]
     private ?int $temps = null;
 
     #[ORM\ManyToOne(inversedBy: 'exercices')]
@@ -39,6 +37,9 @@ class Exercices
     #[ORM\ManyToOne(inversedBy: 'exercices')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ExTemplate $exercice = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $repos = null;
 
 
     public function getId(): ?int
@@ -62,17 +63,6 @@ class Exercices
         return $this;
     }
 
-    public function getSerie(): ?int
-    {
-        return $this->serie;
-    }
-
-    public function setSerie(?int $serie): static
-    {
-        $this->serie = $serie;
-
-        return $this;
-    }
 
     public function getTemps(): ?int
     {
@@ -109,4 +99,17 @@ class Exercices
 
         return $this;
     }
+
+    public function getRepos(): ?int
+    {
+        return $this->repos;
+    }
+
+    public function setRepos(?int $repos): static
+    {
+        $this->repos = $repos;
+
+        return $this;
+    }
+
 }
