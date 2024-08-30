@@ -17,7 +17,9 @@
 
         <p>Déjà inscrit(e) ? <a href="{{ path('app.login') }}">Se connecter</a></p> 
 
-        <button type="submit" class="button btn-principal">Register</button>
+        <div class="btn-container">
+            <button type='submit' class="button btn-principal">S'inscrire</button>
+        </div>
         </div>
     {{ form_end(registrationForm) }}
 {% endblock %}

@@ -37,6 +37,7 @@ nav{
   }
   i{
     box-shadow: $box-shadow;
+    
   }
   @media (min-width:768px){
     width: 30vw;
@@ -52,4 +53,7 @@ nav{
   display: flex;
   align-items: center;
   justify-content: center;
+  i{
+    color: $secondary-color;
+  }
 }

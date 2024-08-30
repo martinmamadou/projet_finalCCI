@@ -103,14 +103,16 @@ h2{
 }
 .filter-button{
     text-align: center;
-    border: solid thin $button-primary;
+    border: solid thin $secondary-color;
     padding: 8px 20px;
     
 }
 .act{
-    background: $button-primary;
+    background: $secondary-color;
     padding: 8px 20px;
     border: none;
+    color: black;
+    text-transform: uppercase;
 }
 .btn-dng{
     border: none;
@@ -276,4 +278,8 @@ label{
 
 ::placeholder{
     color: $text-color;
+}
+
+.empty{
+    text-align: center;
 }

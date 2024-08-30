@@ -14,8 +14,8 @@ Programmes
 	</div>
     <div class="filters">
         <button class="filter-button button" data-protype="all">Tous</button>
-        {% for pro in protype %}
-            <button class="filter-button button" data-protype="{{ pro.name }}">{{ pro.name }}</button>
+        {% for categorie in categories %}
+            <button class="filter-button button" data-protype="{{ categorie.name }}">{{ categorie.name }}</button>
         {% endfor %}
     </div>
     <div class="programme-list anim animate fade-inR ">
@@ -53,15 +53,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById("myInput");
 
     function filterProgrammes() {
+        // Récupère la valeur de la barre de recherche en majuscules
         const filter = searchInput.value.toUpperCase();
+        // Récupère le type de programme sélectionné ou 'all' par défaut
         const selectedProType = document.querySelector('.filter-button.act')?.getAttribute('data-protype') || 'all';
 
         programmeItems.forEach(item => {
-            const programmeName = item.querySelector('p').textContent.toUpperCase();
+            // Récupère le nom du programme pour le filtrage
+            const programmeName = item.querySelector('h2').textContent.toUpperCase(); // Correction: recherche sur le titre
             const programmeType = item.getAttribute('data-protype');
+            
+            // Vérifie si le programme correspond à la recherche et au filtre de catégorie
             const matchesFilter = programmeName.indexOf(filter) > -1;
             const matchesType = selectedProType === 'all' || selectedProType === programmeType;
 
+            // Affiche ou masque les programmes selon les correspondances
             if (matchesFilter && matchesType) {
                 item.style.display = 'flex';
             } else {
@@ -70,18 +76,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Gestion du clic sur les boutons de filtre
     filterButtons.forEach(button => {
         button.addEventListener('click', function () {
-            filterButtons.forEach(btn => btn.classList.remove('act'));
-            this.classList.add('act');
-            filterProgrammes();
+            filterButtons.forEach(btn => btn.classList.remove('act')); // Retire la classe 'act' des autres boutons
+            this.classList.add('act'); // Ajoute la classe 'act' au bouton cliqué
+            filterProgrammes(); // Applique le filtrage
         });
     });
 
+    // Gestion de la recherche en temps réel
     searchInput.addEventListener('keyup', filterProgrammes);
 
-    // Initialize with all programmes visible
+    // Initialisation avec tous les programmes visibles
     filterProgrammes();
 });
+
 </script>
 {% endblock %}
