@@ -4,12 +4,13 @@ namespace App\Form;
 
 use App\Entity\Exercices;
 use App\Entity\ExTemplate;
-use phpDocumentor\Reflection\DocBlock\Description;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use phpDocumentor\Reflection\DocBlock\Description;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ExTemplateType extends AbstractType
 {
@@ -28,6 +29,11 @@ class ExTemplateType extends AbstractType
                 ],
                 'required' => false
             ])
+            
+            ->add('imageFile', FileType::class, [
+                'label' => 'Photo Type : ',
+                'required' => false
+            ]);
         ;
     }
 

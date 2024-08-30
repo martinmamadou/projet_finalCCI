@@ -21,13 +21,34 @@
     .programme-text{
         position: relative;
         padding: 100px 10px 0;
+        text-align: left;
         h1{
             text-align: left;
             font-size: 3.5em;
             padding-bottom: 0;
         }
+       
         i{
             color: $text-color;
+        }
+        @media (min-width:768px){
+            padding: 80px 40px 0;
+            h1{
+                padding-top: 0px;
+                
+                font-size: 4.5em;
+            }
+            p{
+                margin-top: 5px;
+                font-size: 1.5em;
+            }
+        }
+        @media (min-width:980px){
+            padding: 80px 40px 0;
+            h1{
+                padding-top: 0px;
+                font-size: 5.5em;
+            }
         }
     }
     .show-comment{
@@ -253,33 +274,7 @@
   
   /* Style the accordion panel. Note: hidden by default */
   
-  .ex-content{
-    position: relative;
-    background: url('../../img/atGym.jpg') center/cover;
-    max-height: 100vh;
-    height: 100vh;
-    overflow: hidden;
-    .exercice-container{
-        background: #1112129b;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        box-shadow: $box-shadow;
-        margin-top: 350px;
-        h2{
-            font-size: 3em;
-            padding: 0;
-            margin: 0;
-        }
-       
-    }
-    .btn-principal{
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%,-50%);
-    }
-   
-  }
+
 
   .programme-list{
     @media (min-width: 650px) {

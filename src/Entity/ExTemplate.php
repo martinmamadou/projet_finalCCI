@@ -2,18 +2,21 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\DateTimeTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ExTemplateRepository;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use App\Entity\Traits\DateTimeTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use App\Repository\ExTemplateRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ExTemplateRepository::class)]
 #[HasLifecycleCallbacks]
+#[Vich\Uploadable]
 class ExTemplate
 {
     use DateTimeTrait;
@@ -36,15 +39,24 @@ class ExTemplate
     #[ORM\OneToMany(targetEntity: Exercices::class, mappedBy: 'exercice', orphanRemoval: true)]
     private Collection $exercices;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $gifurl = null;
-
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $instruction = null;
 
     #[ORM\ManyToMany(targetEntity: Membre::class, mappedBy: 'exTemplate')]
     private Collection $membres;
+
+    #[Vich\UploadableField(mapping: 'exercice', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
@@ -113,18 +125,6 @@ class ExTemplate
         return $this;
     }
 
-    public function getGifurl(): ?string
-    {
-        return $this->gifurl;
-    }
-
-    public function setGifurl(?string $gifurl): static
-    {
-        $this->gifurl = $gifurl;
-
-        return $this;
-    }
-
   
     public function getInstruction(): ?string
     {
@@ -165,6 +165,41 @@ class ExTemplate
         return $this;
     }
 
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
 
- 
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+    
+
 }
