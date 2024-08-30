@@ -27,7 +27,7 @@
                 </div>
                 <div class="repos hidden ">
                     <p>Repos</p>
-                    <p class="timer">{{ex.repos}}</p>
+                    <p class="repoTimer">{{ex.repos}}s</p>
                 </div>
 			</div>
             
@@ -48,7 +48,7 @@
 
 
 	</section>
-	<script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
     const exercices = document.querySelectorAll('.exercice-container');
     let currentIndex = 0;
@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 repos.classList.remove('hidden');
                 exo.classList.add('hidden');
+                startReposTimer(repos);
             }
         } else {
             currentExercice.style.display = 'none';
@@ -103,6 +104,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Function to start the repos timer
+    function startReposTimer(repos) {
+        const timerElement = repos.querySelector('.repoTimer');
+        if (timerElement) {
+            let time = parseInt(timerElement.textContent);
+            const interval = setInterval(() => {
+                if (time > 0) {
+                    time--;
+                    timerElement.textContent = `${time}s`;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+    }
+
     // Add event listener to the button
     document.getElementById('suivant').addEventListener('click', showNextExercice);
 
@@ -110,5 +127,6 @@ document.addEventListener('DOMContentLoaded', function () {
     startTimerIfPresent(exercices[currentIndex]);
 });
 </script>
+
 
 {% endblock %}
