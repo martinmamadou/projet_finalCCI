@@ -1,3 +1,17 @@
+const footer = document.querySelector('footer')
+const nav = document.querySelector('nav')
+window.addEventListener('scroll',function(){
+const y = footer.getBoundingClientRect().top + window.scrollY ;
+const x = nav.getBoundingClientRect().top + window.scrollY ;
+
+console.log(x,y)
+if(x >= y){
+    nav.classList.add('hidden')
+} else {
+    nav.classList.remove('hidden')
+}
+})
+
 
 
 
