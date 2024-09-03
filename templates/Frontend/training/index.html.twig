@@ -17,7 +17,9 @@
 	<section class="content ex-content">
 		{% for ex in programme.exercices %}
 			<div class="exercice-container ">
-            <div class="exo">
+             <img src="{{vich_uploader_asset(ex.exercice)}}" alt="" class="ex-img">
+            <div class="exo anim animate fade-inL">
+            
 				<h2>{{ex.exercice.name}}</h2>
 				{% if ex.repetitions %}
 					<p>X{{ex.repetitions}}</p>
@@ -26,8 +28,8 @@
 				{% endif %}
                 </div>
                 <div class="repos hidden ">
-                    <p>Repos</p>
-                    <p class="timer">{{ex.repos}}</p>
+                    <h2>Repos</h2>
+                    <p class="repoTimer">{{ex.repos}}s</p>
                 </div>
 			</div>
             
@@ -48,7 +50,7 @@
 
 
 	</section>
-	<script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
     const exercices = document.querySelectorAll('.exercice-container');
     let currentIndex = 0;
@@ -78,18 +80,36 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 repos.classList.remove('hidden');
                 exo.classList.add('hidden');
+                startReposTimer(repos);
             }
         } else {
             currentExercice.style.display = 'none';
             document.querySelector('.resume').classList.remove('hidden');
             document.querySelector('.terminer').classList.remove('hidden');
             document.getElementById('suivant').classList.add('hidden');
+            document.querySelector('.ex-img').classList.add('hidden')
         }
     }
 
     // Function to start the timer if present
     function startTimerIfPresent(exercice) {
         const timerElement = exercice.querySelector('.timer');
+        if (timerElement) {
+            let time = parseInt(timerElement.textContent);
+            const interval = setInterval(() => {
+                if (time > 0) {
+                    time--;
+                    timerElement.textContent = `${time}s`;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+    }
+
+    // Function to start the repos timer
+    function startReposTimer(repos) {
+        const timerElement = repos.querySelector('.repoTimer');
         if (timerElement) {
             let time = parseInt(timerElement.textContent);
             const interval = setInterval(() => {
@@ -110,5 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
     startTimerIfPresent(exercices[currentIndex]);
 });
 </script>
+
 
 {% endblock %}

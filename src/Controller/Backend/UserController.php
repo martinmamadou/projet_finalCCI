@@ -39,7 +39,7 @@ class UserController extends AbstractController
             $this->em->persist($user);
             $this->em->flush();
             
-            $this->addFlash('success','Utilisateur modifier avec succès');
+            $this->addFlash('success','Utilisateur modifié avec succès');
            return $this->redirectToRoute('admin.users.index');
         }
         return $this->render('Backend/User/edit.html.twig',[
@@ -62,7 +62,7 @@ class UserController extends AbstractController
             $this->em->remove($user);
             $this->em->flush();
 
-            $this->addFlash('success', 'utilisateur supprimer  avec succes');
+            $this->addFlash('success', 'utilisateur supprimé  avec succes');
             return $this->redirectToRoute('admin.users.index');
             
         }

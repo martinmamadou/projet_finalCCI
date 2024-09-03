@@ -42,7 +42,7 @@ class CategorieController extends AbstractController
             $this->em->persist($categorie);
             $this->em->flush();
 
-            $this->addFlash('success', 'Categorie creer avec succès');
+            $this->addFlash('success', 'Categorie créé avec succès');
             return $this->redirectToRoute('admin.categories.index');
         }
 
@@ -64,7 +64,7 @@ class CategorieController extends AbstractController
             $this->em->persist($categorie);
             $this->em->flush();
 
-            $this->addFlash('success', 'Categorie modifier avec succès');
+            $this->addFlash('success', 'Categorie modifié avec succès');
             return $this->redirectToRoute('admin.categories.index');
         }
         return $this->render('Backend/Categorie/edit.html.twig', [
@@ -85,7 +85,7 @@ class CategorieController extends AbstractController
             $this->em->remove($categorie);
             $this->em->flush();
 
-            $this->addFlash('success', 'Categorie supprimer  avec succes');
+            $this->addFlash('success', 'Categorie supprimé  avec succes');
             return $this->redirectToRoute('admin.categories.index');
         }
         return $this->redirectToRoute('admin.categoriex.index');

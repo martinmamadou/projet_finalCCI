@@ -39,6 +39,7 @@
             padding: 0;
             color: $secondary-color;
             font-size: 3em;
+            padding: 0 30px;
         }
         a{
             display: flex;
@@ -52,15 +53,29 @@
       justify-content: center;
     }
 
+    @media (min-width:760px){
+        .header-text{
+            p:first-child{
+                padding-top: 100px;
+            }
+           h1{
+            font-size: 6em;
+            margin-top: 5px;
+            margin-bottom: 100px;
+            } 
+
+        }
     @media (min-width:1024px){
         .header-text{
             p:first-child{
                 padding-top: 100px;
             }
            h1{
-            font-size: 7em;
+            font-size: 8em;
             margin-top: 5px;
+            
             } 
+        }
 
         }
         
@@ -94,7 +109,7 @@
         margin-bottom: 10px;
     }
 
-@media (min-width: 650px){
+@media (min-width: 760px){
     .swiper{
         display: none;
     }
@@ -109,7 +124,7 @@
     }
     
 }
-@media (min-width: 860px){
+@media (min-width: 900px){
     .programme-list{
         display: grid;
         grid-template-columns: repeat(3, 0.5fr); // Crée deux colonnes de largeur égale

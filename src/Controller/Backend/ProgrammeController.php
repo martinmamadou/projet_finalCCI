@@ -46,6 +46,9 @@ class ProgrammeController extends AbstractController
             $programme->setUser($this->getUser());
             $this->em->persist($programme);
             $this->em->flush();
+            
+            $this->addFlash('success','programme créé avec succès');
+            return $this->redirectToRoute('admin.membre.index');
         }
 
 
@@ -67,7 +70,7 @@ class ProgrammeController extends AbstractController
             $this->em->persist($programme);
             $this->em->flush();
 
-            $this->addFlash('success', 'programme modifier avec succès');
+            $this->addFlash('success', 'programme modifié avec succès');
             return $this->redirectToRoute('admin.programmes.index');
         }
         return $this->render('Backend/Programme/edit.html.twig', [
@@ -88,7 +91,7 @@ class ProgrammeController extends AbstractController
             $this->em->remove($programme);
             $this->em->flush();
 
-            $this->addFlash('success', 'programme supprimer  avec succes');
+            $this->addFlash('success', 'programme supprimé  avec succes');
             return $this->redirectToRoute('admin.programmes.index');
         }
         return $this->redirectToRoute('admin.programmes.index');

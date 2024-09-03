@@ -65,6 +65,10 @@ h2{
     margin: 70px auto;
 }
 
+.content{
+    text-align: center;
+}
+
 .alert {
     margin-bottom: 0;
     opacity: 0.5;
@@ -199,7 +203,9 @@ input{
     padding: 10px 30px;
     width: 100%;
 }
-
+textarea{
+    padding: 10px 0;
+}
 ::placeholder{
     color: $text-color;
     opacity: 1;
@@ -276,10 +282,7 @@ label{
     width: 20px;
 }
 
-::placeholder{
-    color: $text-color;
-}
-
-.empty{
+.text-center{
     text-align: center;
 }
+

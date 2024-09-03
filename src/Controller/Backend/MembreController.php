@@ -39,8 +39,9 @@ class MembreController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($membre);
             $entityManager->flush();
-
-            return $this->redirectToRoute('admin.membre.index', [], Response::HTTP_SEE_OTHER);
+            
+            $this->addFlash('success','membre créé avec succès');
+            return $this->redirectToRoute('admin.membre.index');
         }
 
         return $this->render('Backend/Membre/new.html.twig', [
@@ -59,7 +60,8 @@ class MembreController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin.membre.index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success','membre modifié avec succès');
+            return $this->redirectToRoute('admin.membre.index');
         }
 
         return $this->render('Backend/Membre/edit.html.twig', [
@@ -82,7 +84,7 @@ class MembreController extends AbstractController
             $this->em->remove($membre);
             $this->em->flush();
 
-            $this->addFlash('success', 'membre supprimer  avec succes');
+            $this->addFlash('success', 'membre supprimé  avec succes');
             return $this->redirectToRoute('admin.membre.index');
         }
         return $this->redirectToRoute('admin.programmes.index');

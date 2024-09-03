@@ -3,7 +3,7 @@
 {% block body %}
 	<section class="container">
 		<h1>admin des exercices</h1>
-			<a href="" class="btn btn-secondaire">
+			<a href="{{path('app.home')}}" class="btn btn-secondaire">
 			<i class="bi bi-chat-text"></i>Acceuil</a>
 			<a href="{{path('admin.exercices.create')}}" class='button btn-secondaire'>Ajouter</a>
 		<table class="table table-striped table-bordered" data-toggle="table" data-sort-name="fullName" data-sort-order="asc" data-pagination="true" data-search="true" data-show-columns="true">
@@ -20,7 +20,6 @@
 					<tr>
 						<td>{{exercice.name}}</td>
 						<td>{{exercice.createdAt|ago}}</td>
-						<td><img src="{{exercice.gifUrl}}" alt="image de l'exercice" width='50px'></td>
 
 						<td scope="col">
 							<div class="d-flex gap-2">

@@ -41,10 +41,10 @@ class ResetPasswordController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->processSendingPasswordResetEmail(
-                $form->get('email')->getData(),
-                $mailer,
-                $translator
+            /** @var string $email */
+            $email = $form->get('email')->getData();
+
+            return $this->processSendingPasswordResetEmail($email, $mailer, $translator
             );
         }
 
@@ -91,6 +91,7 @@ class ResetPasswordController extends AbstractController
         }
 
         try {
+            /** @var User $user */
             $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlash('reset_password_error', sprintf(
@@ -110,13 +111,11 @@ class ResetPasswordController extends AbstractController
             // A password reset token should be used only once, remove it.
             $this->resetPasswordHelper->removeResetRequest($token);
 
-            // Encode(hash) the plain password, and set it.
-            $encodedPassword = $passwordHasher->hashPassword(
-                $user,
-                $form->get('plainPassword')->getData()
-            );
+            /** @var string $plainPassword */
+            $plainPassword = $form->get('plainPassword')->getData();
 
-            $user->setPassword($encodedPassword);
+            // Encode(hash) the plain password, and set it.
+            $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
             $this->entityManager->flush();
 
             // The session is cleaned up after the password has been changed.
@@ -158,8 +157,8 @@ class ResetPasswordController extends AbstractController
         }
 
         $email = (new TemplatedEmail())
-            ->from(new Address('mamad@mamad.com', 'madbot'))
-            ->to($user->getEmail())
+            ->from(new Address('mail@sporting.com', 'sporting Bot'))
+            ->to((string) $user->getEmail())
             ->subject('Your password reset request')
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([

@@ -38,6 +38,9 @@ class ProTypeController extends AbstractController
 
             $this->em->persist($protype);
             $this->em->flush();
+
+            $this->addFlash('success','type créé avec succès');
+            return $this->redirectToRoute('admin.membre.index');
         }
 
         return $this->render('Backend/ProType/create.html.twig', [
@@ -58,7 +61,7 @@ class ProTypeController extends AbstractController
             $this->em->persist($protype);
             $this->em->flush();
 
-            $this->addFlash('success', 'type modifier avec succès');
+            $this->addFlash('success', 'type modifié avec succès');
             return $this->redirectToRoute('admin.protype.index');
         }
         return $this->render('Backend/ProType/edit.html.twig', [
@@ -79,7 +82,7 @@ class ProTypeController extends AbstractController
             $this->em->remove($protype);
             $this->em->flush();
 
-            $this->addFlash('success', 'type supprimer  avec succes');
+            $this->addFlash('success', 'type supprimé  avec succes');
             return $this->redirectToRoute('admin.protypes.index');
         }
         return $this->redirectToRoute('admin.protype.index');

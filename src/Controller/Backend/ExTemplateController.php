@@ -48,6 +48,9 @@ class ExTemplateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($exercice);
             $this->em->flush();
+
+            $this->addFlash('success', 'exercice créé avec succès');
+            return $this->redirectToRoute('admin.exercices.index');
         }
 
         return $this->render('Backend/Exercice/create.html.twig', [
@@ -57,6 +60,7 @@ class ExTemplateController extends AbstractController
     #[Route('/{id}/edit', '.edit', methods: ['GET', 'POST'])]
     public function edit(?ExTemplate $exercice, Request $request): Response|RedirectResponse
     {
+     
         if (!$exercice) {
             $this->addFlash('error', 'exercices inexistant');
             return $this->redirectToRoute('admin.exercices.index');
@@ -67,7 +71,7 @@ class ExTemplateController extends AbstractController
             $this->em->persist($exercice);
             $this->em->flush();
 
-            $this->addFlash('success', 'Utilisateur modifier avec succès');
+            $this->addFlash('success', 'exercice modifié avec succès');
             return $this->redirectToRoute('admin.exercices.index');
         }
         return $this->render('Backend/Exercice/edit.html.twig', [
@@ -88,7 +92,7 @@ class ExTemplateController extends AbstractController
             $this->em->remove($exercice);
             $this->em->flush();
 
-            $this->addFlash('success', 'exercice supprimer  avec succes');
+            $this->addFlash('success', 'exercice supprimé avec succes');
             return $this->redirectToRoute('admin.exercices.index');
         }
         return $this->redirectToRoute('admin.exercices.index');
