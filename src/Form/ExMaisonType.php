@@ -35,9 +35,10 @@ class ExMaisonType extends AbstractType
                     'label' => 'Exercice',
                     'class' => ExTemplate::class,
                     'choice_label' => 'name',
-                    'by_reference' => false,
+                  
                     'expanded' => false,
                     'multiple' => false,
+                    
                 ])
                 ->add('repetitions', NumberType::class, [
                     'label' => 'Répétitions',

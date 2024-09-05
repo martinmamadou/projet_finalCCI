@@ -24,8 +24,7 @@ class ProgrammeController extends AbstractController
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly ProgrammeRepository $proRepository
-    ) {
-    }
+    ) {}
     #[Route('', name: '.index', methods: ['GET'])]
     public function index(): Response|RedirectResponse
     {
@@ -46,9 +45,9 @@ class ProgrammeController extends AbstractController
             $programme->setUser($this->getUser());
             $this->em->persist($programme);
             $this->em->flush();
-            
-            $this->addFlash('success','programme créé avec succès');
-            return $this->redirectToRoute('admin.membre.index');
+
+            $this->addFlash('success', 'programme créé avec succès');
+            return $this->redirectToRoute('admin.programmes.index');
         }
 
 
@@ -60,6 +59,7 @@ class ProgrammeController extends AbstractController
     #[Route('/{id}/edit', '.edit', methods: ['GET', 'POST'])]
     public function edit(?Programme $programme, Request $request): Response|RedirectResponse
     {
+
         if (!$programme) {
             $this->addFlash('error', 'programme inexistant');
             return $this->redirectToRoute('admin.programmes.index');
@@ -74,7 +74,8 @@ class ProgrammeController extends AbstractController
             return $this->redirectToRoute('admin.programmes.index');
         }
         return $this->render('Backend/Programme/edit.html.twig', [
-            'form' => $form
+            'form' => $form,
+
         ]);
     }
     #[Route('/{id}/delete', '.delete', methods: ['GET', 'POST'])]

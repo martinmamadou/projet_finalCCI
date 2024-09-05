@@ -6,15 +6,17 @@
         {% if programmes|length > 0 %}
             {% for programme in news %}
                 <div class="swiper-slide">
-                    <a href="{{ path('user.programmes.details', {slug: programme.slug}) }}" id="ex-link">
+                    
                         <div class="pro-list" style="background: center/cover url('{{ vich_uploader_asset(programme.categorie) }}')">
+                        <a href="{{ path('user.programmes.details', {slug: programme.slug}) }}" id="ex-link">
                             <div class="text-container">
                                 <h2>{{ programme.name }}</h2>
                                 <p>{{programme.shortDescription}}</p>
                                 <p><i class="fa-solid fa-dumbbell fa-xs"></i> {{programme.exercices|length}}</p>
-                            </div>
+                            </div> 
+                            </a>
                         </div>
-                    </a>
+                   
                 </div>
             {% endfor %}
         {% else %}

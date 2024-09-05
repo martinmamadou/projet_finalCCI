@@ -18,20 +18,21 @@ class CommentaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name' ,TextType::class,[
+            ->add('name', TextType::class, [
                 'label' => 'Titre : ',
-                'required' =>false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Mon super commentaire'
+
                 ]
             ])
-            ->add('note' ,RangeType::class, [
+            ->add('note', RangeType::class, [
                 'label' => 'note',
-              
+
                 'attr' => [
                     'min' => 1,
                     'max' => 5
-                ] 
+                ]
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Message : ',

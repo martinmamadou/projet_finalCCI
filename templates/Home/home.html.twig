@@ -23,15 +23,17 @@
             {% include "Home/_swiperNew.html.twig" %}
             <div class="programme-list hidden">
                 {% for new in news %}
-                <a href="{{ path('user.programmes.details', {slug: new.slug}) }}">
+                
                     <div class="pro-list programme-item" data-protype="{{ new.proType.name }}" style="background: center/cover url('{{ vich_uploader_asset(new.categorie) }}')">
+                       <a href="{{ path('user.programmes.details', {slug: new.slug}) }}">
                         <div class='text-container'>
                             <h2>{{ new.name }}</h2>
                             <p>{{ new.shortDescription }}</p>
                             <p><i class="fa-solid fa-dumbbell fa-xs"></i> {{ new.exercices|length }}</p>
                         </div>
+                        </a> 
                     </div>
-                </a> 
+                
                 {% endfor %}
             </div> 
         </div> >

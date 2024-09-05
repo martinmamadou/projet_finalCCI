@@ -31,7 +31,7 @@ class FavorisController extends AbstractController
         $user = $this->getUser();
 
         if (!$user) {
-            $this->addFlash('error', 'veillez vous connectez');
+            $this->addFlash('error', 'veuillez vous connectez');
             return $this->redirectToRoute('app.home');
         }
         

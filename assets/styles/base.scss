@@ -204,7 +204,9 @@ h3{
     border-bottom: solid thin $button-primary;
     color: $text-color
 }
-
+.form-control::placeholder{
+    color: $text-color;
+}
 input{
     background: none;
     border: none;
@@ -229,11 +231,20 @@ textarea{
 }
 
 label{
+    text-align: left;
     display: block;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 4px;
     color: $text-color;
+}
+
+.header{
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: $box-shadow;
 }
 
 
@@ -256,7 +267,7 @@ label{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 15px;
     button{
         width: 50%;
     }
@@ -271,7 +282,7 @@ label{
         box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
         border-radius: 10px;
         border: 1px solid rgba( 255, 255, 255, 0.18 );
-        width: 90vw;
+        width: 70vw;
         height: 100px;
         margin: 0 auto 45px;
         box-shadow: $box-shadow;
@@ -284,7 +295,11 @@ label{
             font-weight: bold;
             font-size: 1.8em;
         }
-    
+  
+}
+
+.listing:hover{
+    transform: scale(1.1);
 }
 
 .page{

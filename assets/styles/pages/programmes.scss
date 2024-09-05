@@ -1,10 +1,5 @@
 .programme-head{
     background: url(/assets/img/atGym.jpg) center/cover fixed;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: $box-shadow;
 }
 
 .programme-preview{
@@ -294,11 +289,11 @@
 
     @media (min-width: 860px) {
         display: grid;
-        grid-template-columns: repeat(3, 0.5fr); // Crée deux colonnes de largeur égale
+        grid-template-columns: repeat(3, 2fr); // Crée deux colonnes de largeur égale
         gap: 10px;  // Passe à une colonne sur les petits écrans
 
         .programme-item{
-            max-width: 300px;
+            width: 100%;
         }
     }
 

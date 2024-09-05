@@ -10,7 +10,7 @@
 
 		<div class="user-info">
 			<div class="left">
-			<img src="{{user.imageName ? vich_uploader_asset(user) : asset('img/defaut.jpeg')}}" alt="photo de profil de {{user.name}}" width='90' height='90'>
+			<img src="{{user.imageName ? vich_uploader_asset(user) : asset('img/defaut.jpeg')}}" alt="photo de profil de {{user.Username}}" width='90' height='90'>
 			</div>
 			<div class="right">
 				<div class="top">
@@ -21,9 +21,10 @@
 						<p>| {{user.userInfo.taille}}cm |</p>
 						<p>{{user.userInfo.poids}}kg |</p>
                         {% else %}
+                        <p>| 0 cm |</p>
+                           <p> 0 kg |</p>
                         {% endif %}
-                            <p>| 0 cm |</p>
-                            <p>| 0 kg |</p>
+                            
 						
 						<a href='{{path('user.profile.infos',{id:user.id})}}'><i class="fa-regular fa-pen-to-square"></i></a>
 					</div>
@@ -37,7 +38,27 @@
 				    <p>Vos programme favoris</p>
                     <a href="{{path('user.favoris.index')}}">voir tout</a>
                 </div>
-				{% include "Frontend/User/_swiperFav.html.twig" %}
+				<div class="programme-list">
+        {% for fav in favoris %}
+            {% if fav %}
+                <div class="pro-list programme-item" data-protype="{{ fav.programme.categorie.name }}" style="background: center/cover url('{{ vich_uploader_asset(fav.programme.categorie) }}')">
+                    <a href='{{ path('user.programmes.details', {slug: fav.programme.slug}) }}'>
+                        <div class='text-container'>
+                            <h2>{{ fav.programme.name }}</h2>
+                            <p>{{ fav.programme.shortDescription }}</p>
+                            <p><i class="fa-solid fa-dumbbell fa-xs"></i> {{ fav.programme.exercices|length }}</p>
+                        </div>
+                    </a>
+                    <form action="{{ path('user.favoris.delete', {id: fav.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce programme de vos favoris ?')">
+                        <input type="hidden" name="token" value="{{ csrf_token('delete' ~ fav.id) }}">
+                        <button type="submit" class="btn btn-danger add">supprimer</button>
+                    </form>
+                </div>
+            {% else %}
+                <h2>Nothing here...</h2>
+            {% endif %}
+        {% endfor %}
+                
 				</div>
 			</div>
 		</div>

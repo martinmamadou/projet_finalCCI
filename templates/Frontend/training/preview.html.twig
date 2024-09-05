@@ -3,6 +3,15 @@
 {% block title %}
     Preview des Exercices
 {% endblock %}
+{% block stylesheets %}
+	{{parent()}}
+	{{encore_entry_link_tags('admin')}}
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+	{{encore_entry_script_tags('admin')}}
+{% endblock %}
 {% block body %}
 <section class="content preview-page">
     <h1>Preview de {{programme.name}}</h1>
@@ -26,20 +35,5 @@
     <a href="{{path('programmes.training',{slug:programme.slug})}}" class='button btn-principal'>Commencez</a>
     </div>
 </section>
-    <script>
-    let acc = document.getElementsByClassName("accordion");
-let i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    const panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
-  });
-}
-</script>
 {% endblock %}
