@@ -17,7 +17,7 @@
 	<section class="content ex-content">
 		{% for ex in programme.exercices %}
 			<div class="exercice-container ">
-             <img src="{{vich_uploader_asset(ex.exercice)}}" alt="" class="ex-img">
+             <img src="{{vich_uploader_asset(ex.exercice)}}" alt="image de l'exercice {{ex.exercice.name}}" class="ex-img">
             <div class="exo anim animate fade-inL">
             
 				<h2>{{ex.exercice.name}}</h2>
@@ -36,13 +36,13 @@
 		{% endfor %}
 		<div class="resume hidden">
 			<div id='success'>
-				<img src="{{ asset('img/animated/success.gif') }}" alt="">
+				<img src="{{ asset('img/animated/success.gif') }}" alt="gif de succes d'exercice">
 			</div>
 			<h2>
 				Bravo !!!
 			</h2>
-			<p>Vous avez completé
-				{{programme.name}}</p>
+			<p>Vous avez completé {{programme.name}}</p>
+            </div>
 		</div>
 
 		<button id="suivant" class='button btn-principal'>Suivant</button>

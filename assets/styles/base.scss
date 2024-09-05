@@ -5,11 +5,15 @@
     padding: 0;
     
 }
+
 @font-face {
     font-family: BebasNeue;
     src: url(../font/BebasNeue-Regular.ttf);
 }
-
+@font-face {
+    font-family: Roboto;
+    src: url(../font/Roboto-Regular.ttf);
+}
 
 body{
     margin: 0;
@@ -25,10 +29,12 @@ main{
 p{
     color: $text-color;
     text-align: justify;
+    font-family: Roboto;
 }
 
 li{
     list-style: none;
+    color: $text-color
 }
 
 a{
@@ -59,6 +65,10 @@ h2{
     font-family: BebasNeue;
     font-size: 3em;
     color: $text-color;
+}
+h3{
+    color: $text-color;
+    font-family: BebasNeue;
 }
 
 .container{
@@ -205,6 +215,7 @@ input{
 }
 textarea{
     padding: 10px 0;
+    resize: none;
 }
 ::placeholder{
     color: $text-color;

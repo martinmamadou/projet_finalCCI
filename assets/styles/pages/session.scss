@@ -1,4 +1,5 @@
 .ex-content{
+    
     position: relative;
     max-height: 100vh;
     height: 100vh;
@@ -68,8 +69,22 @@
             color: $text-color;
         }
     }
-
+.resume{
+    p{
+        margin: 55px;
+        text-align: center;
+        font-size: 1.5em;
+    }
 }
+.img-success{
+    margin: 0 auto;
+    background: url(../../img/background/bg-exercice.png)center/cover;
+    height: 400px;
+    width: 80vw;
+}
+}
+
+
 
 
 
