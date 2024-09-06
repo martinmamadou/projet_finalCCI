@@ -110,18 +110,18 @@
     }
 
 @media (min-width: 760px){
-    .swiper{
-        display: none;
-    }
-    .programme-list{
-        display: grid;
-        grid-template-columns: repeat(2, 0.5fr); // Crée deux colonnes de largeur égale
-        gap: 10px;  // Passe à une colonne sur les petits écrans
+    // .swiper{
+    //     display: none;
+    // }
+    // .programme-list{
+    //     display: grid;
+    //     grid-template-columns: repeat(2, 0.5fr); // Crée deux colonnes de largeur égale
+    //     gap: 10px;  // Passe à une colonne sur les petits écrans
 
-        .programme-item{
-            max-width: 300px;
-        }
-    }
+    //     .programme-item{
+    //         max-width: 300px;
+    //     }
+    // }
     
 }
 @media (min-width: 900px){
