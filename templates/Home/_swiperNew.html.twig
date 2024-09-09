@@ -1,31 +1,27 @@
 {% if programmes is not null %}
-			
-<div
-	<div class="swiper slider-new">
-    <div class="swiper-wrapper">
-        {% if programmes|length > 0 %}
-            {% for programme in news %}
-                <div class="swiper-slide">
-                    
-                        <div class="pro-list" style="background: center/cover url('{{ vich_uploader_asset(programme.categorie) }}')">
-                        <a href="{{ path('user.programmes.details', {slug: programme.slug}) }}" id="ex-link">
-                            <div class="text-container">
-                                <h2>{{ programme.name }}</h2>
-                                <p>{{programme.shortDescription}}</p>
-                                <p><i class="fa-solid fa-dumbbell fa-xs"></i> {{programme.exercices|length}}</p>
-                            </div> 
-                            </a>
+    <div>
+        <div class="swiper slider-new">
+            <div class="swiper-wrapper">
+                {% if programmes|length > 0 %}
+                    {% for programme in programmes %}
+                        <div class="swiper-slide">
+                            <div class="pro-list" style="background: center/cover url('{{ vich_uploader_asset(programme.categorie) }}')">
+                                <a href="{{ path('user.programmes.details', {slug: programme.slug}) }}" id="ex-link">
+                                    <div class="text-container">
+                                        <h2>{{ programme.name }}</h2>
+                                        <p>{{ programme.shortDescription }}</p>
+                                        <p><i class="fa-solid fa-dumbbell fa-xs"></i> {{ programme.exercices|length }}</p>
+                                    </div> 
+                                </a>
+                            </div>
                         </div>
-                   
-                </div>
-            {% endfor %}
-        {% else %}
-            
-        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <!-- Optionally, include a message or content if there are no programmes -->
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div class="swiper-pagination"></div>
-</div>
-
-	    {% else %}
-				<p class='empty'>Aucun donnée pour le moment</p>
-		{% endif %}
+{% else %}
+    <p class='empty'>Aucun donnée pour le moment</p>
+{% endif %}
