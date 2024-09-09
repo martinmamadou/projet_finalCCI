@@ -1,0 +1,22 @@
+services:
+  app:
+    image: projet_finalcci
+    depends_on:
+      - db
+    ports:
+      - 8000
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_USER: root 
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sport_db
+
+    volumes:
+      - sport_db:/var/lib/mysql
+    ports:
+      - 3306
+
+volumes:
+  sport_db:

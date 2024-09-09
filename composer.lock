@@ -1109,18 +1109,6 @@
         },
         {
             "name": "doctrine/migrations",
-<<<<<<< HEAD
-            "version": "3.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/migrations.git",
-                "reference": "535a70dcbd88b8c6ba945be050977457f4f4c06c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/535a70dcbd88b8c6ba945be050977457f4f4c06c",
-                "reference": "535a70dcbd88b8c6ba945be050977457f4f4c06c",
-=======
             "version": "3.8.1",
             "source": {
                 "type": "git",
@@ -1131,7 +1119,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/migrations/zipball/7760fbd0b7cb58bfb50415505a7bab821adf0877",
                 "reference": "7760fbd0b7cb58bfb50415505a7bab821adf0877",
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
                 "shasum": ""
             },
             "require": {
@@ -1205,11 +1192,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/migrations/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/doctrine/migrations/tree/3.8.0"
-=======
                 "source": "https://github.com/doctrine/migrations/tree/3.8.1"
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
             },
             "funding": [
                 {
@@ -1225,11 +1208,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2024-06-26T14:12:46+00:00"
-=======
             "time": "2024-08-28T13:17:28+00:00"
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
         },
         {
             "name": "doctrine/orm",
@@ -2487,18 +2466,6 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-<<<<<<< HEAD
-            "version": "1.29.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "fcaefacf2d5c417e928405b71b400d4ce10daaf4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/fcaefacf2d5c417e928405b71b400d4ce10daaf4",
-                "reference": "fcaefacf2d5c417e928405b71b400d4ce10daaf4",
-=======
             "version": "1.30.0",
             "source": {
                 "type": "git",
@@ -2509,7 +2476,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/5ceb0e384997db59f38774bf79c2a6134252c08f",
                 "reference": "5ceb0e384997db59f38774bf79c2a6134252c08f",
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
                 "shasum": ""
             },
             "require": {
@@ -2541,15 +2507,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.29.1"
-            },
-            "time": "2024-05-31T08:52:43+00:00"
-=======
                 "source": "https://github.com/phpstan/phpdoc-parser/tree/1.30.0"
             },
             "time": "2024-08-29T09:54:52+00:00"
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
         },
         {
             "name": "psr/cache",
@@ -8597,22 +8557,6 @@
         },
         {
             "name": "twig/extra-bundle",
-<<<<<<< HEAD
-            "version": "v3.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/twig-extra-bundle.git",
-                "reference": "bf8a304eac15838d7724fdf64c345bdefbb75f03"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/bf8a304eac15838d7724fdf64c345bdefbb75f03",
-                "reference": "bf8a304eac15838d7724fdf64c345bdefbb75f03",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.5",
-=======
             "version": "v3.12.0",
             "source": {
                 "type": "git",
@@ -8627,7 +8571,6 @@
             },
             "require": {
                 "php": ">=8.0.2",
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
                 "symfony/framework-bundle": "^5.4|^6.4|^7.0",
                 "symfony/twig-bundle": "^5.4|^6.4|^7.0",
                 "twig/twig": "^3.0"
@@ -8672,11 +8615,7 @@
                 "twig"
             ],
             "support": {
-<<<<<<< HEAD
-                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.11.0"
-=======
                 "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.12.0"
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
             },
             "funding": [
                 {
@@ -8688,26 +8627,6 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2024-06-21T06:25:01+00:00"
-        },
-        {
-            "name": "twig/intl-extra",
-            "version": "v3.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/intl-extra.git",
-                "reference": "e9cadd61342e71e45b2f4f0558122433fd7e4566"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/intl-extra/zipball/e9cadd61342e71e45b2f4f0558122433fd7e4566",
-                "reference": "e9cadd61342e71e45b2f4f0558122433fd7e4566",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.5",
-=======
             "time": "2024-08-10T10:32:24+00:00"
         },
         {
@@ -8726,7 +8645,6 @@
             },
             "require": {
                 "php": ">=8.0.2",
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
                 "symfony/intl": "^5.4|^6.4|^7.0",
                 "twig/twig": "^3.10"
             },
@@ -8761,11 +8679,7 @@
                 "twig"
             ],
             "support": {
-<<<<<<< HEAD
-                "source": "https://github.com/twigphp/intl-extra/tree/v3.11.0"
-=======
                 "source": "https://github.com/twigphp/intl-extra/tree/v3.12.0"
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
             },
             "funding": [
                 {
@@ -8777,30 +8691,6 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2024-06-21T06:25:01+00:00"
-        },
-        {
-            "name": "twig/twig",
-            "version": "v3.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "e80fb8ebba85c7341a97a9ebf825d7fd4b77708d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e80fb8ebba85c7341a97a9ebf825d7fd4b77708d",
-                "reference": "e80fb8ebba85c7341a97a9ebf825d7fd4b77708d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.5",
-                "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/polyfill-ctype": "^1.8",
-                "symfony/polyfill-mbstring": "^1.3",
-                "symfony/polyfill-php80": "^1.22",
-=======
             "time": "2024-08-10T10:32:24+00:00"
         },
         {
@@ -8822,7 +8712,6 @@
                 "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-ctype": "^1.8",
                 "symfony/polyfill-mbstring": "^1.3",
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
                 "symfony/polyfill-php81": "^1.29"
             },
             "require-dev": {
@@ -8869,11 +8758,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/twigphp/Twig/tree/v3.11.0"
-=======
                 "source": "https://github.com/twigphp/Twig/tree/v3.12.0"
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
             },
             "funding": [
                 {
@@ -8885,11 +8770,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2024-08-08T16:15:16+00:00"
-=======
             "time": "2024-08-29T09:51:12+00:00"
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
         },
         {
             "name": "vich/uploader-bundle",
@@ -11222,18 +11103,6 @@
         },
         {
             "name": "symfony/maker-bundle",
-<<<<<<< HEAD
-            "version": "v1.60.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "c305a02a22974670f359d4274c9431e1a191f559"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/c305a02a22974670f359d4274c9431e1a191f559",
-                "reference": "c305a02a22974670f359d4274c9431e1a191f559",
-=======
             "version": "v1.61.0",
             "source": {
                 "type": "git",
@@ -11244,7 +11113,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/a3b7f14d349f8f44ed752d4dde2263f77510cc18",
                 "reference": "a3b7f14d349f8f44ed752d4dde2263f77510cc18",
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
                 "shasum": ""
             },
             "require": {
@@ -11307,11 +11175,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.60.0"
-=======
                 "source": "https://github.com/symfony/maker-bundle/tree/v1.61.0"
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
             },
             "funding": [
                 {
@@ -11327,11 +11191,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2024-06-10T06:03:18+00:00"
-=======
             "time": "2024-08-29T22:50:23+00:00"
->>>>>>> eee5e95265d76b59cbe0ec12156716a83fdb6ce4
         },
         {
             "name": "symfony/phpunit-bridge",

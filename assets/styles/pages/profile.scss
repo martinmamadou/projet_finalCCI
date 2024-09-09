@@ -74,7 +74,7 @@
        .bottom{
         .link{
             justify-content: space-between;
-            padding: 0 50px ;
+            padding: 0 70px ;
 
             p{
                 font-size: 1.5em;
@@ -95,4 +95,18 @@
         }
        }
     }
+    @media(min-width:980px){
+        .link{
+           padding: 0 150px; 
+           p{
+            font-size: 2em;
+           }
+           a{
+            font-size: 2em;
+           }
+        }
+    
+        
+    }
+    
 }
