@@ -1,21 +1,17 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const exercices = document.querySelectorAll('.exercice-container');
     let currentIndex = 0;
-
     // Hide all divs except the first one
     exercices.forEach((ex, index) => {
         if (index !== 0) {
             ex.style.display = 'none';
         }
     });
-
     // Function to show the next div and hide the current one
     function showNextExercice() {
         const currentExercice = exercices[currentIndex];
         const repos = currentExercice.querySelector('.repos');
         const exo = currentExercice.querySelector('.exo');
-
         if (currentIndex < exercices.length - 1) {
             if (!repos.classList.contains('hidden')) {
                 currentExercice.style.display = 'none';
@@ -38,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.ex-img').classList.add('hidden')
         }
     }
-
     // Function to start the timer if present
     function startTimerIfPresent(exercice) {
         const timerElement = exercice.querySelector('.timer');
@@ -54,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 1000);
         }
     }
-
     // Function to start the repos timer
     function startReposTimer(repos) {
         const timerElement = repos.querySelector('.repoTimer');
@@ -70,10 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 1000);
         }
     }
-
     // Add event listener to the button
     document.getElementById('suivant').addEventListener('click', showNextExercice);
-
     // Start the timer for the first exercice if present
     startTimerIfPresent(exercices[currentIndex]);
 });

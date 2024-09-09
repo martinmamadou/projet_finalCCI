@@ -1,0 +1,114 @@
+@keyframes fadeinB {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeinL {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeinR {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fade-inC {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes arrowdown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  10%, 30%, 50%, 70% {
+    transform: translateY(-8px);
+  }
+  20%, 40%, 60% {
+    transform: translateY(8px);
+  }
+  80% {
+    transform: translateY(6.4px);
+  }
+  90% {
+    transform: translateY(-6.4px);
+  }
+}
+@keyframes bouncel {
+  0% {
+    animation-timing-function: ease-in;
+    opacity: 0;
+    transform: translateX(-250px);
+  }
+  38% {
+    animation-timing-function: ease-out;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  55% {
+    animation-timing-function: ease-in;
+    transform: translateX(-68px);
+  }
+  72% {
+    animation-timing-function: ease-out;
+    transform: translateX(0);
+  }
+  81% {
+    animation-timing-function: ease-in;
+    transform: translateX(-28px);
+  }
+  90% {
+    animation-timing-function: ease-out;
+    transform: translateX(0);
+  }
+  95% {
+    animation-timing-function: ease-in;
+    transform: translateX(-8px);
+  }
+  100% {
+    animation-timing-function: ease-out;
+    transform: translateX(0);
+  }
+}
+.bounce-l.animate {
+  animation: bouncel 2s ease 0ms 1 normal forwards;
+}
+
+.shake.animate {
+  animation: arrowdown 2s ease 200ms 1 normal forwards;
+}
+
+.fade-inR.animate {
+  animation: fadeinR 2s ease 0s 1 normal forwards;
+}
+
+.fade-inL.animate {
+  animation: fadeinL 2s ease 0s 1 normal forwards;
+}
+
+.fade-inb.animate {
+  animation: fadeinB 2s ease 0s 1 normal forwards;
+}
+
+.fade-inC.animate {
+  animation: fade-inC 2s ease 0s 1 normal forwards;
+}/*# sourceMappingURL=keyframes.css.map */

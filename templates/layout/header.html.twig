@@ -10,23 +10,23 @@
         </li>
         {% if is_granted('ROLE_ADMIN') %}
             <li{% if app.request.get('_route') == 'admin.index' %} class="active"{% endif %}>
-                <a href="{{ path('admin.index') }}"><i class="fa-solid fa-lock fa-2xl"></i></a>
+                <a href="{{ path('admin.index') }}"  title='Administration' aria-label="Administration"><i class="fa-solid fa-lock fa-2xl"></i></a>
             </li>
         {% else %}
             <li{% if app.request.get('_route') == 'user.favoris.index' %} class="active"{% endif %}>
-                <a href="{{ path('user.favoris.index') }}"><i class="fa-solid fa-heart fa-2xl"></i></a>
+                <a href="{{ path('user.favoris.index') }}" title='Favoris' aria-label="Favoris"><i class="fa-solid fa-heart fa-2xl"></i></a>
             </li>
         {% endif %}
         <li{% if app.request.get('_route') == 'app.home' %} class="active"{% endif %}>
-            <a href="{{ path('app.home') }}"><i class="fa-solid fa-house fa-2xl"></i></a>
+            <a href="{{ path('app.home') }}" title='acceuil' aria-label="Acceuil"><i class="fa-solid fa-house fa-2xl"></i></a>
         </li>
         <li{% if app.request.get('_route') == 'user.profile.index' %} class="active"{% endif %}>
-            <a href="{{ path('user.profile.index') }}"><i class="fa-solid fa-user fa-2xl"></i></a>
+            <a href="{{ path('user.profile.index') }}"  title='profile' aria-label="Profile"><i class="fa-solid fa-user fa-2xl"></i></a>
         </li>
         {% if app.user %}
-            <li><a href="/logout"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a></li>
+            <li><a href="/logout" title='Déconnexion' aria-label="Deconnexion"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a></li>
         {% else %}
-            <li><a href="{{ path('app.login') }}"><i class="fa-solid fa-right-to-bracket fa-2xl"></i></a></li>
+            <li><a href="{{ path('app.login') }}" title='Connexion' aria-label="Connexion"><i class="fa-solid fa-right-to-bracket fa-2xl"></i></a></li>
         {% endif %}
     </ul>
 </nav>

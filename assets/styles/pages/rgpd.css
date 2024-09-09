@@ -1,0 +1,6 @@
+.about, .condition, .confidentialite, .mention {
+  padding: 0 15px;
+}
+.about ul, .condition ul, .confidentialite ul, .mention ul {
+  padding: 0;
+}/*# sourceMappingURL=rgpd.css.map */

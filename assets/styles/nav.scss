@@ -7,7 +7,7 @@ nav{
   -webkit-backdrop-filter: blur( 12px );
   height: 70px;
   position: fixed;
-  width: 80vw;
+  width: 350px;
   bottom: 0px;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -40,7 +40,10 @@ nav{
     
   }
   @media (min-width:768px){
-    width: 30vw;
+    width: 350px;
+  }
+  @media (min-width:960px){
+    width: 450px;
   }
 }
 

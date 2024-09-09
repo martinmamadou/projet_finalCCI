@@ -1,9 +1,7 @@
 import Swiper from 'swiper';
 import { Pagination, Autoplay } from 'swiper/modules';
-
 import 'swiper/scss';
 import 'swiper/scss/pagination';
-
 const swiperArticle = new Swiper('.slider-new', {
     modules: [Pagination, Autoplay],
     direction: 'horizontal',

@@ -206,6 +206,9 @@
     h2{
         font-size: 2.5em;
     }
+    a{
+        width: 100%;
+    }
     .text-container{
         text-align: left;
         backdrop-filter: blur(8px);
@@ -216,9 +219,7 @@
         p{
             text-align: left;
         }
-        a{
-            width: 100%;
-        }
+        
 
     }
 

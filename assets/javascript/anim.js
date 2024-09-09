@@ -1,5 +1,4 @@
-
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
             let options = {
                 root: null,
                 rootMargin: '0px',
@@ -13,7 +12,6 @@
                       }
                 });
             }, options);
-
             let elements = document.querySelectorAll('.anim');
             console.log(elements)
             elements.forEach(element => {
