@@ -62,5 +62,9 @@
 				</div>
 			</div>
 		</div>
+				<form action="{{ path('user.profile.delete', {id: user.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette categorie')">
+					<input type="hidden" name="token" value="{{ csrf_token('delete'~ user.id) }}">
+									<button type="submit" class="btn btn-danger">Supprimer</button>
+								</form>
 	</section>
 {% endblock %}

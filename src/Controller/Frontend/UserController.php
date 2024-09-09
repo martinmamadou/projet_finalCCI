@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
@@ -30,9 +31,8 @@ class UserController extends AbstractController
         private readonly FavorisRepository $favRepo,
         private readonly ProgrammeRepository $proRepo,
 
-    ) {
-    }
-    #[Route('', name:'.index', methods: ['GET', 'POST'])]
+    ) {}
+    #[Route('', name: '.index', methods: ['GET', 'POST'])]
     public function show(?User $user, ?UserInfo $info): Response|RedirectResponse
     {
         $user = $this->getUser();
@@ -41,8 +41,8 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app.home');
         }
         $favoris = $this->favRepo->findByUser($user);
-        
-        
+
+
 
         return $this->render('Frontend/User/show.html.twig', [
             'user' => $user,
@@ -104,5 +104,26 @@ class UserController extends AbstractController
             'info' => $info,
             'form' => $form
         ]);
+    }
+    #[Route('/{id}/delete', '.delete', methods: ['GET', 'POST'])]
+    public function delete(?User $user, Request $request, Security $security): Response|RedirectResponse
+    {
+        if (!$user) {
+
+            $this->addFlash('error', 'Utilisateur inexistant');
+            return $this->redirectToRoute('app.profile');
+        }
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('token'))) {
+
+            //on supprime en bdd
+            $this->em->remove($user);
+            $this->em->flush();
+
+           
+            // Déconner l'utilisateur
+            $security->logout(false); 
+            $this->addFlash('success', 'Utilisateur supprimé avec succes');
+            return $this->redirectToRoute('app.landing');
+        }
     }
 }

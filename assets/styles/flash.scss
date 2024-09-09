@@ -16,12 +16,16 @@
 .flash-parent {
     display: flex;
     justify-content: end;
+    align-items: center;
 }
 
 .flash-enfant {
     display: flex;
     justify-content: center;
     align-items: center;
+    p{
+        margin: 0;
+    }
     gap: 8px;
     padding-right: 10px;
     width: auto;
