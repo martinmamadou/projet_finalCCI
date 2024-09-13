@@ -35,7 +35,6 @@ class ExMaisonType extends AbstractType
                     'label' => 'Exercice',
                     'class' => ExTemplate::class,
                     'choice_label' => 'name',
-                  
                     'expanded' => false,
                     'multiple' => false,
                     

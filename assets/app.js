@@ -8,6 +8,7 @@ import './bootstrap.js';
 import './styles/app.scss';
 import './javascript/swiperPro.js';
 import './javascript/swiperNew.js';
+import './javascript/anim.js'
 
 
 

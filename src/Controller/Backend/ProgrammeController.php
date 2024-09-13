@@ -28,8 +28,9 @@ class ProgrammeController extends AbstractController
     #[Route('', name: '.index', methods: ['GET'])]
     public function index(): Response|RedirectResponse
     {
+        
         return $this->render('Backend/Programme/index.html.twig', [
-            'programmes' => $this->proRepository->findAll()
+            'programmes' => $this->proRepository->findByDate()
         ]);
     }
 

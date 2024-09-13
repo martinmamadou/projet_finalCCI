@@ -9,12 +9,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\ExTemplateRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ExTemplateRepository::class)]
+#[UniqueEntity('slug')]
 #[HasLifecycleCallbacks]
 #[Vich\Uploadable]
 class ExTemplate

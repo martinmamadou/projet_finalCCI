@@ -4,7 +4,6 @@
                 rootMargin: '0px',
                 threshold: 0.1
             };
-
             let observer = new IntersectionObserver(function(entries, observer) {
                 entries.forEach(entry => {
                     if (entry.intersectionRatio > 0) {
