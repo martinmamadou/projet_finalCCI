@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Administration commentaire 
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<h1>Administration des commentaires</h1>
+        <div class="btn-container">
+			<a href="{{path('app.home')}}" class="button btn-secondaire">
+			<i class="bi bi-chat-text"></i>Acceuil</a>
+            </div>
+		<table class="table table-striped table-bordered" data-toggle="table" data-sort-name="fullName" data-sort-order="asc" data-pagination="true" data-search="true" data-show-columns="true">
+			<thead>
+				<tr>
+					<th>utilisateur</th>
+                    <th>date de creation</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for commentaire in commentaires %}
+					<tr>
+						<td>{{commentaire.user.username}}</td>
+						<td>{{commentaire.createdAt|ago}}</td>
+
+						<td scope="col">
+								<form action="{{ path('admin.commentaire.delete', {id: commentaire.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire')">
+									<input type="hidden" name="token" value="{{ csrf_token('delete'~ commentaire.id) }}">
+									<button type="submit" class="btn btn-danger">Supprimer</button>
+								</form>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+    </section>
+{% endblock %}

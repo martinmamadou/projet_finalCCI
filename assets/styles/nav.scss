@@ -60,3 +60,16 @@ nav{
     color: $secondary-color;
   }
 }
+
+.logo-container{
+  position: absolute;
+  top: -35px;
+  left: -35px;
+  height: 200px;
+  width: 100vw;
+  z-index: 100;
+  img{
+    width: 200px;
+    height: 200px;
+  }
+}

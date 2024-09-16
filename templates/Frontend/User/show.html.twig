@@ -51,7 +51,7 @@
                     </a>
                     <form action="{{ path('user.favoris.delete', {id: fav.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce programme de vos favoris ?')">
                         <input type="hidden" name="token" value="{{ csrf_token('delete' ~ fav.id) }}">
-                        <button type="submit" class="btn btn-danger add">supprimer</button>
+                        <button type="submit" class="add"><i class="fa-solid fa-heart" style="color: #fb98d2;"></i></button>
                     </form>
                 </div>
             {% else %}
@@ -62,9 +62,6 @@
 				</div>
 			</div>
 		</div>
-				<form action="{{ path('user.profile.delete', {id: user.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette categorie')">
-					<input type="hidden" name="token" value="{{ csrf_token('delete'~ user.id) }}">
-									<button type="submit" class="btn btn-danger">Supprimer</button>
-								</form>
+				
 	</section>
 {% endblock %}

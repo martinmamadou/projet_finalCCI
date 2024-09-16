@@ -3,7 +3,7 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Programme;
-use App\Form\ProMaisonType;
+use App\Form\ProgrammeType;
 use App\Entity\ProgrammeMaison;
 use App\Entity\ProType;
 use App\Repository\ExercicesRepository;
@@ -40,7 +40,7 @@ class ProgrammeController extends AbstractController
 
 
         $programme = new Programme;
-        $form = $this->createForm(ProMaisonType::class, $programme, ['isUser' => true]);
+        $form = $this->createForm(ProgrammeType::class, $programme, ['isUser' => true]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $programme->setUser($this->getUser());
@@ -65,7 +65,7 @@ class ProgrammeController extends AbstractController
             $this->addFlash('error', 'programme inexistant');
             return $this->redirectToRoute('admin.programmes.index');
         }
-        $form = $this->createForm(ProMaisonType::class, $programme);
+        $form = $this->createForm(ProgrammeType::class, $programme);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($programme);

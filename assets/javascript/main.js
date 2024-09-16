@@ -18,17 +18,6 @@ btnComment.addEventListener('click', function(){
     commentaire.classList.remove('closed');
     over.classList.remove('closed');
 })
-let ex = document.querySelectorAll('.exList')
-let front = document.querySelector('.exList-front')
-let back = document.querySelector('.exList-back')
-ex.forEach(elm => {
-    elm.addEventListener('click', (e)=>{
-        front=e.currentTarget.querySelector('.exList-front')
-        back=e.currentTarget.querySelector('.exList-back')
-        front.classList.toggle('flipped')
-        back.classList.toggle('flipped')
-    })
-});
 
 
 

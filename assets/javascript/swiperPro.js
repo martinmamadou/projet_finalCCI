@@ -13,7 +13,6 @@ const swiperArticle = new Swiper('.slider-programme', {
     grabCursor: true,
     pagination: {
         el: '.swiper-pagination',
-        type:'progressbar',
         clickable: true,
         
     },

@@ -3,14 +3,14 @@
         <div class="swiper slider-new">
             <div class="swiper-wrapper">
                 {% if programmes|length > 0 %}
-                    {% for programme in programmes %}
+                    {% for new in news %}
                         <div class="swiper-slide">
-                            <div class="pro-list" style="background: center/cover url('{{ vich_uploader_asset(programme.categorie) }}')">
-                                <a href="{{ path('user.programmes.details', {slug: programme.slug}) }}" id="ex-link">
+                            <div class="pro-list" style="background: center/cover url('{{ vich_uploader_asset(new.categorie) }}')">
+                                <a href="{{ path('user.programmes.details', {slug: new.slug}) }}" id="ex-link">
                                     <div class="text-container">
-                                        <h2>{{ programme.name }}</h2>
-                                        <p>{{ programme.shortDescription }}</p>
-                                        <p><i class="fa-solid fa-dumbbell fa-xs"></i> {{ programme.exercices|length }}</p>
+                                        <h2>{{ new.name }}</h2>
+                                        <p>{{ new.shortDescription }}</p>
+                                        <p><i class="fa-solid fa-dumbbell fa-xs"></i> {{ new.exercices|length }}</p>
                                     </div> 
                                 </a>
                             </div>
@@ -25,3 +25,4 @@
 {% else %}
     <p class='empty'>Aucun donnée pour le moment</p>
 {% endif %}
+ <div class="swiper-pagination"></div>

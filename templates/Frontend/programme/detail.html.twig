@@ -6,11 +6,8 @@
 {% endblock %}
 
 {% block body %}
-
-	<section class="content">
-	
-		<div class="programme-preview">
-		<div class="overlay"></div>
+<div class="programme-preview">
+		<div class="overlay" style="background : center/cover url('{{vich_uploader_asset(programme.categorie)}}') "></div>
 		<div class="programme-text">
 		<h1>{{ programme.name }}</h1>
 		<div class="display-content">
@@ -25,6 +22,10 @@
 				
 		
 		</div>
+
+	<section class="content">
+	
+		
 		<a href="{{path('programmes.training',{slug:programme.slug})}}" class='button btn-principal start'><i class="fa-solid fa-play"></i></a>
 		<a href="{{path('programmes.preview',{slug:programme.slug})}}"class="preview button button-principal">preview</a>
 		</div>

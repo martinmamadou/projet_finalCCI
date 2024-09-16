@@ -10,6 +10,10 @@
     {{ encore_entry_script_tags('admin') }}
 {% endblock %}
 
+{% block title %}
+    Acceuil
+{% endblock %}
+
 {% block body %}
 {% include "Home/_dashboard.html.twig" %}
     <section class="content anim animate fade-inC">
@@ -21,9 +25,9 @@
         <div class="home-new">
             <h2 class="title">Nouveautés</h2>
             {% include "Home/_swiperNew.html.twig" %}
+
             <div class="programme-list hidden">
                 {% for new in news %}
-                
                     <div class="pro-list programme-item" data-protype="{{ new.proType.name }}" style="background: center/cover url('{{ vich_uploader_asset(new.categorie) }}')">
                        <a href="{{ path('user.programmes.details', {slug: new.slug}) }}">
                         <div class='text-container'>

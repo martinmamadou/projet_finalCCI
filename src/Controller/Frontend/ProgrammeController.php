@@ -5,7 +5,7 @@ namespace App\Controller\Frontend;
 use App\Entity\ProType;
 use App\Entity\Categorie;
 use App\Entity\Programme;
-use App\Form\ProMaisonType;
+use App\Form\ProgrammeType;
 use App\Entity\Commentaires;
 use App\Form\CommentaireType;
 use App\Repository\UserRepository;
@@ -142,7 +142,6 @@ class ProgrammeController extends AbstractController
             $this->em->persist($commentaire);
             $programme->addCommentaire($commentaire); // Appelle setMoyenne() via addCommentaire
             $this->em->flush();
-            dd($programme);
 
             $this->addFlash('success', 'Commentaire créé avec succès');
         }
@@ -168,7 +167,7 @@ class ProgrammeController extends AbstractController
             return $this->redirectToRoute('app.home');
         }
         $programme = new Programme;
-        $form = $this->createForm(ProMaisonType::class, $programme, ['isUser' => true]);
+        $form = $this->createForm(ProgrammeType::class, $programme, ['isUser' => true]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -188,7 +187,7 @@ class ProgrammeController extends AbstractController
             $this->addFlash('error', 'programme inexistant');
             return $this->redirectToRoute('admin.programmes.index');
         }
-        $form = $this->createForm(ProMaisonType::class, $programme);
+        $form = $this->createForm(ProgrammeType::class, $programme);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($programme);
