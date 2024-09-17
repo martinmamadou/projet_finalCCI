@@ -32,8 +32,10 @@
 </nav>
 {% endif %}
 
+{% if app.request.get('_route') != 'app.landing' %}
 <div class="logo-container">
 <a href="{{path('app.home')}}">
     <img src="{{asset('/img/logo/logo.png')}}" alt="le logo de sporting">
     </a>
 </div>
+{% endif %}

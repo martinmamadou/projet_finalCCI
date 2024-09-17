@@ -235,6 +235,7 @@
     }
 }
 
+
   .accordion {
     display: flex;
     justify-content: space-between;
@@ -327,4 +328,8 @@
     }
 
     
+}
+
+.pro-list:hover{
+    transform: scale(1.1);
 }

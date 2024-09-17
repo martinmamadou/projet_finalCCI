@@ -29,6 +29,7 @@ class HomeController extends AbstractController
        $programmes = $this->programmeRepo->findAllWithComments();
        $newPro = $this->programmeRepo->findByDate();
        
+       
         
         return $this->render('Home/home.html.twig', [
             'protypes' => $this->protype->findAll(),

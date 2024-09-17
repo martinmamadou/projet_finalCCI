@@ -1,8 +1,8 @@
-{% if programmes is not null %}
+{% if news is not null %}
     <div>
         <div class="swiper slider-new">
             <div class="swiper-wrapper">
-                {% if programmes|length > 0 %}
+                {% if news|length > 0 %}
                     {% for new in news %}
                         <div class="swiper-slide">
                             <div class="pro-list" style="background: center/cover url('{{ vich_uploader_asset(new.categorie) }}')">

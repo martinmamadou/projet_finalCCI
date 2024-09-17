@@ -2,7 +2,7 @@
 
 {% block title %}
 	Détails des programmes
-	{{ parent() }}
+	
 {% endblock %}
 
 {% block body %}
@@ -55,7 +55,7 @@
 			{% endif %}
 		</div>
 
-		<h2 >Commentaires:</h2>
+		<h2 id="comme">Commentaires</h2>
 		
 		
 		{% for commentaire in commentaires %}

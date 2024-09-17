@@ -107,6 +107,11 @@ h3{
   border: solid 1px $button-primary;
   text-transform: capitalize;
 }
+.btn-principal:hover{
+    background: #4931a6 ;
+    text-transform: uppercase;
+    transform: scale(1.1);
+}
 
 .btn-secondaire{
     border: solid 1px $button-primary;
@@ -119,6 +124,13 @@ h3{
     text-transform: capitalize;
 
 }
+
+.btn-secondaire:hover{
+    background: $primary-color;
+    text-transform: uppercase;
+    transform: scale(1.1);
+}
+
 .filter-button{
     text-align: center;
     border: solid thin $secondary-color;
@@ -326,3 +338,6 @@ label{
     
 }
 
+#comme{
+    text-align: center;
+}

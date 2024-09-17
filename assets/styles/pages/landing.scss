@@ -23,6 +23,9 @@
     }
     .btn-container{
         margin: 25px 0;
+        .home{
+            color: $secondary-color;
+        }
     
     }
     
@@ -64,6 +67,7 @@
         }
         .btn-container{
             margin: 25px 0 ;
+            
         }
     }
 }

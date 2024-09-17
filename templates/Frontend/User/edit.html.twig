@@ -16,8 +16,5 @@
 {{form_end(form)}}
     </div>
 </section>
- <form action="{{ path('user.profile.delete', {id: user.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte')">
-					<input type="hidden" name="token" value="{{ csrf_token('delete'~ user.id) }}">
-									<button type="submit" class="button btn-secondaire">Supprimer</button>
-								</form>
+ 
 {% endblock %}
